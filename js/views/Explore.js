@@ -59,6 +59,7 @@ export default function Explore() {
                             </section>
                         </div>
                         <section class="home-player">
+                        <div class="player-content">
                             <div class="player-header">
                                 <h2>Player</h2>
                                 <button class="btn-icon"><span class="material-icons-round" style="color: white;">
@@ -76,29 +77,28 @@ export default function Explore() {
                                 </div>
                                 <div class="player-progress">
                                     <span class="time">1:54</span>
-                                    <div class="progress-bar">
-                                        <img src="https://www.figma.com/api/mcp/asset/94929bee-acec-4ffb-9196-da407e62f849"
-                                            alt="Progress">
-                                    </div>
+                                    <input type="range" min="0" max="100" value="40" class="progress-bar">
                                     <span class="time">02:53</span>
                                 </div>
                             </div>
+                            </div>
                             <div class="player-controls">
-                                <button class="btn-control"><img
-                                        src="https://www.figma.com/api/mcp/asset/2a3d08e9-cebc-466a-bf89-a7e82af07606"
-                                        alt="Repeat"></button>
-                                <button class="btn-control"><img
-                                        src="https://www.figma.com/api/mcp/asset/c196d924-bb0b-4310-ab13-ffb75d33562e"
-                                        alt="Prev"></button>
-                                <button class="btn-control play"><img
-                                        src="https://www.figma.com/api/mcp/asset/d88018fc-d39d-484d-930a-b00c9f6cfe70"
-                                        alt="Play"></button>
-                                <button class="btn-control"><img
-                                        src="https://www.figma.com/api/mcp/asset/0e19e01f-332d-4f83-b5f7-d8485d400d14"
-                                        alt="Next"></button>
-                                <button class="btn-control"><img
-                                        src="https://www.figma.com/api/mcp/asset/a56e9c2b-9ee8-4c1f-97d6-54601b8f81fd"
-                                        alt="Shuffle"></button>
+                                <button class="btn-control">
+                                <span class="material-icons-round">
+                                repeat
+                                </span></button>
+                                <button class="btn-control"><span class="material-icons-round">
+skip_previous
+</span></button>
+                                <button class="btn-control play"><span class="material-icons-round">
+play_circle
+</span></button>
+                                <button class="btn-control"><span class="material-icons-round">
+skip_next
+</span></button>
+                                <button class="btn-control"><span class="material-icons-round">
+shuffle
+</span></button>
                             </div>
                         </section>
                     </div>
@@ -136,5 +136,18 @@ export default function Explore() {
                         </div>
                     </section>
                 </section>
+                <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 CMusic. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">Về chúng tôi</a>
+                    <a href="#terms">Điều khoản</a>
+                    <a href="#privacy">Chính sách</a>
+                    <a href="#contact">Liên hệ</a>
+                </div>
+            </div>
+        </footer>
     `;
 }

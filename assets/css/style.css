@@ -62,6 +62,14 @@
     .nav-item a span:last-child {
         display: none;
     }
+
+    .banner {
+        display: none !important;
+    }
+
+    .home-player {
+        display: none !important;
+    }
 }
 
 /* --- 3. MOBILE (Điện thoại) - Max-width: 576px --- */
@@ -113,6 +121,14 @@
     }
 
     .chart-right {
+        display: none !important;
+    }
+
+    .banner {
+        display: none !important;
+    }
+
+    .home-player {
         display: none !important;
     }
 }
@@ -553,9 +569,11 @@ body {
 }
 
 .genre-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100px;
     border-radius: 10px;
-    display: flex;
     color: white;
     font-size: var(--fs-body);
     font-weight: 600;
@@ -645,6 +663,12 @@ body {
 .home-player {
     display: flex;
     flex-direction: column;
+}
+
+.player-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
     padding: var(--space-lg);
 }
 
@@ -664,7 +688,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
-    padding: var(--space-lg);
     align-items: center;
 }
 
@@ -700,9 +723,11 @@ body {
 }
 
 .player-progress {
-    width: 100%;
     display: flex;
+    align-items: center;
+    width: 100%;
     gap: var(--space-md);
+    accent-color: #ffffff;
 }
 
 .player-progress .time {
@@ -713,23 +738,20 @@ body {
 
 .progress-bar {
     flex: 1;
-    height: 16px;
-}
-
-.progress-bar img {
-    width: 100%;
-    height: 100%;
+    height: 3px;
+    width: 200px;
 }
 
 .player-controls {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+    justify-content: center;
+    height: 200px;
     background-color: var(--accent-color);
     border-radius: 5px;
     padding: var(--space-lg);
-    display: flex;
-    gap: var(--space-lg);
-    margin-top: auto;
-    height: 150px;
-    align-items: center;
+    
 }
 
 .btn-control {
@@ -739,14 +761,14 @@ body {
     display: flex;
 }
 
-.btn-control img {
-    width: 24px;
-    height: 24px;
+.btn-control.play {
+    width: 64px;
+    height: 64px;
 }
 
-.btn-control.play img {
-    width: 48px;
-    height: 48px;
+.btn-control.play span {
+    font-size: 64px;
+    color: white;
 }
 
 /* Screen reader only class for accessibility */

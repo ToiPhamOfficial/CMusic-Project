@@ -1,7 +1,6 @@
 import Sidebar from './components/Sidebar.js';
 import Player from './components/Player.js';
 import Header from './components/Header.js';
-import Footer from './components/Footer.js';
 import { initRouter } from './router.js';
 import { songs, searchSongs } from './data.js';
 
