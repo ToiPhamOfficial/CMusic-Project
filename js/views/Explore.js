@@ -123,12 +123,14 @@ shuffle
                                 <div class="chart-right">
                                     <span class="duration">${song.duration}</span>
                                     <button class="btn-icon btn-play-song" data-song-id="${song.id}">
-                                        <img src="https://www.figma.com/api/mcp/asset/44748275-c192-431d-bea9-a45db56c6053"
-                                            alt="Play">
+                                        <span class="material-icons-round">
+                                            play_arrow
+                                        </span>
                                     </button>
                                     <button class="btn-icon btn-add-song" data-song-id="${song.id}">
-                                        <img src="https://www.figma.com/api/mcp/asset/1284d5b3-25ae-405e-95f1-6239562e50ad"
-                                            alt="Add">
+                                        <span class="material-icons-round">
+                                            add_circle
+                                        </span>
                                     </button>
                                 </div>
                             </div>

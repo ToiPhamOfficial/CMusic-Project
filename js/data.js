@@ -70,35 +70,35 @@ export const artists = [
     {
         id: 1,
         name: "Alan Walker",
-        image: "https://www.figma.com/api/mcp/asset/f4cf5d7e-e854-43eb-a073-26d2011ed91e",
+        image: "/data/artists/alan-walker.png",
         listeners: "970M",
         genre: "EDM"
     },
     {
         id: 2,
         name: "Bruno Mars",
-        image: "https://www.figma.com/api/mcp/asset/a4da7324-a9a9-404c-aa1b-e687e953f1eb",
+        image: "/data/artists/bruno-mars.png",
         listeners: "275M",
         genre: "Pop"
     },
     {
         id: 3,
         name: "Sơn Tùng MTP",
-        image: "https://www.figma.com/api/mcp/asset/d252e589-257a-4a81-a168-0c01c4004d45",
+        image: "/data/artists/son-tung-mtp.png",
         listeners: "134M",
         genre: "V-Pop"
     },
     {
         id: 4,
         name: "Soobin Hoàng Sơn",
-        image: "https://www.figma.com/api/mcp/asset/72131549-40e1-499f-92eb-9f96379c3da6",
+        image: "/data/artists/soobin-hoang-son.png",
         listeners: "80M",
         genre: "V-Pop"
     },
     {
         id: 5,
         name: "Drake",
-        image: "https://www.figma.com/api/mcp/asset/026fbca9-640a-494a-a332-4ab64b06e098",
+        image: "/data/artists/drake.png",
         listeners: "75M",
         genre: "Hip Hop"
     }
