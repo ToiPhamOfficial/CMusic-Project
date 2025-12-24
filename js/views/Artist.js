@@ -38,7 +38,7 @@ export default function Artist() {
                 const colTimeClass = isActive ? 'col-time actions' : 'col-time';
 
                 return `
-                <div class="track-item ${activeClass}" data-song-id="${song.id}">
+                <div class="track-item-artist ${activeClass}" data-song-id="${song.id}">
                     
                     <div class="col-rank ${rankClass}">#${rank}</div>
                     

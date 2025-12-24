@@ -73,7 +73,7 @@
 /* Grid Layout cho các hàng */
 /* Cấu trúc cột: [Rank] [Artist Info] [Song Info] [Time/Actions] */
 .chart-header,
-.track-item {
+.track-item-artist {
     display: grid;
     grid-template-columns: 50px 1.5fr 1.5fr 100px;
     /* Chia tỷ lệ cột */
@@ -100,7 +100,7 @@
 /* --- */
 
 /* --- Track Item Styling --- */
-.track-item {
+.track-item-artist {
     border-radius: 6px;
     transition: background-color 0.2s ease;
     padding: 12px 10px;
@@ -108,7 +108,7 @@
 }
 
 /* Hover vào hàng */
-.track-item:hover {
+.track-item-artist:hover {
     background-color: #1A1A1A;
     /* Màu xám đậm nền khi active */
 }
@@ -167,7 +167,7 @@
 }
 
 /* Ẩn nút theo dõi ở các hàng không active nếu muốn giống ảnh */
-.track-item:not(.active) .btn-follow {
+.track-item-artist:not(.active) .btn-follow {
     display: none;
 }
 
@@ -207,7 +207,7 @@
 }
 
 /* Hiển thị nút play khi active */
-.track-item.active .play-overlay {
+.track-item-artist .play-overlay {
     opacity: 1;
 }
 
@@ -254,7 +254,7 @@
 }
 
 .icon-heart:hover {
-    color: #1ed760;
+    color: red;
 }
 
 /* Xanh Spotify khi hover */
@@ -266,7 +266,7 @@
 @media (max-width: 768px) {
 
     .chart-header,
-    .track-item {
+    .track-item-artist {
         grid-template-columns: 40px 1fr 60px;
         /* Thu gọn trên mobile */
     }
@@ -281,7 +281,7 @@
 
 
 /* ==========================================
-   
+   Favorite
    ========================================== */
 
 /* --- Playlist Hero Section --- */
@@ -308,7 +308,7 @@
 }
 
 /* Ảnh bìa playlist (Gradient + Heart Icon) */
-.playlist-cover {
+.hero-cover {
     position: relative;
     z-index: 2;
     width: 220px;
@@ -328,12 +328,13 @@
     flex-shrink: 0;
 }
 
-.playlist-cover .fa-heart {
+/* icon more */
+.hero-cover span {
     font-size: 80px;
     color: #fff;
 }
 
-.playlist-info {
+.hero-info {
     position: relative;
     z-index: 2;
     display: flex;
@@ -481,7 +482,7 @@
     gap: 10px;
 }
 
-.icon-more {
+.track-item .icon-more {
     display: none; /* Ẩn dấu 3 chấm mặc định */
     cursor: pointer;
 }
@@ -515,11 +516,153 @@
         text-align: center;
         height: auto;
     }
-    .playlist-cover { margin-right: 0; margin-bottom: 20px; }
-    .playlist-info { height: auto; align-items: center; }
+    .hero-cover { margin-right: 0; margin-bottom: 20px; }
+    .hero-info { height: auto; align-items: center; }
     
     .track-header, .track-item {
         grid-template-columns: 40px 1fr 60px; /* Ẩn cột Artist/Album */
     }
     .col-artist, .col-album { display: none; }
+}
+
+/* ==========================================
+   Profile
+   ========================================== */
+
+/* --- 1. Header Profile --- */
+.profile-hero {
+    position: relative;
+    background: linear-gradient(to bottom, #1e3c72, #000); /* Gradient Xanh đậm -> Đen */
+    padding: 30px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 20px;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    z-index: 2;
+    width: 100%;
+}
+
+/* Ảnh đại diện tròn */
+.profile-avatar img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%; /* Làm tròn ảnh */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.1);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-tag {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.profile-name {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.profile-stats {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.btn-play-profile {
+    background: linear-gradient(90deg, #5b7fff, #3366ff);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    transition: transform 0.2s;
+}
+
+.btn-play-profile:hover {
+    transform: scale(1.05);
+}
+
+/* --- 2. Quick Access Cards (Grid 2 cột) --- */
+.quick-access-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia đôi */
+    gap: 20px;
+    padding: 0 30px;
+    margin-bottom: 40px;
+}
+
+.qa-card {
+    background-color: #181818;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0; /* Ảnh tràn viền trái */
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.qa-card:hover {
+    background-color: #2a2a2a;
+}
+
+.qa-img-box {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.gradient-heart {
+    background: linear-gradient(135deg, #8a2387, #e94057, #f27121);
+}
+
+.gradient-blue {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+
+.gradient-heart span,
+.gradient-blue span {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.qa-info {
+    padding-left: 15px;
+}
+
+.qa-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.qa-sub {
+    font-size: 0.8rem;
+    color: #b3b3b3;
 }

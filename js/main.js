@@ -2,6 +2,7 @@ import Sidebar from './components/Sidebar.js';
 import Player from './components/Player.js';
 import Header from './components/Header.js';
 import { initRouter } from './router.js';
+import { navigateTo } from './router.js';
 import { songs, searchSongs } from './data.js';
 import audioManager from './utils/audioManager.js';
 
@@ -36,6 +37,13 @@ function renderComponents() {
 function initEventListeners() {
     // Search functionality
     $('.search-bar input').on('input', handleSearch);
+
+    // Listeners for other element :))
+    $(document).on('click', '[data-route]', function () {
+        const path = $(this).data('route');
+        navigateTo(path);
+    });
+
 
     // Event delegation cho các actions
     $(document).on('click', '.nav-link', handleNavigation);

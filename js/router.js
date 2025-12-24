@@ -5,6 +5,7 @@ import Artist from './views/Artist.js';
 import Genre from './views/Genre.js';
 import Playlist from './views/Playlist.js';
 import Favorite from './views/Favorite.js'
+import Profile from './views/Profile.js';
 // Định nghĩa các route (sử dụng History API)
 const routes = {
     '/': Explore,
@@ -16,6 +17,7 @@ const routes = {
     '/recent': Explore,
     '/favorites': Favorite,
     '/archive': Explore,
+    '/profile': Profile
 };
 
 // Render trang dựa trên route hiện tại

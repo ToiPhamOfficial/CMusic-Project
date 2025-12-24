@@ -6,11 +6,11 @@ export default function Favorite() {
         
             <div class="playlist-hero">
                 <div class="hero-bg-glow"></div> 
-                <div class="playlist-cover">
+                <div class="hero-cover">
                     <span class="material-icons-round">favorite</span>
                 </div>
                 
-                <div class="playlist-info">
+                <div class="hero-info">
                     <span class="playlist-subtitle">Playlist: ${songs.length} bài</span>
                     <h1 class="playlist-title">Yêu thích của Tamo Osaki</h1>
                     <button class="btn-play-all">

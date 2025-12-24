@@ -54,7 +54,7 @@ export default function Header() {
                             settings
                         </span>
                     </button>
-                    <div class="user-profile">
+                    <div class="user-profile" data-route="/profile">
                         <div class="avatar">
                             <img src="${users[0].avatar}"
                                 alt="User Avatar">
