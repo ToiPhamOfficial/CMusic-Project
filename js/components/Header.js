@@ -7,40 +7,15 @@ export default function Header() {
                     <div class="tab-item">PODCAST</div>
                     <div class="tab-item">LIVE</div>
                 </div>
-                <form class="search-bar-container">
+                <div class="search-bar-container">
                     <div class="search-bar">
                         <span class="material-icons-round">
                             search
                         </span>
                         <input type="text" placeholder="Tìm kiếm bài hát">
                     </div>
-                    <ul class="search-bar-suggestions">
-                        <li class="suggestion-item">
-                            <img src="/data/songs/thumb/Faded - Alan Walker.png"
-                                alt="Faded - Alan Walker">
-                            <div class="suggestion-info">
-                                <span class="song-title">Faded</span>
-                                <span class="song-artist">Alan Walker</span>
-                            </div>
-                        </li>
-                        <li class="suggestion-item">
-                            <img src="/data/songs/thumb/Đừng Làm Trái Tim Anh Đau - Sơn Tùng MTP.png"
-                                alt="Đừng Làm Trái Tim Anh Đau - Sơn Tùng MTP">
-                            <div class="suggestion-info">
-                                <span class="song-title">Đừng Làm Trái Tim Anh Đau</span>
-                                <span class="song-artist">Sơn Tùng MTP</span>
-                            </div>
-                        </li>
-                        <li class="suggestion-item">
-                            <img src="/data/songs/thumb/Kamin - Emin ft. JONY.png"
-                                alt="Kamin - Emin ft. JONY">
-                            <div class="suggestion-info">
-                                <span class="song-title">Kamin</span>
-                                <span class="song-artist">Emin ft. JONY</span>
-                            </div>
-                        </li>
-                    </ul>
-                </form>
+                    <ul class="search-bar-suggestions"></ul>
+                </div>
 
                 <div class="user-actions">
                     <button class="btn btn-notification">

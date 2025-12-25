@@ -10,13 +10,13 @@ import audioManager from './utils/audioManager.js';
 $(document).ready(function() {
     // Render các components tĩnh
     renderComponents();
-    
+
     // Khởi tạo router
     initRouter();
-    
+
     // Thêm event listeners
     initEventListeners();
-    
+
     // Set playlist mặc định cho audio manager
     audioManager.setPlaylist(songs);
 });
@@ -25,10 +25,10 @@ $(document).ready(function() {
 function renderComponents() {
     // Render Sidebar
     $('.sidebar').html(Sidebar());
-    
+
     // Render Header
     $('.header').html(Header());
-    
+
     // Render Bottom Player
     $('.bottom-player').html(Player());
 }
@@ -47,95 +47,129 @@ function initEventListeners() {
 
     // Event delegation cho các actions
     $(document).on('click', '.nav-link', handleNavigation);
-    
-    $(document).on('click', '.btn-play-song', function() {
+
+    $(document).on('click', '.btn-play-song', function () {
         const songId = parseInt($(this).data('song-id'));
         playSong(songId);
     });
-    
-    $(document).on('click', '.btn-add-song', function() {
+
+    $(document).on('click', '.btn-add-song', function () {
         const songId = parseInt($(this).data('song-id'));
         addToPlaylist(songId);
     });
 
     // Tab navigation
-    $(document).on('click', '.tab-item', function() {
+    $(document).on('click', '.tab-item', function () {
         $('.tab-item').removeClass('active');
         $(this).addClass('active');
     });
-    
+
     // Bottom Player Controls
     initBottomPlayerControls();
+
+    // Search Bar interactions
+    initSearchBar();
 }
 
 // Khởi tạo bottom player controls
 function initBottomPlayerControls() {
     // Play/Pause button
-    $(document).on('click', '.bottom-player-controls .btn-play, .player-controls .play', function() {
+    $(document).on('click', '.bottom-player-controls .btn-play, .player-controls .play, .suggestion-item div button', function () {
         audioManager.togglePlay();
     });
-    
+
     // Previous button
-    $(document).on('click', '.bottom-player-controls .btn-control[title="Previous"]', function() {
+    $(document).on('click', '.bottom-player-controls .btn-control[title="Previous"]', function () {
         audioManager.prev();
     });
-    
+
     // Next button
-    $(document).on('click', '.bottom-player-controls .btn-control[title="Next"]', function() {
+    $(document).on('click', '.bottom-player-controls .btn-control[title="Next"]', function () {
         audioManager.next();
     });
-    
+
     // Repeat button
-    $(document).on('click', '.bottom-player-controls .btn-control[title="Repeat"]', function() {
+    $(document).on('click', '.bottom-player-controls .btn-control[title="Repeat"]', function () {
         audioManager.toggleRepeat();
     });
-    
+
     // Shuffle button
-    $(document).on('click', '.bottom-player-controls .btn-control[title="Shuffle"]', function() {
+    $(document).on('click', '.bottom-player-controls .btn-control[title="Shuffle"]', function () {
         audioManager.toggleShuffle();
     });
-    
+
     // Progress slider
-    $(document).on('input', '.progress-slider', function() {
+    $(document).on('input', '.progress-slider', function () {
         const percentage = $(this).val();
         audioManager.seek(percentage);
     });
-    
+
     // Favorite button
-    $(document).on('click', '.bottom-player-right .btn-control[title="Favorite"]', function() {
-        $(this).find('span').text(function(i, text) {
+    $(document).on('click', '.bottom-player-right .btn-control[title="Favorite"]', function () {
+        $(this).find('span').text(function (i, text) {
             return text === 'favorite' ? 'favorite_border' : 'favorite';
         });
         $(this).toggleClass('favorited');
     });
 }
 
+function initSearchBar() {
+    $('.search-bar').on('click', function () {
+        $(this).addClass('is-expanded');
+        // $('.search-bar-suggestions').css('display', 'flex');
+    });
+}
+
 // Handle search
 function handleSearch(e) {
     const query = e.target.value.trim();
-    
+
     if (query.length > 0) {
         const results = searchSongs(query);
+        if (results.length === 0) {
+            $('.search-bar-suggestions').html('<li class="no-results">Không tìm thấy kết quả</li>');
+            return;
+        }
+        $('.search-bar-suggestions').addClass('is-shown');
         displaySearchResults(results);
     } else {
-        // Clear search results or show default content
-        console.log('Clear search');
+        $('.search-bar-suggestions').removeClass('is-shown');
+        $('.search-bar-suggestions').empty();
     }
 }
 
 // Display search results
 function displaySearchResults(results) {
-    console.log('Search results:', results);
-    // TODO: Implement UI for search results
+    const searchBarSuggestions = $('.search-bar-suggestions');
+    let suggestionItems = '<li class="sugestion-label">Gợi ý kết quả</li>';
+    results.forEach(song => {
+        suggestionItems += `
+            <li class="suggestion-item">
+                <div>
+                    <img src="${song.image}" alt="${song.title} - ${song.artist}">
+                    <button type="button" data-song-id="${song.id}">
+                        <span class="material-icons-round">
+                            play_arrow
+                        </span>
+                    </button>
+                </div>
+                <div class="suggestion-info">
+                    <span class="song-title">${song.title}</span>
+                    <span class="song-artist">${song.artist}</span>
+                </div>
+            </li>
+        `;
+    });
+    searchBarSuggestions.html(suggestionItems);
 }
 
 // Handle navigation
 function handleNavigation(e) {
     e.preventDefault();
-    
+
     // Remove active class from all nav items
     $('.nav-item').removeClass('active');
-    
+
     // Add active class to clicked nav item
     $(this).closest('.nav-item').addClass('active');
 }
@@ -143,7 +177,7 @@ function handleNavigation(e) {
 // Play song
 function playSong(songId) {
     const song = songs.find(s => s.id === songId);
-    
+
     if (song) {
         audioManager.playSong(song, songs);
         console.log('Playing:', song.title);
@@ -155,11 +189,11 @@ function playSong(songId) {
 // Add to playlist
 function addToPlaylist(songId) {
     const song = songs.find(s => s.id === songId);
-    
+
     if (song) {
         console.log('Added to playlist:', song.title);
         // TODO: Implement actual playlist functionality
-        
+
         // Show notification
         showNotification(`Đã thêm "${song.title}" vào danh sách phát`);
     }
@@ -169,7 +203,7 @@ function addToPlaylist(songId) {
 function showNotification(message) {
     // Simple notification (có thể cải thiện với toast UI)
     console.log('Notification:', message);
-    
+
     // TODO: Implement better notification UI
 }
 
