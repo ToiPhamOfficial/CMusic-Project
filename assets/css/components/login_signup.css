@@ -1,0 +1,180 @@
+/* ============================================
+   Login/Signup Modal Styles
+   ============================================ */
+
+.modal#login-signup-modal.is-shown {
+    display: flex;
+}
+
+/* ============================================
+   Auth View
+   ============================================ */
+.auth-view {
+    display: none;
+    flex-direction: column;
+    gap: var(--space-lg);
+    animation: fadeIn 0.3s ease;
+}
+
+.auth-view#login-view {
+}
+
+.auth-view#signup-view {
+}
+
+.auth-view#login-view.active, .auth-view#signup-view.active {
+    display: flex;
+}
+
+.modal__title {
+    font-size: var(--fs-h1);
+    font-weight: 700;
+    color: var(--text-primary, #1a1a1a);
+    margin-bottom: 8px;
+}
+
+.modal__subtitle {
+    font-size: var(--fs-body);
+    color: var(--text-secondary, #666);
+}
+
+.modal__link {
+    color: var(--primary-color, #5674ff);
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.modal__link:hover {
+    color: var(--primary-hover, #4560e5);
+}
+
+/* ============================================
+   Auth Form
+   ============================================ */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.auth-form__group {
+
+}
+
+.auth-form__input {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-body);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: var(--background-secondary, #fafafa);
+}
+
+.auth-form__input.has-icon {
+    padding-right: var(--space-2xl);
+}
+
+.auth-form__input:focus {
+    outline: none;
+    border-color: var(--primary-color, #5674ff);
+    box-shadow: 0 0 0 3px rgba(86, 116, 255, 0.1);
+    background: #fff;
+}
+
+.auth-form__input::placeholder {
+    color: var(--text-placeholder, #999);
+}
+
+.auth-form__password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.auth-form__toggle-password {
+    position: absolute;
+    right: 12px;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.auth-form__toggle-password .material-icons-round {
+    font-size: 20px;
+    color: black
+}
+
+.auth-form__submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary-color, #5674ff);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.auth-form__submit-btn:hover {
+    background: var(--primary-hover, #4560e5);
+}
+
+.auth-form__submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   Divider
+   ============================================ */
+.modal__divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-secondary, #666);
+    font-size: var(--fs-label);
+}
+
+.modal__divider span {
+    width: 100%;
+    text-align: center;
+}
+
+/* ============================================
+   Social Login Button
+   ============================================ */
+.social-login-btn {
+    width: 100%;
+    padding: var(--space-sm);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    font-size: var(--fs-body);
+    font-weight: 600;
+    color: #1a1a1a;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-login-btn:hover {
+    background: var(--background-secondary, #fafafa);
+    border-color: var(--border-hover, #ccc);
+}
+
+.social-login-btn img {
+    width: 28px;
+    height: 28px;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */

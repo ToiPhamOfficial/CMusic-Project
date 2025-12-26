@@ -19,6 +19,9 @@
 @import url('components/content.css');
 @import url('components/player.css');
 @import url('components/bottom-player.css');
+@import url('components/modal.css');
+@import url('components/login_signup.css');
+@import url('components/toast.css');
 
 /* === 4. RESPONSIVE === */
 /* Media queries must come last */

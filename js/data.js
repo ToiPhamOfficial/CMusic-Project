@@ -3,17 +3,17 @@
 export const users = [
     {
         id: 1,
-        username: "Hoàng Quân",
+        name: "Hoàng Quân",
         password: "hoangquan123@",
         email: "hoang_quan@gmail.com",
         avatar: "/data/users/avatar/hoang_quan_3343.png"
     },
     {
         id: 2,
-        username: "Văn Khánh",
+        name: "Văn Khánh",
         password: "vankhanh456@",
         email: "van_khanh@gmail.com",
-        avatar: "/data/users/avatar/van_khanh.png"
+        avatar: "/data/users/avatar/van_khanh_2331.png"
     }
 ];
 

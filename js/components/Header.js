@@ -1,6 +1,11 @@
-import { users } from '../data.js';
-
 export default function Header() {
+    // Đọc dữ liệu mỗi khi render để cập nhật trạng thái mới nhất
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    let currentUser = null;
+    if (isLoggedIn) {
+        currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
+    
     return `
         <div class="tabs">
                     <div class="tab-item active">MUSIC</div>
@@ -29,12 +34,15 @@ export default function Header() {
                             settings
                         </span>
                     </button>
-                    <div class="user-profile" data-route="/profile">
-                        <div class="avatar">
-                            <img src="${users[0].avatar}"
+                    <div class="mini-user-profile ${!isLoggedIn ? 'is-guest' : '" data-route="/profile"'}">
+                    ${currentUser ?
+                        `<div class="avatar">
+                            <img src="${currentUser ? currentUser.avatar : ''}"
                                 alt="User Avatar">
                         </div>
-                        <span class="username">${users[0].username}</span>
+                        <span class="name">${currentUser ? currentUser.name : ''}</span>`
+                        : `<span>${!isLoggedIn ? 'Đăng nhập' : ''}</span>`
+                    }
                     </div>
                 </div>
     `;

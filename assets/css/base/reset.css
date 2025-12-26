@@ -39,9 +39,21 @@ ul {
     padding: 0;
 }
 
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
 /* Material Icons Size */
 span.material-icons-round {
     font-size: 20px;
+    color: var(--text-primary);
 }
 
 /* App Container */

@@ -1,13 +1,21 @@
+/* Import components */
 import Sidebar from './components/Sidebar.js';
 import Player from './components/Player.js';
 import Header from './components/Header.js';
+import LoginSignup from './components/LoginSignup.js';
+import Toast from './components/Toast.js';
+
+/* Import modules */
 import { initRouter } from './router.js';
 import { navigateTo } from './router.js';
 import { songs, searchSongs } from './data.js';
-import audioManager from './utils/audioManager.js';
+
+/* Import services */
+import auth from './services/auth.js';
+import audioManager from './services/audioManager.js';
 
 // Khởi tạo app
-$(document).ready(function() {
+$(document).ready(function () {
     // Render các components tĩnh
     renderComponents();
 
@@ -16,6 +24,9 @@ $(document).ready(function() {
 
     // Thêm event listeners
     initEventListeners();
+
+    // Khởi tạo login signup modal interactions
+    initLoginSignupModal();
 
     // Set playlist mặc định cho audio manager
     audioManager.setPlaylist(songs);
@@ -31,6 +42,8 @@ function renderComponents() {
 
     // Render Bottom Player
     $('.bottom-player').html(Player());
+
+    $('#modal-root').html(LoginSignup());
 }
 
 // Khởi tạo các event listeners
@@ -71,10 +84,101 @@ function initEventListeners() {
     initSearchBar();
 }
 
+// Init login signup modal interactions
+function initLoginSignupModal() {
+    const $modal = $('#login-signup-modal');
+    const $views = $('.auth-view');
+
+    // Hàm chuyển đổi view linh hoạt
+    function switchAuthView(viewId) {
+        $views.removeClass('active');
+        $(`${viewId}`).addClass('active');
+    }
+
+    // 1. Mở modal (mặc định luôn hiện login)
+    $('.mini-user-profile.is-guest').on('click', function () {
+        $modal.addClass('is-shown');
+        switchAuthView('#login-view');
+    });
+
+    // 2. Chuyển đổi qua lại giữa Đăng nhập/Đăng ký (Sử dụng ID từ href)
+    // Giả sử HTML: <a href="#signup-view" class="modal__link">Đăng ký ngay!</a>
+    $('.modal__link').on('click', function (e) {
+        e.preventDefault();
+        const targetView = $(this).attr('data-target');
+        console.log('Switching to view:', targetView);
+        if (targetView) {
+            switchAuthView(targetView);
+        }
+    });
+
+    // 3. Đóng modal (Vừa bấm nút Close vừa bấm ra ngoài Overlay)
+    $modal.on('click', function (e) {
+        const isCloseBtn = $(e.target).closest('.modal__close button').length > 0;
+        const isOverlay = $(e.target).is($modal);
+
+        if (isCloseBtn || isOverlay) {
+            $modal.removeClass('is-shown');
+        }
+    });
+
+    // Toggle password visibility
+    $('.auth-form__toggle-password').on('click', function () {
+        const $passwordInput = $(this).siblings('input[type="password"], input[type="text"]');
+        const type = $passwordInput.attr('type') === 'password' ? 'text' : 'password';
+        $passwordInput.attr('type', type);
+        $(this).find('span').text(type === 'password' ? 'visibility' : 'visibility_off');
+    });
+
+    $('.auth-form').on('submit', function (e) {
+        e.preventDefault();
+        // if(!$(this).valid) {
+        //     console.log('Form is valid, proceeding...');
+        //     return;
+        // }
+        const isLogin = $(this).attr('id') === 'login-form';
+        if (isLogin) {
+            // Handle login
+            const email = $('#login-email').val().trim();
+            const password = $('#login-password').val().trim();
+            const loginResult = auth.handleLogin(email, password);
+            Toast[loginResult.type](loginResult.message);
+            
+            if (loginResult.success) {
+                // Đóng modal
+                $modal.removeClass('is-shown');
+                // Re-render Header để hiển thị thông tin user
+                $('.header').html(Header());
+                // Reset form
+                $(this)[0].reset();
+            }
+            
+        } else {
+            // Handle signup
+            const name = $('#signup-name').val().trim();
+            const email = $('#signup-email').val().trim();
+            const password = $('#signup-password').val().trim();
+            const confirmPassword = $('#signup-confirm-password').val().trim();
+            const signupResult = auth.handleSignup(name, email, password, confirmPassword);
+            Toast[signupResult.type](signupResult.message);
+            
+            if (signupResult.success) {
+                // Đóng modal
+                $modal.removeClass('is-shown');
+                // Re-render Header để hiển thị thông tin user
+                $('.header').html(Header());
+                // Reset form
+                $(this)[0].reset();
+            }
+        }
+    });
+}
+
 // Khởi tạo bottom player controls
 function initBottomPlayerControls() {
     // Play/Pause button
     $(document).on('click', '.bottom-player-controls .btn-play, .player-controls .play, .suggestion-item div button', function () {
+        Toast.error('Đang phát nhạc mà chưa được cấp phép âm thanh do trình duyệt chặn tự động phát!');
         audioManager.togglePlay();
     });
 
@@ -113,6 +217,7 @@ function initBottomPlayerControls() {
     });
 }
 
+// Khởi tạo search bar interactions
 function initSearchBar() {
     $('.search-bar').on('click', function () {
         $(this).addClass('is-expanded');
@@ -120,6 +225,11 @@ function initSearchBar() {
     });
 }
 
+
+
+
+
+////////////////////////////////////////////
 // Handle search
 function handleSearch(e) {
     const query = e.target.value.trim();
@@ -184,8 +294,6 @@ function playSong(songId) {
     }
 }
 
-
-
 // Add to playlist
 function addToPlaylist(songId) {
     const song = songs.find(s => s.id === songId);
@@ -195,20 +303,13 @@ function addToPlaylist(songId) {
         // TODO: Implement actual playlist functionality
 
         // Show notification
-        showNotification(`Đã thêm "${song.title}" vào danh sách phát`);
+        Toast.success(`Đã thêm "${song.title}" vào playlist!`);
     }
 }
+///////////////////////////////////////////////////////
 
-// Show notification
-function showNotification(message) {
-    // Simple notification (có thể cải thiện với toast UI)
-    console.log('Notification:', message);
 
-    // TODO: Implement better notification UI
-}
+
 
 // Export functions for use in other modules
 export { playSong, addToPlaylist };
-
-// Make audioManager globally accessible for debugging
-window.audioManager = audioManager;
