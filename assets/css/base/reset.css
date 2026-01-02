@@ -47,7 +47,7 @@ button {
 
 input::-ms-reveal,
 input::-ms-clear {
-  display: none;
+    display: none;
 }
 
 /* Material Icons Size */
@@ -98,4 +98,19 @@ span.material-icons-round {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+}
+
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }

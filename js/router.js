@@ -9,7 +9,7 @@ import Profile from './views/Profile.js';
 import RecentlyPlayed_Songs from './views/RecentlyPlayed-Songs.js';
 import RecentlyPlayed_Playlist from './views/RecentlyPlayed-Playlist.js';
 import RecentlyPlayed_Album from './views/RecentlyPlayed-Album.js';
-import RecentlyPlayed_Artist from './views/RecentlyPlayed_Artist.js';
+import RecentlyPlayed_Artist from './views/RecentlyPlayed-Artist.js';
 
 // Định nghĩa các route (sử dụng History API)
 const routes = {

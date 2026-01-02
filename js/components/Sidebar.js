@@ -4,6 +4,11 @@ export default function Sidebar() {
             <div class="logo">
                 <img src="assets/img/logo-icon.png" alt="CMusic Logo">
                 <span class="logo-text">MUSIC</span>
+                <button class="btn btn-close-sidebar" id="btn-close-sidebar">
+                    <span class="material-icons-round">
+                        close
+                    </span>
+                </button>
             </div>
 
             <div class="sidebar-nav">

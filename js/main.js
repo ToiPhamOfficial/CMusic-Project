@@ -25,6 +25,9 @@ $(document).ready(function () {
     // Thêm event listeners
     initEventListeners();
 
+    // Init sidebar toggle
+    initSidebarToggle();
+
     // Khởi tạo login signup modal interactions
     initLoginSignupModal();
 
@@ -82,6 +85,19 @@ function initEventListeners() {
 
     // Search Bar interactions
     initSearchBar();
+}
+
+function initSidebarToggle() {
+    $('.btn-menu, #btn-close-sidebar').on('click', function () {
+        $('.sidebar').toggleClass('is-active');
+        $('.overlay').toggleClass('is-open');
+    });
+
+    // Đóng sidebar khi bấm vào overlay
+    $('.overlay').on('click', function () {
+        $('.sidebar').removeClass('is-active');
+        $(this).removeClass('is-open');
+    });
 }
 
 // Init login signup modal interactions
@@ -220,8 +236,14 @@ function initBottomPlayerControls() {
 // Khởi tạo search bar interactions
 function initSearchBar() {
     $('.search-bar').on('click', function () {
-        $(this).addClass('is-expanded');
-        // $('.search-bar-suggestions').css('display', 'flex');
+        $('.search-bar-wrapper').addClass('is-expanded');
+    });
+
+    $('#btn-close-search-bar').on('click', function () {
+        $('.search-bar-wrapper').removeClass('is-expanded');
+        $('.search-bar-suggestions').removeClass('is-shown');
+        $('.search-bar-suggestions').empty();
+        $('.search-bar input').val('');
     });
 }
 

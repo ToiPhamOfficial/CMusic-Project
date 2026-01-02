@@ -12,6 +12,18 @@
     flex-shrink: 0;
     border-right: 1px solid var(--divider-color);
     overflow-y: auto;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.sidebar.is-active {
+    width: auto !important;
+}
+
+.sidebar.is-active .logo .logo-text,
+.sidebar.is-active .nav-title,
+.sidebar.is-active .nav-item a span:last-child {
+    display: none !important;
 }
 
 /* Logo */
@@ -19,20 +31,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
+    height: 45px;
 }
 
 .logo img {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
 }
 
 .logo-text {
-    font-family: "Source Sans Pro", sans-serif;
+    /* font-family: "Source Sans Pro", sans-serif; */
     font-weight: 600;
     font-size: var(--fs-h1);
     color: var(--accent-color);
     line-height: 1;
+}
+
+.logo #btn-close-sidebar {
+    display: none;
 }
 
 /* Sidebar Navigation */
@@ -97,4 +114,62 @@
     width: 24px;
     height: 24px;
     object-fit: contain;
+}
+
+
+/* Responsive for Tablet and Small Laptops */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: auto !important;
+    }
+
+    .sidebar .logo .logo-text,
+    .sidebar .nav-title,
+    .sidebar .nav-item a span:last-child {
+        display: none !important;
+    }
+
+    .sidebar.is-active {
+        width: var(--sidebar-width) !important;
+    }
+
+    .sidebar.is-active .logo .logo-text,
+    .sidebar.is-active .nav-title,
+    .sidebar.is-active .nav-item a span:last-child {
+        display: inline !important;
+    }
+}
+
+/* Responsive for Mobile */
+@media (max-width: 576px) {
+    .overlay.is-open {
+        /* Khi mở sidebar: Hiện */
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .sidebar {
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        transform: translateX(-250px);
+        transition: transform 300ms ease-in-out;
+    }
+
+    .sidebar .logo {
+        justify-content: flex-start;
+    }
+
+    .sidebar .logo .logo-text {
+        flex: 1;
+    }
+
+    .sidebar #btn-close-sidebar {
+        display: block;
+    }
+
+    .sidebar.is-active {
+        transform: translateX(0);
+        transition: transform 300ms ease-in-out;
+    }
 }

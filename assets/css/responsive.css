@@ -12,30 +12,9 @@
         --fs-h1: 1.75rem;     /* 28px */
     }
 
-    /* Sidebar adjustments */
-    .sidebar {
-        width: auto !important;
-    }
-
-    .sidebar .logo {
-        display: none;
-    }
-
-    .nav-title {
-        display: none;
-    }
-
-    .nav-item a span:last-child {
-        display: none;
-    }
-
     /* Hide banner and home player on tablet */
     .banner {
-        display: none !important;
-    }
-
-    .home-player {
-        display: none !important;
+        display: none;
     }
 
     /* Bottom player adjustments */
@@ -65,40 +44,12 @@
         --radius-lg: 0.375rem; /* 6px */
     }
 
-    /* Hide sidebar completely on mobile */
-    .sidebar {
-        display: none !important;
-    }
-
-    /* Header adjustments */
-    .user-profile {
-        width: auto;
-    }
-
-    .user-profile .username {
-        display: none;
-    }
-
-    .search-bar {
-        width: auto !important;
-        background-color: transparent !important;
-        border: none !important;
-    }
-
-    .search-bar input {
-        display: none;
-    }
-
     /* Hide elements on mobile */
     .chart-right {
         display: none !important;
     }
 
     .banner {
-        display: none !important;
-    }
-
-    .home-player {
         display: none !important;
     }
 
@@ -122,10 +73,6 @@
     .bottom-player-right {
         flex: none;
         justify-content: center;
-    }
-
-    .app {
-        padding-bottom: 200px;
     }
 
     /* Content adjustments */

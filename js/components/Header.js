@@ -7,12 +7,17 @@ export default function Header() {
     }
     
     return `
-        <div class="tabs">
-                    <div class="tab-item active">MUSIC</div>
-                    <div class="tab-item">PODCAST</div>
-                    <div class="tab-item">LIVE</div>
-                </div>
-                <div class="search-bar-container">
+        <button class="btn btn-menu">
+            <span class="material-icons-round">
+                menu
+            </span>
+        </button>
+                <div class="search-bar-wrapper">
+                    <button class="btn" id="btn-close-search-bar">
+                    <span class="material-icons-round">
+                        arrow_back
+                    </span>
+                </button>
                     <div class="search-bar">
                         <span class="material-icons-round">
                             search
@@ -34,15 +39,12 @@ export default function Header() {
                             settings
                         </span>
                     </button>
-                    <div class="mini-user-profile ${!isLoggedIn ? 'is-guest' : '" data-route="/profile"'}">
-                    ${currentUser ?
-                        `<div class="avatar">
-                            <img src="${currentUser ? currentUser.avatar : ''}"
+                    <div class="mini-user-profile${!isLoggedIn ? ' is-guest' : '" data-route="/profile"'}">
+                        <div class="avatar">
+                            <img src="${currentUser ? currentUser.avatar : '/assets/img/guest-avatar.png'}"
                                 alt="User Avatar">
                         </div>
-                        <span class="name">${currentUser ? currentUser.name : ''}</span>`
-                        : `<span>${!isLoggedIn ? 'Đăng nhập' : ''}</span>`
-                    }
+                        ${currentUser ? '<span class="name">' + currentUser.name + '</span>' : ''}
                     </div>
                 </div>
     `;

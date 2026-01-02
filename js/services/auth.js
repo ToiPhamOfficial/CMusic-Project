@@ -192,8 +192,7 @@ class Auth {
     // Get default avatar
     getDefaultAvatar() {
         const avatars = [
-            '/assets/img/icon/user-default.png',
-            'https://ui-avatars.com/api/?name=' + encodeURIComponent('User')
+            '/assets/img/default-avatar.png'
         ];
         return avatars[0];
     }
