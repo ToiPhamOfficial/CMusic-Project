@@ -113,6 +113,7 @@
 /* Hover vào hàng */
 .track-item-artist:hover {
     background-color: #1A1A1A;
+    
     /* Màu xám đậm nền khi active */
 }
 
@@ -245,24 +246,36 @@
     align-items: center;
 }
 
-.icon-heart {
+.track-item-artist .icon-heart {
+    display: none;
     color: #fff;
     /* Trái tim màu trắng trong hình */
     cursor: pointer;
 }
 
-.icon-more {
+.track-item-artist .icon-more {
+    display: none;
     color: #b3b3b3;
     cursor: pointer;
 }
 
 .icon-heart:hover {
+    display: none;
     color: red;
 }
 
 /* Xanh Spotify khi hover */
 .icon-more:hover {
     color: #fff;
+}
+
+.track-item-artist:hover .icon-heart,
+.track-item-artist:hover .icon-more {
+    display: block;
+}
+
+.track-item-artist:hover .time {
+    display: none;
 }
 
 /* Responsive cơ bản */
@@ -382,9 +395,10 @@
 }
 
 /* --- Track List --- */
-.track-list-container {
+/* .track-list-container {
     padding: 0 30px;
-}
+} */ 
+/* bỏ */
 
 /* Grid Layout: Định nghĩa độ rộng các cột */
 /* Cấu trúc: [Index] [Title] [Artist] [Album] [Time] */

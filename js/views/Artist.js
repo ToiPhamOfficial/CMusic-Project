@@ -1,6 +1,7 @@
 import { artists, songs } from '../data.js';
 
 export default function Artist() {
+    // const artist = artists[0];  
     return `
     <section class="section-hero">
         <div class="hero-content">
@@ -22,23 +23,12 @@ export default function Artist() {
         <div class="track-list">
             ${songs.map((song, index) => {
                 const rank = index + 1;
-                const isActive = index === 0; // Bài đầu tiên là Active
-                
+                const artist = artists.find(a => a.name === song.artist);
                 // Logic class: Active và Rank (1, 2, 3)
-                const activeClass = isActive ? 'active' : '';
                 const rankClass = rank <= 3 ? `number-${rank}` : '';
-
-                // Logic hiển thị cột cuối cùng: Active thì hiện Icon, ko Active thì hiện Thời gian
-                const actionsContent = isActive 
-                    ? ` <span class="material-icons-round icon-heart">favorite</span>
-                        <span class="material-icons-round icon-more">more_horiz</span>`
-                    : `${song.duration}`;
                 
-                // Class cho cột cuối: nếu active thêm class 'actions'
-                const colTimeClass = isActive ? 'col-time actions' : 'col-time';
-
                 return `
-                <div class="track-item-artist ${activeClass}" data-song-id="${song.id}">
+                <div class="track-item-artist active" data-song-id="${song.id}">
                     
                     <div class="col-rank ${rankClass}">#${rank}</div>
                     
@@ -48,7 +38,7 @@ export default function Artist() {
                             <div class="artist-name">${song.artist}</div>
                             <div class="artist-sub">${song.plays} người theo dõi</div>
                         </div>
-                        ${isActive ? '<button class="btn-follow">Theo dõi</button>' : ''}
+                        <button class="btn-follow" data-artist-id="${artist?.id || ''}">${getFollowText(artist?.id)}</button>
                     </div>
 
                     <div class="col-song">
@@ -62,8 +52,10 @@ export default function Artist() {
                         </div>
                     </div>
 
-                    <div class="${colTimeClass}">
-                        ${actionsContent}
+                    <div class="col-time">
+                        <span class="time">${song.duration}</span>
+                        <span class="material-icons-round icon-heart">favorite</span>
+                        <span class="material-icons-round icon-more">more_horiz</span>
                     </div>
                 </div>
                 `;
@@ -72,4 +64,15 @@ export default function Artist() {
 
     </section>
     `;
+}
+
+// Hàm trả về kiểu text của btn-follow
+function getFollowText(artistId) {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) return 'Theo dõi';
+
+    user.followedArtists ||= [];
+    return user.followedArtists.includes(artistId)
+        ? 'Đã theo dõi'
+        : 'Theo dõi';
 }

@@ -10,6 +10,9 @@ import { initRouter } from './router.js';
 import { navigateTo } from './router.js';
 import { songs, searchSongs } from './data.js';
 
+/* Import state */
+import { artistState } from './state/stateArtist.js';
+
 /* Import services */
 import auth from './services/auth.js';
 import audioManager from './services/audioManager.js';
@@ -85,6 +88,38 @@ function initEventListeners() {
 
     // Search Bar interactions
     initSearchBar();
+
+    // FOLLOW / UNFOLLOW (theo artistId)
+    $(document).on('click', '.btn-follow', function () {
+        const $btn = $(this);
+        const artistId = $btn.data('artist-id');
+        if (!artistId) return;
+
+        let user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            alert('Vui lòng đăng nhập');
+            return;
+        }
+
+        // Danh sách artist đã theo dõi
+        user.followedArtists ||= [];
+
+        const index = user.followedArtists.indexOf(artistId);
+
+        if (index === -1) {
+            // FOLLOW
+            user.followedArtists.push(artistId);
+            $btn.text('Đã theo dõi');
+        } else {
+            // UNFOLLOW
+            user.followedArtists.splice(index, 1);
+            $btn.text('Theo dõi');
+        }
+
+        // Lưu lại user
+        localStorage.setItem('currentUser', JSON.stringify(user));
+    });
+
 }
 
 function initSidebarToggle() {
@@ -330,6 +365,12 @@ function addToPlaylist(songId) {
 }
 ///////////////////////////////////////////////////////
 
+// STATE //
+
+
+
+
+///////////////////////////////////////////////////////
 
 
 
