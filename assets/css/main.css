@@ -16,12 +16,14 @@
 /* === 3. COMPONENTS === */
 @import url('components/sidebar.css');
 @import url('components/header.css');
-@import url('components/content.css');
-@import url('components/card.css');
 @import url('components/player.css');
 @import url('components/modal.css');
 @import url('components/login-signup.css');
 @import url('components/toast.css');
+@import url('components/card.css');
+
+/* === 3.5 PAGES === */
+@import url('pages/explore.css');
 
 /* === 4. RESPONSIVE === */
 /* Media queries must come last */

@@ -4,20 +4,21 @@
 
 /* Base Card Styles */
 .card {
+    position: relative;
     display: flex;
     flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-md);
     background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     overflow: hidden;
     cursor: pointer;
     transition: all var(--transition-normal);
-    position: relative;
 }
 
 .card:hover {
-    background: var(--hover-bg);
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
 }
 
 /* Card Cover */
@@ -27,6 +28,7 @@
     padding-top: 100%; /* 1:1 Aspect Ratio */
     overflow: hidden;
     background: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
 }
 
 .card-cover img {
@@ -36,61 +38,44 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: var(--radius-lg);
+    transition: transform var(--transition-normal);
 }
 
-/* Card Overlay */
-.card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
-.card:hover .card-overlay {
-    opacity: 1;
-}
-
-/* Card Play Button */
+/* Card Play Button - Positioned at bottom right corner */
 .card-play-btn {
-    width: 56px;
-    height: 56px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 48px;
+    height: 48px;
     border-radius: var(--radius-round);
-    background: var(--primary);
+    background: var(--accent-color);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transform: translateY(8px);
-    transition: all var(--transition-base);
-    box-shadow: 0 4px 16px rgba(86, 116, 255, 0.4);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    z-index: 2;
 }
 
 .card:hover .card-play-btn {
-    transform: translateY(0) scale(1.05);
+    opacity: 1;
 }
 
 .card-play-btn:hover {
-    transform: translateY(0) scale(1.1);
-    background: var(--primary-hover);
+    transform: scale(1.1);
 }
 
 .card-play-btn span {
-    font-size: 32px;
-    color: white;
+    font-size: 28px;
+    color: white;   
 }
 
 /* Card Info */
 .card-info {
-    padding: var(--space-md);
+    
 }
 
 .card-title {
@@ -112,7 +97,7 @@
 }
 
 .card-meta {
-    font-size: var(--fs-caption);
+    font-size: var(--fs-label);
     color: var(--text-tertiary);
     margin-top: var(--space-xs);
 }
@@ -127,19 +112,12 @@
 /* ==========================================
    ARTIST CARD
    ========================================== */
-.artist-card .card-cover,
-.artist-card .artist-cover {
-    border-radius: var(--radius-round);
-    padding-top: 100%;
+.artist-card {
+    /* Inherits from base .card - same style as album card */
 }
 
-.artist-card .card-cover img,
-.artist-card .artist-cover img {
+.artist-cover img {
     border-radius: var(--radius-round);
-}
-
-.artist-card .card-info {
-    text-align: center;
 }
 
 /* ==========================================
@@ -195,7 +173,7 @@
 }
 
 .genre-name {
-    font-size: var(--fs-h4);
+    font-size: var(--fs-body);
     font-weight: 700;
     color: white;
     z-index: 1;
@@ -333,14 +311,13 @@
     font-size: var(--fs-h3);
     font-weight: 700;
     color: var(--text-secondary);
-    width: 40px;
     text-align: center;
 }
 
 .chart-item.top-rank .chart-rank {
-    background: linear-gradient(135deg, var(--primary), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* -webkit-text-fill-color: transparent; */
     background-clip: text;
 }
 
@@ -411,6 +388,7 @@
     font-size: var(--fs-label);
     color: var(--text-secondary);
     margin: 0 var(--space-md);
+    display: none;
 }
 
 .chart-actions {

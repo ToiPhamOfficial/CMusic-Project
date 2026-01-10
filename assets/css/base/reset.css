@@ -87,7 +87,7 @@ span.material-icons-round {
     padding: 0 var(--space-lg);
     height: 100vh;
     width: 100%;
-    max-width: var(--container-max-width);
+    max-width: 1400px;
     overflow-y: auto;
 }
 

@@ -1,5 +1,40 @@
 // Dữ liệu mẫu cho website CMusic
 
+export const banner = [
+    {
+        id: 1,
+        subtitle: "Bản Hit Mới Nhất",
+        title: "Mất Kết Nối",
+        artist: "Dương Domic",
+        views: "15Tr lượt nghe",
+        image: "/data/hit-songs-bg/hit1.png"
+    },
+    {
+        id: 2,
+        subtitle: "Top Trending",
+        title: "Die With A Smile",
+        artist: "Lady Gaga, Bruno Mars",
+        views: "120Tr lượt nghe",
+        image: "https://images.unsplash.com/photo-1494526585095-c41746248156"
+    },
+    {
+        id: 3,
+        subtitle: "Cháy Nhất Hiện Nay",
+        title: "Kamin",
+        artist: "Emran, HANN",
+        views: "85Tr lượt nghe",
+        image: "https://images.unsplash.com/photo-1500534623283-312aade485b7"
+    },
+    {
+        id: 4,
+        subtitle: "Mới Ra Mắt",
+        title: "Faded",
+        artist: "Alan Walker",
+        views: "95Tr lượt nghe",
+        image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5"
+    }
+];
+
 export const users = [
     {
         id: 1,
@@ -85,55 +120,52 @@ export const songs = [
         plays: "45M",
         genre: "Lofi",
         audioUrl: "/data/songs/mp3/Sea%20Of%20Feelings%20-%20Lowx.mp3"
-    },
-    {
-        id: 7,
-        title: "In My Feelings",
-        artist: "Camila Cabello",
-        duration: "3:47",
-        image: "assets/img/hit-songs-bg/hit1.png",
-        plays: "63M",
-        genre: "Pop",
-        audioUrl: "/data/songs/mp3/In%20My%20Feelings%20-%20Camila%20Cabello.mp3"
     }
 ];
 
 export const artists = [
     {
         id: 1,
-        name: "Alan Walker",
-        image: "/data/artists/alan-walker.png",
-        listeners: "970M",
-        genre: "EDM"
-    },
-    {
-        id: 2,
-        name: "Bruno Mars",
-        image: "/data/artists/bruno-mars.png",
-        listeners: "275M",
-        genre: "Pop"
-    },
-    {
-        id: 3,
         name: "Sơn Tùng MTP",
-        image: "/data/artists/son-tung-mtp.png",
+        image: "/data/artists/son-tung-mtp.webp",
         listeners: "134M",
         genre: "V-Pop"
     },
     {
-        id: 4,
+        id: 2,
         name: "Soobin Hoàng Sơn",
-        image: "/data/artists/soobin-hoang-son.png",
-        listeners: "80M",
+            image: "/data/artists/soobin-hoang-son.webp",
+            listeners: "80M",
         genre: "V-Pop"
     },
     {
-        id: 5,
-        name: "Drake",
-        image: "/data/artists/drake.png",
-        listeners: "75M",
+        id: 3,
+        name: "Dương Domic",
+        image: "/data/artists/duong-domic.webp",
+        listeners: "45M",
+        genre: "V-Pop"
+    },
+    {
+        id: 4,
+        name: "Đen Vâu",
+        image: "/data/artists/den-vau.webp",
+        listeners: "120M",
         genre: "Hip Hop"
-    }
+    },
+    {
+        id: 5,
+        name: "Min",
+        image: "/data/artists/min.webp",
+        listeners: "95M",
+        genre: "V-Pop"
+    },
+    {
+        id: 6,
+        name: "ERIK",
+        image: "/data/artists/erik.webp",
+        listeners: "85M",
+        genre: "V-Pop"
+    },
 ];
 
 export const genres = [
@@ -166,6 +198,36 @@ export const genres = [
         id: 6,
         name: "Hip Hop Rap",
         color: "#5647a5"
+    },
+    {
+        id: 7,
+        name: "V-Pop",
+        color: "#d34e24"
+    },
+    {
+        id: 8,
+        name: "Lofi",
+        color: "#6b8a4f"
+    },
+    {
+        id: 9,
+        name: "Pop",
+        color: "#d24f67"
+    },
+    {
+        id: 10,
+        name: "EDM",
+        color: "#4f90d2"
+    },
+    {
+        id: 11,
+        name: "Rock",
+        color: "#888888"
+    },
+    {
+        id: 12,
+        name: "Jazz",
+        color: "#a0522d"
     }
 ];
 
@@ -191,7 +253,7 @@ export const albums = [
         artist: "Bruno Mars",
         year: 2023,
         songs: 12,
-        image: "/data/artists/bruno-mars.png"
+        image: "/data/albums/greatest-hits-bruno-mars.webp"
     },
     {
         id: 2,
@@ -199,7 +261,7 @@ export const albums = [
         artist: "Alan Walker",
         year: 2018,
         songs: 15,
-        image: "/data/albums/different-world-alan-walker.png"
+        image: "/data/albums/different-world-alan-walker.webp"
     },
     {
         id: 3,
@@ -207,7 +269,7 @@ export const albums = [
         artist: "Sơn Tùng MTP",
         year: 2022,
         songs: 10,
-        image: "/data/albums/sky-tour-son-tung-mtp.png"
+        image: "/data/albums/sky-tour-son-tung-mtp.webp"
     },
     {
         id: 4,
@@ -215,7 +277,7 @@ export const albums = [
         artist: "Various Artists",
         year: 2021,
         songs: 20,
-        image: "/data/albums/lofi-beats.png"
+        image: "/data/albums/lofi-beats.webp"
     },
     {
         id: 5,
@@ -223,7 +285,7 @@ export const albums = [
         artist: "Various Artists",
         year: 2020,
         songs: 18,
-        image: "/data/albums/pop-classics.png"
+        image: "/data/albums/pop-classics.webp"
     },
     {
         id: 6,
@@ -231,7 +293,7 @@ export const albums = [
         artist: "Various Artists",
         year: 2019,
         songs: 22,
-        image: "/data/albums/indie-vibes.png"
+        image: "/data/albums/indie-vibes.webp"
     },
     {
         id: 7,
@@ -239,7 +301,125 @@ export const albums = [
         artist: "Various Artists",
         year: 2023,
         songs: 16,
-        image: "/data/albums/hip-hop-anthems.png"
+        image: "/data/albums/hip-hop-anthems.webp"
+    }
+];
+
+export const internationalAlbums = [
+    {
+        id: 1,
+        title: "Behind The Light",
+        artist: "James Bay",
+        year: 2018,
+        songs: 12,
+        image: "/data/albums/international-albums/behind-the-light-james-bay.webp"
+    },
+    {
+        id: 2,
+        title: "Future Nostalgia",
+        artist: "Dua Lipa",
+        year: 2020,
+        songs: 11,
+        image: "/data/albums/international-albums/future-nostalgia-dua-lipa.webp"
+    },
+    {
+        id: 3,
+        title: "Divide",
+        artist: "Ed Sheeran",
+        year: 2017,
+        songs: 16,
+        image: "/data/albums/international-albums/divide-ed-sheeran.webp"
+    },
+    {
+        id: 4,
+        title: "Lover",
+        artist: "Taylor Swift",
+        year: 2019,
+        songs: 18,
+        image: "/data/albums/international-albums/lover-taylor-swift.webp"
+    },
+    {
+        id: 5,
+        title: "Starboy",
+        artist: "The Weeknd",
+        year: 2016,
+        songs: 18,
+        image: "/data/albums/international-albums/starboy-the-weeknd.webp"
+    },
+    {
+        id: 6,
+        title: "Purpose",
+        artist: "Justin Bieber",
+        year: 2015,
+        songs: 13,
+        image: "/data/albums/international-albums/purpose-justin-bieber.webp"
+    },
+    {
+        id: 7,
+        title: "Scorpion",
+        artist: "Drake",
+        year: 2018,
+        songs: 25,
+        image: "/data/albums/international-albums/scorpion-drake.webp"
+    },
+    {
+        id: 8,
+        title: "Fine Line",
+        artist: "Harry Styles",
+        year: 2019,
+        songs: 12,
+        image: "/data/albums/international-albums/fine-line-harry-styles.webp"
+    }
+];
+
+export const lofiAlbums = [
+    {
+        id: 1,
+        title: "Lofi Chill Beats",
+        artist: "Various Artists",
+        year: 2021,
+        songs: 20,
+        image: "/data/albums/lofi-albums/lofi-chill-beats.webp"
+    },
+    {
+        id: 2,
+        title: "Study Lofi",
+        artist: "Various Artists",
+        year: 2020,
+        songs: 18,
+        image: "/data/albums/lofi-albums/study-lofi.webp"
+    },
+    {
+        id: 3,
+        title: "Lofi Vibes",
+        artist: "Various Artists",
+        year: 2019,
+        songs: 22,
+        image: "/data/albums/lofi-albums/lofi-vibes.webp"
+    },
+    {
+        id: 4,
+        title: "Lofi Hip Hop",
+        artist: "Various Artists",
+        year: 2022,
+        songs: 16,
+        image: "/data/albums/lofi-albums/lofi-hip-hop.webp"
+    },
+    {
+        id: 5,
+        title: "Chillhop Essentials",
+        artist: "Various Artists",
+        year: 2023,
+        songs: 15,
+        image: "/data/albums/lofi-albums/chillhop-essentials.webp"
+    },
+    {
+        id: 6,
+        title: "Lofi Dreams",
+        artist: "Various Artists",
+        year: 2021,
+        songs: 19,
+        image: "/data/albums/lofi-albums/lofi-dreams.webp"
     }
 ];
 

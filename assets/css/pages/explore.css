@@ -10,10 +10,36 @@
     flex-direction: column;
     gap: var(--space-md);
     padding: var(--space-lg);
-    background-image: url("/data/hit-songs-bg/hit1.png"), linear-gradient( 90deg, #1a1a21 0%, #000000 100%);
-    background-size: contain;
+    min-height: 300px;
+    background-size: cover, cover;
     background-repeat: no-repeat;
-    background-position: right center;
+    background-position: left center, center right;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+/* Thêm overlay gradient để tạo độ sâu và màu sắc */
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        120deg,
+        rgba(79, 70, 229, 0.12) 0%,
+        rgba(139, 92, 246, 0.08) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Đảm bảo nội dung nằm trên gradient */
+.banner > * {
+    position: relative;
+    z-index: 1;
 }
 
 .banner-subtitle {
@@ -59,7 +85,7 @@
     padding: 0 var(--space-lg);
 }
 
-.btn-play {
+.btn-play-zzz {
     background-color: var(--accent-color);
     color: var(--text-primary);
     border: none;
@@ -72,7 +98,7 @@
     transition: background-color var(--transition-fast);
 }
 
-.btn-play:hover {
+.btn-play-zzz:hover {
     background-color: var(--accent-hover);
 }
 
@@ -92,6 +118,18 @@
 .btn-fav:hover {
     background-color: var(--accent-color);
 }
+
+
+
+
+
+
+
+/*////////////////////////////////////////////*/
+
+
+
+
 
 /* Content Section */
 .content-section {
@@ -134,103 +172,70 @@
     color: var(--accent-color);
 }
 
-/* Tags Player Layout */
-.tags-player {
-    display: flex;
-    gap: var(--space-lg);
-    width: 100%;
+
+
+
+
+
+
+/*////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+
+/* Top Artists Grid */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
+    gap: 20px;
 }
 
-.tags {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    flex: 1;
-    width: 100%;
-}
-
-/* Artist Slider */
-.artist-slider-wrap {
-    position: relative;
-}
-
-.next-previous-controls {
-    /* display: flex; */
-    display: none;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.next-btn, .previous-btn {
-    height: 32px;
-    width: 32px;
-    border: 2px solid #4E4E4E;
-    border-radius: 50%;
-}
-
-.artist-slider {
-    display: flex;
-    /* gap: var(--space-lg); */
-    overflow-x: auto;
-    /* scrollbar-width: none; */
-}
-
-.artist-slider::-webkit-scrollbar {
+.artists-grid > *:nth-child(n+7) {
     display: none;
 }
 
-.artist-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-    padding: var(--space-md);
-    background-color: var(--card-bg);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+/* Albums Grid */
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
+    gap: 20px;
 }
 
-.artist-card:hover {
-    background-color: var(--hover-bg);
+.artists-grid > *:nth-child(n+7) {
+    display: none;
 }
 
-.artist-card img {
-    width: 9.375rem;
-    height: 9.375rem;
-    border-radius: var(--radius-sm);
-    object-fit: cover;
-}
 
-.artist-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-}
 
-.artist-info .name {
-    display: -webkit-box;
-    font-size: var(--fs-body);
-    font-weight: 600;
-    color: var(--text-primary);
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+/*////////////////////////////////////////////*/
 
-.artist-info .listeners {
-    font-size: var(--fs-label);
-    color: var(--text-secondary);
-}
+
+
+
+
+
+
+
+
+
+
 
 /* Genres Grid */
-.genre-grid {
+.genres-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: var(--space-md);
+}
+
+.genres-grid > *:nth-child(n+13) {
+    display: none;
 }
 
 .genre-item {
@@ -251,7 +256,81 @@
     transform: scale(1.05);
 }
 
-/* Charts */
+
+
+
+
+
+
+
+
+/*////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+
+/* Charts Section */
+.charts-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-lg);
+}
+
+.chart-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    min-width: 0; /* Ngăn grid item co giãn vì nội dung */
+    background: linear-gradient(rgba(205, 104, 104, 0.3) 0%, rgba(205, 104, 104, 0.06) 100%);
+    padding: var(--space-lg);
+    border-radius: var(--radius-sm);
+}
+
+.chart-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-column-header h3 {
+    font-size: var(--fs-h4);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.btn-play-chart {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--accent-color);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 100px;
+    font-size: var(--fs-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.btn-play-chart:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-play-chart span.material-icons-round {
+    font-size: 20px;
+}
+
+
+/* Chart List */
 .chart-list {
     display: flex;
     flex-direction: column;
@@ -315,6 +394,7 @@
 }
 
 .chart-right .duration {
+    display: none;
     font-size: var(--fs-label);
     color: var(--text-primary);
 }
@@ -341,6 +421,26 @@
 .btn-play-song:hover span {
     color: var(--text-primary);
 }
+
+
+
+
+
+
+
+/*////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Songs list*/
 .song-list {
@@ -490,6 +590,7 @@
 .genre-tabs {
     display: flex;
     gap: var(--space-md);
+    margin-bottom: var(--space-lg);
     flex-wrap: wrap;
 }
 
@@ -526,7 +627,6 @@
 .btn-create-playlist:hover {
     opacity: 0.9;
 }
-
 
 /* ==========================================
    FOOTER
@@ -611,5 +711,66 @@
     
     .footer-section p {
         font-size: 11px;
+    }
+}
+
+/* Giới hạn tối đa 6 cột cho albums */
+@media (max-width: 1024px) {
+    .artists-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .artists-grid > *:nth-child(n+5) {
+        display: none;
+    }
+
+    .genres-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .genres-grid > *:nth-child(n+7) {
+        display: none;
+    }
+
+    .charts-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-wrapper > .chart-column:not(:first-child) {
+        display: none;
+    }
+
+    .albums-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .albums-grid > *:nth-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .artists-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .artists-grid > *:nth-child(n+4) {
+        display: none;
+    }
+
+    .genres-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .genres-grid > *:nth-child(n+5) {
+        display: none;
+    }
+
+    .albums-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .albums-grid > *:nth-child(n+4) {
+        display: none;
     }
 }
