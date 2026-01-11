@@ -119,6 +119,21 @@ function initEventListeners() {
         localStorage.setItem('currentUser', JSON.stringify(user));
     });
 
+    // Xử lý click nút Xem thêm / Thu gọn
+    $(document).on('click', '.btn-toggle-lyrics', function() {
+        const $content = $('#lyric-content');
+        const $btn = $(this);
+        
+        if ($content.hasClass('collapsed')) {
+            // Đang đóng -> Mở ra
+            $content.removeClass('collapsed').addClass('expanded');
+            $btn.html('THU GỌN <i class="fa fa-chevron-up"></i>');
+        } else {
+            // Đang mở -> Đóng lại
+            $content.removeClass('expanded').addClass('collapsed');
+            $btn.html('XEM THÊM <i class="fa fa-chevron-down"></i>');
+        }
+    });
 }
 
 function initSidebarToggle() {

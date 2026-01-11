@@ -17,10 +17,10 @@
 @import url('components/sidebar.css');
 @import url('components/header.css');
 @import url('components/content.css');
-@import url('components/card.css');
 @import url('components/player.css');
+@import url('components/bottom-player.css');
 @import url('components/modal.css');
-@import url('components/login-signup.css');
+@import url('components/login_signup.css');
 @import url('components/toast.css');
 
 /* === 4. RESPONSIVE === */
@@ -37,8 +37,7 @@
     flex-shrink: 0;
     position: relative;
     width: 100%;
-    height: 350px;
-    margin-bottom: 24px;
+    height: 300px;
     background:
         linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, #000 100%),
         url('data:image/jpeg;base64,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');
@@ -68,10 +67,10 @@
 
 
 /* --- Playlist Layout --- */
-.playlist-container {
+/* .playlist-container {
     padding: 0 30px;
     gap: 24px;
-}
+} */
 
 /* Grid Layout cho các hàng */
 /* Cấu trúc cột: [Rank] [Artist Info] [Song Info] [Time/Actions] */
@@ -306,7 +305,7 @@
     display: flex;
     align-items: flex-end; /* Căn nội dung xuống đáy */
     padding: 40px 30px;
-    height: 350px;
+    height: 300px;
     margin-bottom: 20px;
     overflow: hidden;
 }
@@ -344,6 +343,20 @@
     flex-shrink: 0;
 }
 
+.hero-img {
+    position: relative;
+    z-index: 2;
+    width: 220px;
+    height: 220px;
+    
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    margin-right: 25px;
+    margin-bottom: 0px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
 /* icon more */
 .hero-cover span {
     font-size: 80px;
@@ -355,8 +368,8 @@
     z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    height: 220px;
+    justify-content: space-between;
+    height: 200px;
 }
 
 .playlist-subtitle {
@@ -534,6 +547,7 @@
         height: auto;
     }
     .hero-cover { margin-right: 0; margin-bottom: 20px; }
+    .hero-img { margin-right: 0; margin-bottom: 20px; }
     .hero-info { height: auto; align-items: center; }
     
     .track-header, .track-item {
@@ -682,4 +696,97 @@
 .qa-sub {
     font-size: 0.8rem;
     color: #b3b3b3;
+}
+
+/*==========================================
+    DetailSong
+========================================== */
+
+/* --- 1. Cài đặt chung cho trang chi tiết --- */
+.song-detail {
+    max-width: 800px;     /* Giới hạn chiều rộng để không bị bè ra */
+    margin: 0 auto;       /* Căn giữa trang */
+    color: #fff;          /* Chữ trắng */
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 50px;
+}
+
+/* --- 2. Typography (Tiêu đề bài hát & Nghệ sĩ) --- */
+.song-detail h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Hiệu ứng chữ gradient */
+}
+
+.song-detail h3.text-muted {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6) !important; /* Màu xám mờ */
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+/* --- 3. Card (Khung chứa lời bài hát) --- */
+/* Tự định nghĩa lại class .card */
+.card {
+    background-color: #202a44;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Định nghĩa lại .card-body */
+.card-body {
+    padding: 30px;
+}
+
+/* Tiêu đề "Lời bài hát" */
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* Đường kẻ ngang */
+hr.border-secondary {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 25px;
+}
+
+/* --- 4. Nội dung Lyric (#lyric-content) --- */
+#lyric-content {
+    /* Các thuộc tính này kết hợp với style inline trong JS của bạn */
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    
+    /* Tạo hiệu ứng cuộn mượt nếu lời quá dài */
+    max-height: 500px; 
+    overflow-y: auto;
+    
+    /* Tùy chỉnh thanh cuộn cho đẹp */
+    scrollbar-width: thin;
+    scrollbar-color: #555 transparent;
+}
+
+/* Style cho thanh cuộn (Chrome/Safari) */
+#lyric-content::-webkit-scrollbar {
+    width: 6px;
+}
+#lyric-content::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+}
+
+/* Style cho icon loading */
+.fa-spinner {
+    margin-right: 8px;
+    color: #c662ef;
 }

@@ -10,6 +10,9 @@ import RecentlyPlayed_Songs from './views/RecentlyPlayed-Songs.js';
 import RecentlyPlayed_Playlist from './views/RecentlyPlayed-Playlist.js';
 import RecentlyPlayed_Album from './views/RecentlyPlayed-Album.js';
 import RecentlyPlayed_Artist from './views/RecentlyPlayed-Artist.js';
+import ArtistDetail from './views/DetailArtist.js';
+import PlaylistDetail from './views/DetailPlaylist.js';
+import SongDetail from './views/DetailSong.js';
 
 // Định nghĩa các route (sử dụng History API)
 const routes = {
@@ -24,19 +27,36 @@ const routes = {
     '/recent/artist': RecentlyPlayed_Artist,
     '/favorites': Favorite,
     '/archive': Explore,
-    '/profile': Profile
+    '/profile': Profile,
+    '/artist-detail': ArtistDetail, // Trang chi tiết (Tên khác đi cho đỡ nhầm)
+    '/playlist-detail': PlaylistDetail,
+    '/song-detail': SongDetail
 };
 
 // Render trang dựa trên route hiện tại
-export function renderRoute(path) {
-    const currentPath = path || window.location.pathname;
-    const route = routes[currentPath];
+export function renderRoute() {
+    // const currentPath = path || window.location.pathname;
+    // const route = routes[currentPath];
     
-    // Lấy app container
-    $('.container').html(route());
+    // // Lấy app container
+    // $('.container').html(route());
     
-    // Update active state trong sidebar
-    updateActiveNavItem(currentPath);
+    // // Update active state trong sidebar
+    // updateActiveNavItem(currentPath);
+
+    //--------------------------------------------------
+
+    const path = window.location.pathname; 
+
+    // 2. Tìm view
+    const viewFunction = routes[path] || routes['/'];
+
+    // 3. Render HTML
+    // Lưu ý: Không truyền ID vào đây nữa, View sẽ tự lấy từ URL
+    $('.container').html(viewFunction());
+
+    // 4. Update Sidebar
+    updateActiveNavItem(path);
 }
 
 // Update active state trong navigation
@@ -46,6 +66,9 @@ function updateActiveNavItem(path) {
     
     // Add active class cho nav item tương ứng
     $(`.nav-link[href="${path}"]`).closest('.nav-item').addClass('active');
+
+    // // Tìm thẻ a có href bắt đầu bằng path hiện tại
+    // $(`.nav-link[href^="${path}"]`).closest('.nav-item').addClass('active');
 }
 
 // Khởi tạo router

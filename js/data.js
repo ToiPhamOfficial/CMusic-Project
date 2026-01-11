@@ -99,15 +99,17 @@ export const songs = [
 ];
 
 export const artists = [
+    { id: 1, name: 'Sơn Tùng M-TP', image: 'https://placehold.co/200', desc: 'Hoàng tử mưa...' },
+    { id: 2, name: 'Đen Vâu', image: 'https://placehold.co/200', desc: 'Rapper tử tế...' },
     {
-        id: 1,
+        id: 11,
         name: "Alan Walker",
         image: "/data/artists/alan-walker.png",
         listeners: "970M",
         genre: "EDM"
     },
     {
-        id: 2,
+        id: 22,
         name: "Bruno Mars",
         image: "/data/artists/bruno-mars.png",
         listeners: "275M",
@@ -252,6 +254,10 @@ export function getArtistById(id) {
     return artists.find(artist => artist.id === id);
 }
 
+export function getPlaylistById(id) {
+    return playlists.find(playlist => playlist.id === id);
+}
+
 export function getTopSongs(limit = 5) {
     return songs.slice(0, limit);
 }
@@ -267,3 +273,19 @@ export function searchSongs(query) {
         song.artist.toLowerCase().includes(lowerQuery)
     );
 }
+
+export const db = {
+    artists: [
+        { id: '1', name: 'Sơn Tùng M-TP', image: 'https://placehold.co/200', desc: 'Hoàng tử mưa...' },
+        { id: '2', name: 'Đen Vâu', image: 'https://placehold.co/200', desc: 'Rapper tử tế...' }
+    ],
+    playlists: [
+        { id: '101', title: 'Nhạc Chill Cuối Tuần', author: 'Admin', image: 'https://placehold.co/200' },
+        { id: '102', title: 'Top Hits 2024', author: 'Spotify', image: 'https://placehold.co/200' }
+    ],
+    songs: [
+        { id: 's1', title: 'Chúng Ta Của Hiện Tại', artist: 'Sơn Tùng M-TP', lyrics: '...' },
+        { id: 's2', title: 'Mang Tiền Về Cho Mẹ', artist: 'Đen Vâu', lyrics: '...' }
+    ]
+};
+
