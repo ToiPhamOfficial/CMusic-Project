@@ -1,15 +1,15 @@
-import { getPlaylistById, getSongById } from '../data.js';
+import { getAlbumById, getSongById } from '../data.js';
 
-export default function PlaylistDetail() {
+export default function AlbumDetail() {
     //Tự lấy ID từ URL hiện tại (ví dụ: .../artist-detail?id=1)
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get('id')); // Lấy số 1 ra
 
-    const playlist = getPlaylistById(id);
+    const album = getAlbumById(id);
 
-    if (!playlist) return `<h1>Playlist không tồn tại</h1>`;
+    if (!album) return `<h1>Playlist không tồn tại</h1>`;
 
-    const listSongs = playlist.songIds.map(songId => {
+    const listSongs = album.songIds.map(songId => {
         return getSongById(songId);
     }).filter(song => song !== undefined); // Lọc bỏ trường hợp bài hát bị xóa (undefined)
 
@@ -24,20 +24,18 @@ export default function PlaylistDetail() {
     </div>` : ``;
 
     return `
-        <div class="playlist-detail">
+        <div class="album-detail">
             
             <section class="playlist-hero">
                 <div class="hero-bg-glow"></div> 
-                <div class="hero-cover">
-                    <span class="material-icons-round">favorite</span>
-                </div>
+                <img class="hero-img" src="${album.image}" alt="">
                 
                 <div class="hero-info">
-                    <span class="playlist-subtitle">Playlist: ${playlist.songIds.length} bài</span>
-                    <h1 class="playlist-title">${playlist.name}
+                    <span class="playlist-subtitle">Album: ${album.songIds.length} bài</span>
+                    <h1 class="playlist-title">${album.title}
                         <br> 
                         <span class="hero-desc-text">
-                                Tạo bởi: <strong>${playlist.creator || 'Admin'}</strong>
+                                Tạo bởi: <strong>${album.creator || 'Admin'}</strong>
                         </span>
                     </h1>
                     <button class="btn-play-all">

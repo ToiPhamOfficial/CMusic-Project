@@ -124,49 +124,62 @@ export const songs = [
 ];
 
 export const artists = [
-    { id: 1, name: 'Sơn Tùng M-TP', image: 'https://placehold.co/200', desc: 'Hoàng tử mưa...' },
-    { id: 2, name: 'Đen Vâu', image: 'https://placehold.co/200', desc: 'Rapper tử tế...' },
     {
         id: 1,
         name: "Alan Walker",
         image: "/data/artists/alan-walker.png",
         listeners: "970M",
-        genre: "EDM"
+        followers: 1250400,
+        genre: "EDM",
+        songIds: [1, 3],
+        biography: "Alan Olav Walker (sinh ngày 24/8/1997) là một DJ và nhà sản xuất thu âm người Na Uy gốc Anh. Anh nổi tiếng toàn cầu với đĩa đơn 'Faded' đạt chứng nhận kim cương tại nhiều quốc gia. Phong cách của Alan đặc trưng bởi hình ảnh bí ẩn với chiếc áo hoodie đen và mặt nạ che mặt, cùng dòng nhạc EDM mang âm hưởng u tối, hùng vĩ nhưng giàu cảm xúc."
     },
     {
         id: 2,
         name: "Bruno Mars",
         image: "/data/artists/bruno-mars.png",
         listeners: "275M",
-        genre: "Pop"
+        followers: 1250400,
+        genre: "Pop",
+        songIds: [1, 3],
+        biography: "Peter Gene Hernandez (sinh ngày 8/10/1985), nghệ danh Bruno Mars, là một ca sĩ, nhạc sĩ, vũ công và nhà sản xuất âm nhạc người Mỹ. Anh nổi tiếng với phong cách trình diễn lôi cuốn và khả năng biến hóa đa dạng qua nhiều thể loại như Pop, R&B, Funk, Soul, Reggae. Bruno Mars sở hữu hàng loạt giải Grammy và các bản hit vượt thời gian như 'Just the Way You Are', 'Uptown Funk', và 'That's What I Like'."
     },
     {
         id: 3,
         name: "Dương Domic",
         image: "/data/artists/duong-domic.webp",
         listeners: "45M",
-        genre: "V-Pop"
+        followers: 1250400,
+        genre: "V-Pop",
+        songIds: [1, 3],
+        biography: "Dương Domic (tên thật Trần Đăng Dương, sinh năm 2000) là một nghệ sĩ Gen Z đa tài của V-Pop. Từng là thực tập sinh của công ty giải trí Hàn Quốc IF Entertainment, anh sở hữu ngoại hình điển trai, khả năng vũ đạo điêu luyện, sáng tác tốt và chơi nhạc cụ thành thạo. Tên tuổi của anh vụt sáng sau chương trình 'Anh Trai Say Hi', thu hút lượng lớn người hâm mộ trẻ."
     },
     {
         id: 4,
         name: "Đen Vâu",
         image: "/data/artists/den-vau.webp",
         listeners: "120M",
-        genre: "Hip Hop"
+        followers: 1250400,
+        genre: "Hip Hop",
+        biography: "Đen Vâu (tên thật Nguyễn Đức Cường, sinh năm 1989) là một Rapper và nhạc sĩ nổi tiếng người Việt Nam. Xuất thân từ một công nhân vệ sinh bãi biển, âm nhạc của Đen mang đậm chất đời, mộc mạc, triết lý nhưng vô cùng gần gũi và chữa lành. Anh là chủ nhân của hàng loạt bản hit 'Top 1 Trending' như 'Đưa nhau đi trốn', 'Lối nhỏ', 'Mang tiền về cho mẹ', được mệnh danh là 'Nhà thơ của Rap Việt'."
     },
     {
         id: 5,
         name: "Min",
         image: "/data/artists/min.webp",
         listeners: "95M",
-        genre: "V-Pop"
+        followers: 1250400,
+        genre: "V-Pop",
+        biography: "MIN (tên thật Nguyễn Minh Hằng, sinh năm 1988) xuất thân là thành viên nhóm nhảy St.319 trước khi trở thành ca sĩ chuyên nghiệp. Cô được đánh giá là một trong những nghệ sĩ có tư duy hình ảnh và âm nhạc hiện đại nhất V-Pop. Với giọng hát ngọt ngào và phong cách thời thượng, MIN sở hữu bộ sưu tập hit đồ sộ như 'Yêu', 'Có Em Chờ', 'Em Mới Là Người Yêu Anh'."
     },
     {
         id: 6,
         name: "ERIK",
         image: "/data/artists/erik.webp",
         listeners: "85M",
-        genre: "V-Pop"
+        followers: 1250400,
+        genre: "V-Pop",
+        biography: "ERIK (tên thật Lê Trung Thành, sinh năm 1997) là một nam ca sĩ sở hữu chất giọng mũi đặc trưng đầy nội lực. Nổi lên từ bản hit quốc dân 'Sau Tất Cả', ERIK nhanh chóng khẳng định vị thế 'Hoàng tử Ballad' của V-Pop. Anh là cựu thành viên nhóm nhạc Monstar và là một mảnh ghép của gia đình 'Hoa Dâm Bụt'. Các ca khúc của ERIK luôn được đầu tư chỉn chu và dễ dàng chạm đến cảm xúc khán giả."
     },
 ];
 
@@ -259,7 +272,8 @@ export const albums = [
         artist: "Bruno Mars",
         year: 2023,
         songs: 12,
-        image: "/data/albums/greatest-hits-bruno-mars.webp"
+        image: "/data/albums/greatest-hits-bruno-mars.webp",
+        songIds: [1, 3]
     },
     {
         id: 2,
@@ -267,7 +281,8 @@ export const albums = [
         artist: "Alan Walker",
         year: 2018,
         songs: 15,
-        image: "/data/albums/different-world-alan-walker.webp"
+        image: "/data/albums/different-world-alan-walker.webp",
+        songIds: []
     },
     {
         id: 3,
@@ -275,7 +290,8 @@ export const albums = [
         artist: "Sơn Tùng MTP",
         year: 2022,
         songs: 10,
-        image: "/data/albums/sky-tour-son-tung-mtp.webp"
+        image: "/data/albums/sky-tour-son-tung-mtp.webp",
+        songIds: [1, 3]
     },
     {
         id: 4,
@@ -283,7 +299,8 @@ export const albums = [
         artist: "Various Artists",
         year: 2021,
         songs: 20,
-        image: "/data/albums/lofi-beats.webp"
+        image: "/data/albums/lofi-beats.webp",
+        songIds: []
     },
     {
         id: 5,
@@ -291,7 +308,8 @@ export const albums = [
         artist: "Various Artists",
         year: 2020,
         songs: 18,
-        image: "/data/albums/pop-classics.webp"
+        image: "/data/albums/pop-classics.webp",
+        songIds: [1, 3]
     },
     {
         id: 6,
@@ -299,7 +317,8 @@ export const albums = [
         artist: "Various Artists",
         year: 2019,
         songs: 22,
-        image: "/data/albums/indie-vibes.webp"
+        image: "/data/albums/indie-vibes.webp",
+        songIds: [1, 3]
     },
     {
         id: 7,
@@ -307,7 +326,8 @@ export const albums = [
         artist: "Various Artists",
         year: 2023,
         songs: 16,
-        image: "/data/albums/hip-hop-anthems.webp"
+        image: "/data/albums/hip-hop-anthems.webp",
+        songIds: []
     }
 ];
 
@@ -440,6 +460,10 @@ export function getArtistById(id) {
 
 export function getPlaylistById(id) {
     return playlists.find(playlist => playlist.id === id);
+}
+
+export function getAlbumById(id) {
+    return albums.find(album => album.id === id);
 }
 
 export function getTopSongs(limit = 5) {

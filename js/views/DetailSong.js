@@ -30,7 +30,7 @@ export default function SongDetail() {
 
    return `
         <div class="detail-song">
-            <div class="playlist-hero">
+            <section class="playlist-hero">
                 <div class="hero-bg-glow"></div> 
                 
                 <img class="hero-img" src="${song.image}" alt="">
@@ -42,7 +42,7 @@ export default function SongDetail() {
                         <span class="material-icons-round">play_arrow</span> Phát
                     </button>
                 </div>
-            </div>
+            </section>
             
             <div class="card bg-dark text-white border-secondary">
                 <div class="card-body">

@@ -8,7 +8,7 @@ export default function Album() {
             </div>
             <div class="album-grid">
                 ${albums.map(album => `
-                    <div class="album-card" data-album-id="${album.id}">
+                    <div class="album-card" data-route="/album-detail?id=${album.id}">
                         <div class="album-cover">
                             <img src="${album.image}" alt="${album.title}">
                             <button class="album-play-btn">
@@ -31,7 +31,7 @@ export default function Album() {
             </div>
             <div class="album-grid">
                 ${albums.map(album => `
-                    <div class="album-card" data-album-id="${album.id}">
+                    <div class="album-card" data-route="/album-detail?id=${album.id}">
                         <div class="album-cover">
                             <img src="${album.image}" alt="${album.title}">
                             <button class="album-play-btn">

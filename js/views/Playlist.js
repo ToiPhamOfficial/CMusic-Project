@@ -12,7 +12,7 @@ export default function Playlist() {
             </div>
             <div class="playlist-grid">
                 ${playlists.map(playlist => `
-                    <div class="playlist-card" data-playlist-id="${playlist.id}">
+                    <div class="playlist-card" data-route="/playlist-detail?id=${playlist.id}">
                         <div class="playlist-cover">
                             <span class="material-icons-round">${playlist.icon}</span>
                         </div>

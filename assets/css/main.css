@@ -567,7 +567,7 @@
 }
 
 /* ==========================================
-   Profile
+   Profile - DetailArtist
    ========================================== */
 
 /* --- 1. Header Profile --- */
@@ -800,4 +800,36 @@ hr.border-secondary {
 .fa-spinner {
     margin-right: 8px;
     color: #c662ef;
+}
+
+/*==========================================
+    DetailArtist
+========================================== */
+
+.artist-bio {
+    display: flex;
+    flex-direction: row;
+    max-height: 220px;
+}
+
+.bio-text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.text-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;   /* số dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/*==========================================
+    data-route
+========================================== */
+
+/* Bất kỳ thẻ nào có thuộc tính data-route sẽ hiện con trỏ bàn tay */
+[data-route] {
+    cursor: pointer;
 }

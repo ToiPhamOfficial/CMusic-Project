@@ -25,7 +25,7 @@ export default function Profile() {
     }
 
     return `      
-        <div class="profile-hero">
+        <section class="profile-hero">
             <div class="hero-bg-overlay"></div>
             
             <div class="profile-content">
@@ -43,7 +43,7 @@ export default function Profile() {
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="quick-access-grid">
             <div class="qa-card">

@@ -13,6 +13,7 @@ import RecentlyPlayed_Artist from './views/RecentlyPlayed-Artist.js';
 import ArtistDetail from './views/DetailArtist.js';
 import PlaylistDetail from './views/DetailPlaylist.js';
 import SongDetail from './views/DetailSong.js';
+import AlbumDetail from './views/DetailAlbum.js';
 
 // Định nghĩa các route (sử dụng History API)
 const routes = {
@@ -30,11 +31,12 @@ const routes = {
     '/profile': Profile,
     '/artist-detail': ArtistDetail, // Trang chi tiết (Tên khác đi cho đỡ nhầm)
     '/playlist-detail': PlaylistDetail,
-    '/song-detail': SongDetail
+    '/song-detail': SongDetail,
+    '/album-detail': AlbumDetail
 };
 
 // Render trang dựa trên route hiện tại
-export function renderRoute() {
+export function renderRoute(path) {
     // const currentPath = path || window.location.pathname;
     // const route = routes[currentPath];
     
@@ -45,18 +47,23 @@ export function renderRoute() {
     // updateActiveNavItem(currentPath);
 
     //--------------------------------------------------
+    // 1. Xác định path thực tế
+    // Ưu tiên path được truyền vào (từ navigateTo), nếu không có thì lấy từ URL trình duyệt
+    const fullPath = path || window.location.pathname;
 
-    const path = window.location.pathname; 
+    // 2. Tách path chính và query string (để map đúng key trong routes)
+    // Ví dụ: '/song-detail?id=10' -> routePath là '/song-detail'
+    const routePath = fullPath.split('?')[0];
 
-    // 2. Tìm view
-    const viewFunction = routes[path] || routes['/'];
+    // 3. Tìm view
+    const viewFunction = routes[routePath] || routes['/'];
 
-    // 3. Render HTML
-    // Lưu ý: Không truyền ID vào đây nữa, View sẽ tự lấy từ URL
+    // 4. Render HTML
+    // View sẽ tự lấy ID từ URLSearchParams bên trong nó
     $('.container').html(viewFunction());
 
-    // 4. Update Sidebar
-    updateActiveNavItem(path);
+    // 5. Update Sidebar (chỉ cần highlight path chính)
+    updateActiveNavItem(routePath);
 }
 
 // Update active state trong navigation

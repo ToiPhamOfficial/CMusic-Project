@@ -1,6 +1,6 @@
 export function ArtistCard(artist) {
     return `
-        <div class="card artist-card" data-artist-id="${artist.id}">
+        <div class="card artist-card" data-route="/artist-detail?id=${artist.id}">
             <div class="card-cover artist-cover">
                 <img src="${artist.image}" alt="${artist.name}" loading="lazy">
                 <button class="card-play-btn btn-play" title="Phát">
@@ -53,7 +53,7 @@ export function ChartItem(song, rank) {
 
 export function AlbumCard(album) {
     return `
-        <div class="card album-card" data-album-id="${album.id}">
+        <div class="card album-card" data-route="/album-detail?id=${album.id}">
             <div class="card-cover">
                 <img src="${album.image}" alt="${album.title}" loading="lazy">
                 <button class="card-play-btn btn-play" title="Phát">
