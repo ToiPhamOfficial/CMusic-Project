@@ -33,7 +33,7 @@ export default function Explore() {
             <section class="section-box top-artists">
                 <div class="section-header">
                     <h2>Top nghệ sĩ</h2>
-                    <a href="/artist" class="view-all">Tất cả</a>
+                    <a href="/artists" class="view-all">Tất cả</a>
                 </div>
                 <div class="artists-grid">
                     ${artists.map(artist => ArtistCard(artist)).join('')}
@@ -44,7 +44,7 @@ export default function Explore() {
             <section class="section-box genres">
                 <div class="section-header">
                     <h2>Thể loại</h2>
-                    <a href="#genres" class="view-all">Tất cả</a>
+                    <a href="/genres" class="view-all">Tất cả</a>
                 </div>
                 <div class="genres-grid">
                     ${genres.map(genre => GenreCard(genre)).join('')}
@@ -55,7 +55,7 @@ export default function Explore() {
             <section class="section-box charts-section">
                 <div class="section-header">
                     <h2>Bảng xếp hạng</h2>
-                    <a href="#genres" class="view-all">Tất cả</a>
+                    <a href="/charts" class="view-all">Tất cả</a>
                 </div>
                 <div class="charts-wrapper">
                     <!-- Weekly Chart -->
@@ -107,7 +107,7 @@ export default function Explore() {
         <section class="section-box hot-albums">
             <div class="section-header">
                 <h2>Album Hot</h2>
-                <a href="#albums" class="view-all">Tất cả</a>
+                <a href="/albums" class="view-all">Tất cả</a>
             </div>
             <div class="albums-grid">
                 ${albums.slice(0, 6).map(album => AlbumCard(album)).join('')}
@@ -118,7 +118,7 @@ export default function Explore() {
         <section class="section-box international-albums">
             <div class="section-header">
                 <h2>Album Nhạc Quốc Tế</h2>
-                <a href="#international" class="view-all">Tất cả</a>
+                <a href="/international" class="view-all">Tất cả</a>
             </div>
             <div class="albums-grid">
                 ${internationalAlbums.slice(0, 6).map(album => AlbumCard(album)).join('')}
@@ -129,7 +129,7 @@ export default function Explore() {
         <section class="section-box lofi-albums">
             <div class="section-header">
                 <h2>Album Nhạc Lofi</h2>
-                <a href="#lofi" class="view-all">Tất cả</a>
+                <a href="/lofi" class="view-all">Tất cả</a>
             </div>
             <div class="albums-grid">
                 ${lofiAlbums.slice(0, 6).map(album => AlbumCard(album)).join('')}

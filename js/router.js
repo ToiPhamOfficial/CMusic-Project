@@ -1,7 +1,7 @@
 // Router cho Single Page Application
 import Explore from './views/Explore.js';
 import Album from './views/Album.js';
-import Artist from './views/Artist.js';
+import Artists from './views/Artists.js';
 import Genre from './views/Genre.js';
 import Playlist from './views/Playlist.js';
 import Favorite from './views/Favorite.js'
@@ -19,7 +19,7 @@ import AlbumDetail from './views/DetailAlbum.js';
 const routes = {
     '/': Explore,
     '/album': Album,
-    '/artist': Artist,
+    '/artists': Artists,
     '/genre': Genre,
     '/playlist': Playlist,
     '/recent': RecentlyPlayed_Songs,

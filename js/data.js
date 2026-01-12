@@ -120,67 +120,116 @@ export const songs = [
         plays: "45M",
         genre: "Lofi",
         audioUrl: "/data/songs/mp3/Sea%20Of%20Feelings%20-%20Lowx.mp3"
+    },
+    {
+        id: 7,
+        title: "Sau Tất Cả",
+        artist: "ERIK",
+        duration: "3:15",
+        image: "/data/songs/thumb/Sau%20Tất%20Cả%20-%20ERIK.png",
+        plays: "250M",
+        genre: "V-Pop",
+        audioUrl: "/data/songs/mp3/Sau%20Tất%20Cả%20-%20ERIK.mp3"
+    },
+    {
+        id: 8,
+        title: "Yêu Đơn Phương",
+        artist: "Min",
+        duration: "3:45",
+        image: "/data/songs/thumb/Yêu%20Đơn%20Phương%20-%20Min.png",
+        plays: "300M",
+        genre: "V-Pop",
+        audioUrl: "/data/songs/mp3/Yêu%20Đơn%20Phương%20-%20Min.mp3"
+    },
+    {
+        id: 9,
+        title: "Bài Này Chill Phết",
+        artist: "Đen Vâu, Min",
+        duration: "4:00",
+        image: "/data/songs/thumb/Bài%20Này%20Chill%20Phết%20-%20Đen%20Vâu,%20Min.png",
+        plays: "400M",
+        genre: "Hip Hop",
+        audioUrl: "/data/songs/mp3/Bài%20Này%20Chill%20Phết%20-%20Đen%20Vâu,%20Min.mp3"
+    },
+    {
+        id: 10,
+        title: "Phía Sau Một Cô Gái",
+        artist: "Soobin Hoàng Sơn",
+        duration: "3:50",
+        image: "/data/songs/thumb/Phía%20Sau%20Một%20Cô%20Gái%20-%20Soobin%20Hoàng%20Sơn.png",
+        plays: "220M",
+        genre: "V-Pop",
+        audioUrl: "/data/songs/mp3/Phía%20Sau%20Một%20Cô%20Gái%20-%20Soobin%20Hoàng%20Sơn.mp3"
     }
 ];
 
 export const artists = [
     {
-        id: 1,
-        name: "Alan Walker",
-        image: "/data/artists/alan-walker.png",
-        listeners: "970M",
+        id: "A001",
+        name: "Sơn Tùng MTP",
+        image: "/data/artists/son-tung-mtp.webp",
+        listeners: "134M",
         followers: 1250400,
-        genre: "EDM",
-        songIds: [1, 3],
-        biography: "Alan Olav Walker (sinh ngày 24/8/1997) là một DJ và nhà sản xuất thu âm người Na Uy gốc Anh. Anh nổi tiếng toàn cầu với đĩa đơn 'Faded' đạt chứng nhận kim cương tại nhiều quốc gia. Phong cách của Alan đặc trưng bởi hình ảnh bí ẩn với chiếc áo hoodie đen và mặt nạ che mặt, cùng dòng nhạc EDM mang âm hưởng u tối, hùng vĩ nhưng giàu cảm xúc."
+        genre: "V-Pop",
+        songIds: [3],
+        topSongId: 3,
+        biography: "Sơn Tùng M-TP (tên thật Nguyễn Thanh Tùng, sinh năm 1994) là một ca sĩ, nhạc sĩ và nhà sản xuất âm nhạc hàng đầu của V-Pop. Với phong cách âm nhạc đa dạng từ Pop, R&B đến EDM, Sơn Tùng nhanh chóng chiếm được cảm tình của giới trẻ Việt Nam. Anh nổi tiếng với những bản hit như 'Lạc Trôi', 'Chạy Ngay Đi', và 'Hãy Trao Cho Anh', đồng thời sở hữu lượng fan hâm mộ đông đảo và trung thành."
     },
     {
-        id: 2,
-        name: "Bruno Mars",
-        image: "/data/artists/bruno-mars.png",
-        listeners: "275M",
-        followers: 1250400,
-        genre: "Pop",
-        songIds: [1, 3],
-        biography: "Peter Gene Hernandez (sinh ngày 8/10/1985), nghệ danh Bruno Mars, là một ca sĩ, nhạc sĩ, vũ công và nhà sản xuất âm nhạc người Mỹ. Anh nổi tiếng với phong cách trình diễn lôi cuốn và khả năng biến hóa đa dạng qua nhiều thể loại như Pop, R&B, Funk, Soul, Reggae. Bruno Mars sở hữu hàng loạt giải Grammy và các bản hit vượt thời gian như 'Just the Way You Are', 'Uptown Funk', và 'That's What I Like'."
+        id: "A002",
+        name: "Soobin Hoàng Sơn",
+        image: "/data/artists/soobin-hoang-son.webp",
+        listeners: "80M",
+        followers: 995040,
+        genre: "V-Pop",
+        songIds: [10],
+        topSongId: 10,
+        biography: "Soobin Hoàng Sơn (tên thật Nguyễn Hoàng Sơn, sinh năm 1992) là một ca sĩ và nhạc sĩ nổi tiếng của V-Pop. Anh bắt đầu sự nghiệp âm nhạc từ cuộc thi The Voice Việt Nam và nhanh chóng ghi dấu ấn với giọng hát nội lực cùng phong cách trình diễn cuốn hút. Soobin nổi bật với các bản hit như 'Phía Sau Một Cô Gái', 'Đi Đu Đưa Đi', và 'Đã Lỡ Yêu Em Nhiều'."
     },
     {
-        id: 3,
+        id: "A003",
         name: "Dương Domic",
         image: "/data/artists/duong-domic.webp",
         listeners: "45M",
-        followers: 1250400,
+        followers: 835040,
         genre: "V-Pop",
-        songIds: [1, 3],
+        songIds: [5],
+        topSongId: "5",
         biography: "Dương Domic (tên thật Trần Đăng Dương, sinh năm 2000) là một nghệ sĩ Gen Z đa tài của V-Pop. Từng là thực tập sinh của công ty giải trí Hàn Quốc IF Entertainment, anh sở hữu ngoại hình điển trai, khả năng vũ đạo điêu luyện, sáng tác tốt và chơi nhạc cụ thành thạo. Tên tuổi của anh vụt sáng sau chương trình 'Anh Trai Say Hi', thu hút lượng lớn người hâm mộ trẻ."
     },
     {
-        id: 4,
+        id: "A004",
         name: "Đen Vâu",
         image: "/data/artists/den-vau.webp",
         listeners: "120M",
-        followers: 1250400,
+        followers: 74400,
+        songIds: [9],
+        topSongId: "9",
         genre: "Hip Hop",
         biography: "Đen Vâu (tên thật Nguyễn Đức Cường, sinh năm 1989) là một Rapper và nhạc sĩ nổi tiếng người Việt Nam. Xuất thân từ một công nhân vệ sinh bãi biển, âm nhạc của Đen mang đậm chất đời, mộc mạc, triết lý nhưng vô cùng gần gũi và chữa lành. Anh là chủ nhân của hàng loạt bản hit 'Top 1 Trending' như 'Đưa nhau đi trốn', 'Lối nhỏ', 'Mang tiền về cho mẹ', được mệnh danh là 'Nhà thơ của Rap Việt'."
     },
     {
-        id: 5,
+        id: "A005",
         name: "Min",
         image: "/data/artists/min.webp",
         listeners: "95M",
-        followers: 1250400,
+        followers: 635040,
+        songIds: [8],
+        topSongId: "8",
         genre: "V-Pop",
         biography: "MIN (tên thật Nguyễn Minh Hằng, sinh năm 1988) xuất thân là thành viên nhóm nhảy St.319 trước khi trở thành ca sĩ chuyên nghiệp. Cô được đánh giá là một trong những nghệ sĩ có tư duy hình ảnh và âm nhạc hiện đại nhất V-Pop. Với giọng hát ngọt ngào và phong cách thời thượng, MIN sở hữu bộ sưu tập hit đồ sộ như 'Yêu', 'Có Em Chờ', 'Em Mới Là Người Yêu Anh'."
     },
     {
-        id: 6,
+        id: "A006",
         name: "ERIK",
         image: "/data/artists/erik.webp",
         listeners: "85M",
-        followers: 1250400,
+        followers: 540400,
+        songIds: [7],
+        topSongId: "7",
         genre: "V-Pop",
         biography: "ERIK (tên thật Lê Trung Thành, sinh năm 1997) là một nam ca sĩ sở hữu chất giọng mũi đặc trưng đầy nội lực. Nổi lên từ bản hit quốc dân 'Sau Tất Cả', ERIK nhanh chóng khẳng định vị thế 'Hoàng tử Ballad' của V-Pop. Anh là cựu thành viên nhóm nhạc Monstar và là một mảnh ghép của gia đình 'Hoa Dâm Bụt'. Các ca khúc của ERIK luôn được đầu tư chỉn chu và dễ dàng chạm đến cảm xúc khán giả."
-    },
+    }
 ];
 
 export const genres = [

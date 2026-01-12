@@ -134,6 +134,73 @@ function initEventListeners() {
             $btn.html('XEM THÊM <i class="fa fa-chevron-down"></i>');
         }
     });
+
+    // Artists Page - Dropdown Toggle
+    initArtistsDropdown();
+}
+
+// Khởi tạo dropdown cho trang Artists
+function initArtistsDropdown() {
+    let currentOpenDropdown = null;
+
+    // Toggle dropdown khi click vào icon more
+    $(document).on('click', '.js-dropdown-trigger', function(e) {
+        e.stopPropagation();
+        const $wrapper = $(this).closest('.page-artists__dropdown-wrapper');
+        const $dropdown = $wrapper.find('.page-artists__dropdown');
+
+        // Đóng dropdown đang mở (nếu có)
+        if (currentOpenDropdown && currentOpenDropdown[0] !== $dropdown[0]) {
+            currentOpenDropdown.removeClass('page-artists__dropdown--active');
+        }
+
+        // Toggle dropdown hiện tại
+        $dropdown.toggleClass('page-artists__dropdown--active');
+        currentOpenDropdown = $dropdown.hasClass('page-artists__dropdown--active') ? $dropdown : null;
+    });
+
+    // Đóng dropdown khi click bên ngoài
+    $(document).on('click', function(e) {
+        if (currentOpenDropdown && !$(e.target).closest('.page-artists__dropdown-wrapper').length) {
+            currentOpenDropdown.removeClass('page-artists__dropdown--active');
+            currentOpenDropdown = null;
+        }
+    });
+
+    // Xử lý các action trong dropdown
+    $(document).on('click', '.page-artists__dropdown-item', function(e) {
+        e.stopPropagation();
+        const action = $(this).data('action');
+        const $track = $(this).closest('.page-artists__track');
+        const songId = $track.data('song-id');
+
+        // Đóng dropdown
+        if (currentOpenDropdown) {
+            currentOpenDropdown.removeClass('page-artists__dropdown--active');
+            currentOpenDropdown = null;
+        }
+
+        // Xử lý action
+        handleArtistsDropdownAction(action, songId);
+    });
+}
+
+// Xử lý các action của dropdown trong trang Artists
+function handleArtistsDropdownAction(action, songId) {
+    switch (action) {
+        case 'download':
+            Toast.info('Tính năng tải về đang được phát triển');
+            break;
+        case 'add-to-playlist':
+            Toast.info('Tính năng thêm vào playlist đang được phát triển');
+            break;
+        case 'share':
+            Toast.info('Tính năng chia sẻ đang được phát triển');
+            break;
+        case 'report':
+            Toast.warning('Tính năng báo cáo đang được phát triển');
+            break;
+    }
 }
 
 function initSidebarToggle() {

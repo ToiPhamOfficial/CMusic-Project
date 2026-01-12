@@ -1,0 +1,433 @@
+/* ==========================================
+   Page Artists CSS
+   ========================================== */
+
+/* --- Hero Section --- */
+.page-artists__hero {
+    flex-shrink: 0;
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 70%, #000 100%),
+        url('https://images2.thanhnien.vn/zoom/1200_630/528068263637045248/2024/7/1/duong-domic-2-1719824385622873310447-313-0-1653-2560-crop-17198247640211580002859.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.page-artists__hero-content {
+    position: absolute;
+    bottom: calc(var(--space-2xl) - 15px);
+    left: calc(var(--space-2xl) - 15px);
+    z-index: 2;
+}
+
+.page-artists__hero-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: var(--space-sm);
+    letter-spacing: -2px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.page-artists__hero-subtitle {
+    font-size: 1rem;
+    color: #e0e0e0;
+    font-weight: 500;
+}
+
+/* --- Container --- */
+.page-artists__container {
+
+}
+
+/* Grid Layout cho các hàng */
+.page-artists__header,
+.page-artists__track {
+    display: grid;
+    grid-template-columns: 35px minmax(0, 1.5fr) minmax(0, 1fr) 80px;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 16px;
+}
+
+/* Header */
+.page-artists__header {
+    font-size: 13px;
+    color: #b3b3b3;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.page-artists__header-col--time {
+    text-align: right;
+}
+
+/* Divider */
+.page-artists__divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* Track List */
+.page-artists__track-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+/* Track Item */
+.page-artists__track {
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 16px;
+    cursor: pointer;
+}
+
+.page-artists__track:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Track Rank */
+.page-artists__track-rank {
+    font-weight: 700;
+    color: #b3b3b3;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.page-artists__track-rank--1 {
+    color: #FFD700;
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.page-artists__track-rank--2 {
+    color: #C0C0C0;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+}
+
+.page-artists__track-rank--3 {
+    color: #CD7F32;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(205, 127, 50, 0.5);
+}
+
+/* Track Artist Column */
+.page-artists__track-artist {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-artists__artist-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+.page-artists__track:hover .page-artists__artist-avatar {
+    transform: scale(1.05);
+}
+
+.page-artists__artist-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.page-artists__artist-name {
+    font-weight: 600;
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.3px;
+}
+
+.page-artists__artist-followers {
+    font-size: var(--fs-label);
+    color: var(--text-secondary);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Follow Button */
+.page-artists__follow-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    border-radius: 100px;
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.page-artists__follow-btn:hover {
+    background: var(--text-primary);
+    color: #000;
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.page-artists__track:hover .page-artists__follow-btn {
+    display: block;
+}
+
+/* Track Song Column */
+.page-artists__track-song {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.page-artists__song-cover-wrapper {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.page-artists__song-cover {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.page-artists__track:hover .page-artists__song-cover {
+    transform: scale(1.05);
+}
+
+.page-artists__play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.page-artists__play-overlay .material-icons-round {
+    font-size: 32px;
+    color: #fff;
+}
+
+.page-artists__play-overlay:hover {
+    opacity: 1;
+}
+
+.page-artists__track:hover .page-artists__play-overlay {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.page-artists__song-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.page-artists__song-title {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.page-artists__song-artist {
+    font-size: var(--fs-label);
+    color: var(--text-secondary);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Track Actions Column */
+.page-artists__track-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+}
+
+.page-artists__duration {
+    min-width: 45px;
+    text-align: right;
+}
+
+.page-artists__icon {
+    display: none;
+    cursor: pointer;
+    font-size: 22px;
+    transition: all 0.2s ease;
+}
+
+.page-artists__icon--heart {
+    color: #fff;
+}
+
+.page-artists__icon--more {
+    color: #b3b3b3;
+}
+
+.page-artists__icon--heart:hover {
+    color: #ff4444;
+    transform: scale(1.15);
+}
+
+.page-artists__icon--more:hover {
+    color: #fff;
+    transform: scale(1.15);
+}
+
+.page-artists__track:hover .page-artists__icon {
+    display: block;
+}
+
+.page-artists__track:hover .page-artists__duration {
+    display: none;
+}
+
+/* Dropdown */
+.page-artists__dropdown-wrapper {
+    position: relative;
+}
+
+.page-artists__dropdown {
+    position: absolute;
+    bottom: calc(100% + var(--space-sm));
+    right: 0;
+    width: 220px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-artists__dropdown--active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.page-artists__dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.page-artists__dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.page-artists__dropdown-item span.material-icons-round {
+    font-size: 20px;
+    color: var(--text-secondary);
+}
+
+.page-artists__dropdown-item span:not(.material-icons-round) {
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+.page-artists__dropdown-item:hover span.material-icons-round {
+    color: var(--text-primary);
+}
+
+.page-artists__dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 4px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .page-artists__hero {
+        height: 200px;
+    }
+
+    .page-artists__hero-title {
+        font-size: 2rem;
+    }
+
+    .page-artists__hero-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .page-artists__header, 
+    .page-artists__track {
+        grid-template-columns: 35px minmax(0,2fr) 80px;
+    }
+
+    .page-artists__header-col--time {
+        visibility: hidden;
+    }
+
+    .page-artists__header-col--song,
+    .page-artists__track-song, 
+    .page-artists__duration, 
+    .page-artists__icon--heart {
+        display: none !important;
+    }
+
+    .page-artists__icon--more {
+        display: block !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-artists__header, 
+    .page-artists__track {
+        grid-template-columns: 35px minmax(0,2fr) 20px;
+    }
+
+    .page-artists__header-col--time {
+        visibility: hidden;
+    }
+
+    .page-artists__follow-btn {
+        display: none !important;
+    }
+}

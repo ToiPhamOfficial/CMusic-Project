@@ -27,7 +27,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/album" class="nav-link">
+                            <a href="/albums" class="nav-link">
                                 <span class="material-icons-round">
                                     album
                                 </span>
@@ -35,7 +35,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/artist" class="nav-link">
+                            <a href="/artists" class="nav-link">
                                 <span class="material-icons-round">
                                     mic
                                 </span>
@@ -43,7 +43,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/genre" class="nav-link">
+                            <a href="/genres" class="nav-link">
                                 <span class="material-icons-round">
                                     volume_up
                                 </span>

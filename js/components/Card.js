@@ -68,3 +68,22 @@ export function AlbumCard(album) {
         </div>
     `;
 }
+
+export function SongCard(song) {
+    return `
+        <div class="card song-card" data-song-id="${song.id}">
+            <div class="card-cover">
+                <img src="${song.image}" alt="${song.title}" loading="lazy">
+                <div class="card-overlay">
+                    <button class="card-play-btn btn-play" title="Phát">
+                        <span class="material-icons-round">play_arrow</span>
+                    </button>
+                </div>
+            </div>
+            <div class="card-info">
+                <h3 class="card-title">${song.title}</h3>
+                <p class="card-subtitle">${song.artist}</p>
+            </div>
+        </div>
+    `;
+}
