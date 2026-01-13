@@ -498,7 +498,7 @@ export const lofiAlbums = [
     }
 ];
 
-// Recntly data
+// Recently data
 export const recentlyData = {
     songsIds: [1, 5, 3, 8, 2],
     playlists: [1],
