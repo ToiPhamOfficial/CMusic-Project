@@ -86,3 +86,37 @@
 .gap-xl {
     gap: var(--space-xl);
 }
+
+/* Section Box */
+.section-box {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-sm);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-header h2 {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.section-header .view-all {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.section-header .view-all:hover {
+    color: var(--accent-color);
+}

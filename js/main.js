@@ -310,7 +310,8 @@ function initLoginSignupModal() {
 // Khởi tạo bottom player controls
 function initPlayerControls() {
     // Play/Pause button
-    $(document).on('click', '.player-controls .btn-play, .player-controls .play, .suggestion-item div button, .btn-play', function () {
+    $(document).on('click', '.player-controls .btn-play, .player-controls .play, .suggestion-item div button, .btn-play', function (e) {
+        e.stopPropagation(); // Ngăn chặn sự kiện nổi bọt
         $(this).find('span').text(function (i, text) {
             return text === 'play_arrow' ? 'pause' : 'play_arrow';
         });

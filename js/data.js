@@ -165,7 +165,7 @@ export const songs = [
 
 export const artists = [
     {
-        id: "A001",
+        id: 1,
         name: "Sơn Tùng MTP",
         image: "/data/artists/son-tung-mtp.webp",
         listeners: "134M",
@@ -176,7 +176,7 @@ export const artists = [
         biography: "Sơn Tùng M-TP (tên thật Nguyễn Thanh Tùng, sinh năm 1994) là một ca sĩ, nhạc sĩ và nhà sản xuất âm nhạc hàng đầu của V-Pop. Với phong cách âm nhạc đa dạng từ Pop, R&B đến EDM, Sơn Tùng nhanh chóng chiếm được cảm tình của giới trẻ Việt Nam. Anh nổi tiếng với những bản hit như 'Lạc Trôi', 'Chạy Ngay Đi', và 'Hãy Trao Cho Anh', đồng thời sở hữu lượng fan hâm mộ đông đảo và trung thành."
     },
     {
-        id: "A002",
+        id: 2,
         name: "Soobin Hoàng Sơn",
         image: "/data/artists/soobin-hoang-son.webp",
         listeners: "80M",
@@ -187,46 +187,46 @@ export const artists = [
         biography: "Soobin Hoàng Sơn (tên thật Nguyễn Hoàng Sơn, sinh năm 1992) là một ca sĩ và nhạc sĩ nổi tiếng của V-Pop. Anh bắt đầu sự nghiệp âm nhạc từ cuộc thi The Voice Việt Nam và nhanh chóng ghi dấu ấn với giọng hát nội lực cùng phong cách trình diễn cuốn hút. Soobin nổi bật với các bản hit như 'Phía Sau Một Cô Gái', 'Đi Đu Đưa Đi', và 'Đã Lỡ Yêu Em Nhiều'."
     },
     {
-        id: "A003",
+        id: 3,
         name: "Dương Domic",
         image: "/data/artists/duong-domic.webp",
         listeners: "45M",
         followers: 835040,
         genre: "V-Pop",
         songIds: [5],
-        topSongId: "5",
+        topSongId: 5,
         biography: "Dương Domic (tên thật Trần Đăng Dương, sinh năm 2000) là một nghệ sĩ Gen Z đa tài của V-Pop. Từng là thực tập sinh của công ty giải trí Hàn Quốc IF Entertainment, anh sở hữu ngoại hình điển trai, khả năng vũ đạo điêu luyện, sáng tác tốt và chơi nhạc cụ thành thạo. Tên tuổi của anh vụt sáng sau chương trình 'Anh Trai Say Hi', thu hút lượng lớn người hâm mộ trẻ."
     },
     {
-        id: "A004",
+        id: 4,
         name: "Đen Vâu",
         image: "/data/artists/den-vau.webp",
         listeners: "120M",
         followers: 74400,
         songIds: [9],
-        topSongId: "9",
+        topSongId: 9,
         genre: "Hip Hop",
         biography: "Đen Vâu (tên thật Nguyễn Đức Cường, sinh năm 1989) là một Rapper và nhạc sĩ nổi tiếng người Việt Nam. Xuất thân từ một công nhân vệ sinh bãi biển, âm nhạc của Đen mang đậm chất đời, mộc mạc, triết lý nhưng vô cùng gần gũi và chữa lành. Anh là chủ nhân của hàng loạt bản hit 'Top 1 Trending' như 'Đưa nhau đi trốn', 'Lối nhỏ', 'Mang tiền về cho mẹ', được mệnh danh là 'Nhà thơ của Rap Việt'."
     },
     {
-        id: "A005",
+        id: 5,
         name: "Min",
         image: "/data/artists/min.webp",
         listeners: "95M",
         followers: 635040,
         songIds: [8],
-        topSongId: "8",
+        topSongId: 8,
         genre: "V-Pop",
         biography: "MIN (tên thật Nguyễn Minh Hằng, sinh năm 1988) xuất thân là thành viên nhóm nhảy St.319 trước khi trở thành ca sĩ chuyên nghiệp. Cô được đánh giá là một trong những nghệ sĩ có tư duy hình ảnh và âm nhạc hiện đại nhất V-Pop. Với giọng hát ngọt ngào và phong cách thời thượng, MIN sở hữu bộ sưu tập hit đồ sộ như 'Yêu', 'Có Em Chờ', 'Em Mới Là Người Yêu Anh'."
     },
     {
-        id: "A006",
+        id: 6,
         name: "ERIK",
         image: "/data/artists/erik.webp",
         listeners: "85M",
         followers: 540400,
         songIds: [7],
-        topSongId: "7",
+        topSongId: 7,
         genre: "V-Pop",
         biography: "ERIK (tên thật Lê Trung Thành, sinh năm 1997) là một nam ca sĩ sở hữu chất giọng mũi đặc trưng đầy nội lực. Nổi lên từ bản hit quốc dân 'Sau Tất Cả', ERIK nhanh chóng khẳng định vị thế 'Hoàng tử Ballad' của V-Pop. Anh là cựu thành viên nhóm nhạc Monstar và là một mảnh ghép của gia đình 'Hoa Dâm Bụt'. Các ca khúc của ERIK luôn được đầu tư chỉn chu và dễ dàng chạm đến cảm xúc khán giả."
     }

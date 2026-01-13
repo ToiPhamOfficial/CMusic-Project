@@ -1,8 +1,8 @@
 // Router cho Single Page Application
 import Explore from './views/Explore.js';
-import Album from './views/Album.js';
+import Albums from './views/Albums.js';
 import Artists from './views/Artists.js';
-import Genre from './views/Genre.js';
+import Genres from './views/Genres.js';
 import Playlist from './views/Playlist.js';
 import Favorite from './views/Favorite.js'
 import Profile from './views/Profile.js';
@@ -18,9 +18,9 @@ import AlbumDetail from './views/DetailAlbum.js';
 // Định nghĩa các route (sử dụng History API)
 const routes = {
     '/': Explore,
-    '/album': Album,
+    '/albums': Albums,
     '/artists': Artists,
-    '/genre': Genre,
+    '/genres': Genres,
     '/playlist': Playlist,
     '/recent': RecentlyPlayed_Songs,
     '/recent/playlist': RecentlyPlayed_Playlist,
