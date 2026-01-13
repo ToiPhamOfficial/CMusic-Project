@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar.js';
 import Player from './components/Player.js';
 import Header from './components/Header.js';
 import LoginSignup from './components/LoginSignup.js';
+import AddPlaylist from './components/AddPlaylist.js';
 import Toast from './components/Toast.js';
 
 /* Import modules */
@@ -13,6 +14,7 @@ import { songs, searchSongs } from './data.js';
 /* Import services */
 import auth from './services/auth.js';
 import audioManager from './services/audioManager.js';
+import Playlist from './views/Playlist.js';
 
 // Khởi tạo app
 $(document).ready(function () {
@@ -46,7 +48,11 @@ function renderComponents() {
     // Render Bottom Player
     $('.player').html(Player());
 
-    $('#modal-root').html(LoginSignup());
+    $('#modal-root').html(`
+        ${LoginSignup()}
+        ${AddPlaylist()}
+    `);
+
 }
 
 // Khởi tạo các event listeners
@@ -135,8 +141,90 @@ function initEventListeners() {
         }
     });
 
+    // Hàm UI Add Playlist
+    initPlaylistModal();
+
     // Artists Page - Dropdown Toggle
     initArtistsDropdown();
+}
+
+// Hàm UI Add Playlist
+function initPlaylistModal() {
+    const modal = document.getElementById('playlist-modal');
+    if (!modal) return;
+
+    const inputName = document.getElementById('playlist-name');
+    const inputCover = document.getElementById('upload-cover');
+    const imgPreview = document.getElementById('cover-preview');
+    const btnSave = document.getElementById('btn-save');
+    const currentCount = document.getElementById('current-count');
+
+    // ===== MỞ MODAL (event delegation – CHUẨN SPA) =====
+    $(document).on('click', '#open-playlist-modal', function (e) {
+        e.preventDefault();
+        modal.classList.add('active');
+        inputName?.focus();
+    });
+
+    // ===== ĐÓNG MODAL =====
+    const closeModal = () => {
+        modal.classList.remove('active');
+
+        setTimeout(() => {
+            inputName.value = '';
+            currentCount.innerText = '0';
+            btnSave.setAttribute('disabled', 'true');
+
+            imgPreview.src = '';
+            imgPreview.style.display = 'none';
+            inputCover.value = '';
+        }, 300);
+    };
+
+    // Click nút đóng
+    $(document).on('click', '.close-btn, #btn-cancel', closeModal);
+
+    // Click ra ngoài
+    modal.addEventListener('click', e => {
+        if (e.target === modal) closeModal();
+    });
+
+    // ===== XEM TRƯỚC ẢNH =====
+    inputCover.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            imgPreview.src = e.target.result;
+            imgPreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // ===== VALIDATE TÊN PLAYLIST =====
+    inputName.addEventListener('input', function () {
+        const len = this.value.length;
+        currentCount.innerText = len;
+        btnSave.disabled = len === 0;
+    });
+
+    // ===== LƯU PLAYLIST =====
+    btnSave.addEventListener('click', () => {
+        if (!inputName.value) return;
+
+        const newPlaylist = {
+            id: Date.now(),
+            name: inputName.value,
+            image: imgPreview.src || 'assets/images/default-playlist.png'
+        };
+
+        console.log('Playlist mới:', newPlaylist);
+        alert(`Đã tạo playlist: ${newPlaylist.name}`);
+
+        closeModal();
+        // TODO: addPlaylist(newPlaylist)
+    });
 }
 
 // Khởi tạo dropdown cho trang Artists

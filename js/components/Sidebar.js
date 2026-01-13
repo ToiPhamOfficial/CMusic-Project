@@ -101,7 +101,7 @@ export default function Sidebar() {
                     <h3 class="nav-title">DANH SÁCH PHÁT</h3>
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a href="/playlist/new" class="nav-link">
+                            <a href="#" class="nav-link" id="open-playlist-modal">
                                 <span class="material-icons-round">
                                     add_circle
                                 </span>
