@@ -60,7 +60,7 @@ export default function Sidebar() {
                     <h3 class="nav-title">THƯ VIỆN</h3>
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a href="/recent" class="nav-link">
+                            <a href="/recently" class="nav-link">
                                 <span class="material-icons-round">
                                     history
                                 </span>
@@ -68,7 +68,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/album" class="nav-link">
+                            <a href="/albums-saved" class="nav-link">
                                 <span class="material-icons-round">
                                     book
                                 </span>
@@ -81,14 +81,6 @@ export default function Sidebar() {
                                     favorite
                                 </span>
                                 <span>Yêu thích</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/archive" class="nav-link">
-                                <span class="material-icons-round">
-                                    folder
-                                </span>
-                                <span>Lưu trữ</span>
                             </a>
                         </li>
                     </ul>

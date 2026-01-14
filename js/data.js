@@ -41,7 +41,9 @@ export const users = [
         name: "Demo",
         password: "demo123@",
         email: "demo@example.com",
-        avatar: "/assets/img/default-avatar.png"
+        avatar: "/assets/img/default-avatar.png",
+        favoriteSongs: [1, 2, 3, 4, 5],
+        albumsSaved: [1, 3, 5]
     },
 
     {
@@ -49,14 +51,18 @@ export const users = [
         name: "Hoàng Quân",
         password: "hoangquan123@",
         email: "hoang_quan@gmail.com",
-        avatar: "/data/users/avatar/hoang_quan_3343.png"
+        avatar: "/data/users/avatar/hoang_quan_3343.png",
+        favoriteSongs: [1, 3, 5, 7, 9],
+        albumsSaved: [2, 4, 6]
     },
     {
         id: 3,
         name: "Văn Khánh",
         password: "vankhanh456@",
         email: "van_khanh@gmail.com",
-        avatar: "/data/users/avatar/van_khanh_2331.png"
+        avatar: "/data/users/avatar/van_khanh_2331.png",
+        favoriteSongs: [2, 4, 6, 8, 10],
+        albumsSaved: [1, 5, 7]
     }
 ];
 
@@ -538,19 +544,3 @@ export function searchSongs(query) {
         song.artist.toLowerCase().includes(lowerQuery)
     );
 }
-
-export const db = {
-    artists: [
-        { id: '1', name: 'Sơn Tùng M-TP', image: 'https://placehold.co/200', desc: 'Hoàng tử mưa...' },
-        { id: '2', name: 'Đen Vâu', image: 'https://placehold.co/200', desc: 'Rapper tử tế...' }
-    ],
-    playlists: [
-        { id: '101', title: 'Nhạc Chill Cuối Tuần', author: 'Admin', image: 'https://placehold.co/200' },
-        { id: '102', title: 'Top Hits 2024', author: 'Spotify', image: 'https://placehold.co/200' }
-    ],
-    songs: [
-        { id: 's1', title: 'Chúng Ta Của Hiện Tại', artist: 'Sơn Tùng M-TP', lyrics: '...' },
-        { id: 's2', title: 'Mang Tiền Về Cho Mẹ', artist: 'Đen Vâu', lyrics: '...' }
-    ]
-};
-
