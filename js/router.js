@@ -4,9 +4,10 @@ import Albums from './views/Albums.js';
 import Artists from './views/Artists.js';
 import Genres from './views/Genres.js';
 import Playlist from './views/Playlist.js';
-import Favorite from './views/Favorite.js'
+import Favorites from './views/Favorites.js'
 import Profile from './views/Profile.js';
 import Recently from './views/Recently.js';
+import AlbumsSaved from './views/AlbumsSaved.js';
 import ArtistDetail from './views/DetailArtist.js';
 import PlaylistDetail from './views/DetailPlaylist.js';
 import SongDetail from './views/DetailSong.js';
@@ -15,13 +16,13 @@ import AlbumDetail from './views/DetailAlbum.js';
 // Định nghĩa các route (sử dụng History API)
 const routes = {
     '/': Explore,
-    // '/': Recently, // Mặc định vào trang Recently Played
     '/albums': Albums,
     '/artists': Artists,
     '/genres': Genres,
     '/playlist': Playlist,
-    '/recent': Recently,
-    '/favorites': Favorite,
+    '/recently': Recently,
+    '/albums-saved': AlbumsSaved,
+    '/favorites': Favorites,
     '/archive': Explore,
     '/profile': Profile,
     '/artist-detail': ArtistDetail, // Trang chi tiết (Tên khác đi cho đỡ nhầm)
