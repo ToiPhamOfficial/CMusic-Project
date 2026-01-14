@@ -108,3 +108,92 @@ export default function LoginSignup() {
         </section>
     `;
 }
+
+export function initLoginSignupEvents() {
+    const $modal = $('#login-signup-modal');
+    const $views = $('.auth-view');
+
+    // Hàm chuyển đổi view linh hoạt
+    function switchAuthView(viewId) {
+        $views.removeClass('active');
+        $(`${viewId}`).addClass('active');
+    }
+
+    // 1. Mở modal (mặc định luôn hiện login) - Sử dụng event delegation
+    $(document).on('click', '.mini-user-profile.is-guest', function () {
+        $modal.addClass('is-shown');
+        switchAuthView('#login-view');
+    });
+
+    // 2. Chuyển đổi qua lại giữa Đăng nhập/Đăng ký (Sử dụng ID từ href)
+    // Giả sử HTML: <a href="#signup-view" class="modal__link">Đăng ký ngay!</a>
+    $(document).on('click', '.modal__link', function (e) {
+        e.preventDefault();
+        const targetView = $(this).attr('data-target');
+        console.log('Switching to view:', targetView);
+        if (targetView) {
+            switchAuthView(targetView);
+        }
+    });
+
+    // 3. Đóng modal (Vừa bấm nút Close vừa bấm ra ngoài Overlay)
+    $modal.on('click', function (e) {
+        const isCloseBtn = $(e.target).closest('.modal__close button').length > 0;
+        const isOverlay = $(e.target).is($modal);
+
+        if (isCloseBtn || isOverlay) {
+            $modal.removeClass('is-shown');
+        }
+    });
+
+    // Toggle password visibility - Sử dụng event delegation
+    $(document).on('click', '.auth-form__toggle-password', function () {
+        const $passwordInput = $(this).siblings('input[type="password"], input[type="text"]');
+        const type = $passwordInput.attr('type') === 'password' ? 'text' : 'password';
+        $passwordInput.attr('type', type);
+        $(this).find('span').text(type === 'password' ? 'visibility' : 'visibility_off');
+    });
+
+    $(document).on('submit', '.auth-form', function (e) {
+        e.preventDefault();
+        // if(!$(this).valid) {
+        //     console.log('Form is valid, proceeding...');
+        //     return;
+        // }
+        const isLogin = $(this).attr('id') === 'login-form';
+        if (isLogin) {
+            // Handle login
+            const email = $('#login-email').val().trim();
+            const password = $('#login-password').val().trim();
+            const loginResult = auth.handleLogin(email, password);
+            Toast[loginResult.type](loginResult.message);
+
+            if (loginResult.success) {
+                // Đóng modal
+                $modal.removeClass('is-shown');
+                // Re-render Header để hiển thị thông tin user
+                $('.header').html(Header());
+                // Reset form
+                $(this)[0].reset();
+            }
+
+        } else {
+            // Handle signup
+            const name = $('#signup-name').val().trim();
+            const email = $('#signup-email').val().trim();
+            const password = $('#signup-password').val().trim();
+            const confirmPassword = $('#signup-confirm-password').val().trim();
+            const signupResult = auth.handleSignup(name, email, password, confirmPassword);
+            Toast[signupResult.type](signupResult.message);
+
+            if (signupResult.success) {
+                // Đóng modal
+                $modal.removeClass('is-shown');
+                // Re-render Header để hiển thị thông tin user
+                $('.header').html(Header());
+                // Reset form
+                $(this)[0].reset();
+            }
+        }
+    });
+}

@@ -1,10 +1,9 @@
-// Router cho Single Page Application
 import Explore from './views/Explore.js';
 import Albums from './views/Albums.js';
 import Artists from './views/Artists.js';
 import Genres from './views/Genres.js';
 import Playlist from './views/Playlist.js';
-import Favorites from './views/Favorites.js'
+import Favorites from './views/Favorites.js';
 import Profile from './views/Profile.js';
 import Recently from './views/Recently.js';
 import AlbumsSaved from './views/AlbumsSaved.js';
@@ -13,7 +12,7 @@ import PlaylistDetail from './views/DetailPlaylist.js';
 import SongDetail from './views/DetailSong.js';
 import AlbumDetail from './views/DetailAlbum.js';
 
-// Định nghĩa các route (sử dụng History API)
+// Cấu hình Route map
 const routes = {
     '/': Explore,
     '/albums': Albums,
@@ -23,89 +22,58 @@ const routes = {
     '/recently': Recently,
     '/albums-saved': AlbumsSaved,
     '/favorites': Favorites,
-    '/archive': Explore,
     '/profile': Profile,
-    '/artist-detail': ArtistDetail, // Trang chi tiết (Tên khác đi cho đỡ nhầm)
+    '/artist-detail': ArtistDetail,
     '/playlist-detail': PlaylistDetail,
     '/song-detail': SongDetail,
     '/album-detail': AlbumDetail
 };
 
-// Render trang dựa trên route hiện tại
-export function renderRoute(path) {
-    // const currentPath = path || window.location.pathname;
-    // const route = routes[currentPath];
-    
-    // // Lấy app container
-    // $('.container').html(route());
-    
-    // // Update active state trong sidebar
-    // updateActiveNavItem(currentPath);
-
-    //--------------------------------------------------
-    // 1. Xác định path thực tế
-    // Ưu tiên path được truyền vào (từ navigateTo), nếu không có thì lấy từ URL trình duyệt
-    const fullPath = path || window.location.pathname;
-
-    // 2. Tách path chính và query string (để map đúng key trong routes)
-    // Ví dụ: '/song-detail?id=10' -> routePath là '/song-detail'
-    const routePath = fullPath.split('?')[0];
-
-    // 3. Tìm view
-    const viewFunction = routes[routePath] || routes['/'];
-
-    // 4. Render HTML
-    // View sẽ tự lấy ID từ URLSearchParams bên trong nó
-    $('.container').html(viewFunction());
-
-    // 5. Update Sidebar (chỉ cần highlight path chính)
-    updateActiveNavItem(routePath);
-}
-
-// Update active state trong navigation
-function updateActiveNavItem(path) {
-    // Remove active class từ tất cả nav items
-    $('.nav-item').removeClass('active');
-    
-    // Add active class cho nav item tương ứng
-    $(`.nav-link[href="${path}"]`).closest('.nav-item').addClass('active');
-
-    // // Tìm thẻ a có href bắt đầu bằng path hiện tại
-    // $(`.nav-link[href^="${path}"]`).closest('.nav-item').addClass('active');
-}
-
-// Khởi tạo router
+// Khởi tạo Router
 export function initRouter() {
-    // Xử lý khi người dùng click vào bất kỳ link nào có href bắt đầu bằng /
-    $(document).on('click', 'a[href^="/"]', function(e) {
-        const href = $(this).attr('href');
-        
-        // Prevent default behavior và navigate bằng History API
-        if (href && href.startsWith('/')) {
+    // 1. Xử lý click link nội bộ
+    $(document).on('click', 'a[href^="/"]', (e) => {
+        const href = $(e.currentTarget).attr('href');
+        if (href?.startsWith('/')) {
             e.preventDefault();
             navigateTo(href);
         }
     });
 
-    // Xử lý khi người dùng dùng nút back/forward của trình duyệt
-    $(window).on('popstate', function() {
-        renderRoute(window.location.pathname);
+    // 2. Xử lý click element có data-route
+    $(document).on('click', '[data-route]', function () {
+        const path = $(this).data('route');
+        navigateTo(path);
     });
 
-    // Xử lý redirect /index.html hoặc route không tồn tại về /
-    let currentPath = window.location.pathname;
-    
-    // Nếu là /index.html hoặc route không tồn tại (ngoại trừ /), redirect về /
-    if (currentPath === '/index.html' || (!routes[currentPath] && currentPath !== '/')) {
-        window.history.replaceState({}, '', '/');
-        currentPath = '/';
+    // 3. Xử lý nút Back/Forward trình duyệt
+    $(window).on('popstate', () => renderRoute());
+
+    // 4. Xử lý lần đầu load trang (Redirect index.html hoặc 404 về Home)
+    const path = window.location.pathname;
+    if (path === '/index.html' || (!routes[path] && path !== '/')) {
+        navigateTo('/', true); // Replace state
+    } else {
+        renderRoute();
     }
-    // Render trang đầu tiên khi load
-    renderRoute(currentPath);
 }
 
-// Navigate đến trang mới (helper function)
-export function navigateTo(path) {
-    window.history.pushState({}, '', path);
+// Điều hướng và Render
+export function navigateTo(path, replace = false) {
+    if (replace) window.history.replaceState(null, null, path);
+    else window.history.pushState(null, null, path);
     renderRoute(path);
+}
+
+// Render View dựa trên URL
+export function renderRoute(path = window.location.pathname) {
+    const routePath = path.split('?')[0];
+    const view = routes[routePath] || routes['/'];
+
+    // Render HTML
+    $('.container').html(view());
+
+    // Update Sidebar Active
+    $('.nav-item').removeClass('active');
+    $(`.nav-link[href="${routePath}"]`).closest('.nav-item').addClass('active');
 }

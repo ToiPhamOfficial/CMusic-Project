@@ -543,7 +543,7 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: stretch;
-        height: 100vh;
+        height: 100dvh;
         padding: 0;
         background: var(--bg-primary);
         overflow-y: auto;

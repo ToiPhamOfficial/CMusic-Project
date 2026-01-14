@@ -1,3 +1,7 @@
+import audioManager from '../services/audioManager.js';
+import Toast from './Toast.js';
+import { songs } from '../data.js';
+
 export default function Player() {
     return `
         <button class="btn-collapse-player" title="Collapse">
@@ -96,4 +100,184 @@ export default function Player() {
         <!-- Queue Overlay -->
         <div class="queue-overlay"></div>
     `;
+}
+
+// --- Main Render Function (Optimized) ---
+function renderQueue() {
+    // Destructuring an toàn với giá trị mặc định
+    const { playlist = [], currentSong } = audioManager;
+    const $queueList = $('.queue-list');
+
+    // 1. Xử lý trường hợp danh sách trống
+    if (playlist.length === 0) {
+        $queueList.html(EMPTY_QUEUE_HTML);
+        return;
+    }
+
+    // 2. Cache ID bài hát hiện tại để so sánh nhanh hơn trong vòng lặp
+    const currentSongId = currentSong?.id;
+
+    // 3. Sử dụng map() thay vì forEach để nối chuỗi hiệu quả hơn
+    const queueHTML = playlist.map(song => {
+        const isActive = currentSongId === song.id ? 'active' : '';
+        // Thêm loading="lazy" để tối ưu tải ảnh
+        return `
+            <div class="queue-item ${isActive}" data-song-id="${song.id}">
+                <div class="queue-item-thumbnail">
+                    <img src="${song.image}" alt="${song.title}" loading="lazy">
+                    <div class="play-indicator">
+                        <span class="material-icons-round">equalizer</span>
+                    </div>
+                </div>
+                <div class="queue-item-info">
+                    <div class="queue-item-title">${song.title}</div>
+                    <div class="queue-item-artist">${song.artist}</div>
+                </div>
+                <div class="queue-item-actions">
+                    <button class="queue-item-btn" title="Thêm vào yêu thích">
+                        <span class="material-icons-round">favorite_border</span>
+                    </button>
+                    <button class="queue-item-btn" title="Thêm tùy chọn">
+                        <span class="material-icons-round">more_horiz</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    $queueList.html(queueHTML);
+}
+
+export function initPlayerEvents() {
+    // Play/Pause button
+    $(document).on('click', '.player-controls .btn-play, .player-controls .play, .suggestion-item div button, .btn-play', function (e) {
+        e.stopPropagation(); // Ngăn chặn sự kiện nổi bọt
+        $(this).find('span').text(function (i, text) {
+            return text === 'play_arrow' ? 'pause' : 'play_arrow';
+        });
+        audioManager.togglePlay();
+    });
+
+    // Previous button
+    $(document).on('click', '.player-controls .btn-control[title="Previous"]', function () {
+        audioManager.prev();
+    });
+
+    // Next button
+    $(document).on('click', '.player-controls .btn-control[title="Next"]', function () {
+        audioManager.next();
+    });
+
+    // Repeat button
+    $(document).on('click', '.player-controls .btn-control[title="Repeat"]', function () {
+        audioManager.toggleRepeat();
+    });
+
+    // Shuffle button
+    $(document).on('click', '.player-controls .btn-control[title="Shuffle"]', function () {
+        audioManager.toggleShuffle();
+    });
+
+    // Progress slider
+    $(document).on('input', '.progress-slider', function () {
+        const percentage = $(this).val();
+        audioManager.seek(percentage);
+    });
+
+    // Favorite button
+    $(document).on('click', '.player-right .btn-control[title="Favorite"]', function () {
+        $(this).find('span').text(function (i, text) {
+            return text === 'favorite' ? 'favorite_border' : 'favorite';
+        });
+        $(this).toggleClass('favorited');
+    });
+
+    // Player More Dropdown Toggle
+    $(document).on('click', '.btn-more', function (e) {
+        e.stopPropagation();
+        const $dropdown = $('.player-more-dropdown');
+        $dropdown.toggleClass('active');
+    });
+
+    // Close More Dropdown when clicking outside
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.player-more-container').length) {
+            $('.player-more-dropdown').removeClass('active');
+        }
+    });
+
+    // Handle More Dropdown Actions
+    $(document).on('click', '.dropdown-item', function (e) {
+        e.stopPropagation();
+        const action = $(this).data('action');
+
+        switch (action) {
+            case 'download':
+                Toast.info('Tính năng tải về đang được phát triển');
+                break;
+            case 'add-to-playlist':
+                Toast.info('Tính năng thêm vào playlist đang được phát triển');
+                break;
+            case 'share':
+                Toast.info('Tính năng chia sẻ đang được phát triển');
+                break;
+            case 'report':
+                Toast.warning('Tính năng báo cáo đang được phát triển');
+                break;
+        }
+
+        $('.player-more-dropdown').removeClass('active');
+    });
+
+    // colose player more dropdown when clicking outside
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.player-more-container').length) {
+            $('.player-more-dropdown').removeClass('active');
+        }
+    });
+
+    // For mobile - expand player
+    $(document).on('click', '.player', function (e) {
+        // Không expand nếu click vào button hoặc controls
+        if ($(e.target).closest('.btn-control, .btn-collapse-player, .progress-slider, .queue-panel, .player-more-dropdown').length) {
+            return;
+        }
+
+        // Chỉ expand trên mobile
+        if (window.innerWidth <= 576) {
+            $(this).addClass('is-expanded');
+        }
+    });
+
+    // Collapse player button
+    $(document).on('click', '.btn-collapse-player', function (e) {
+        // e.stopPropagation();
+        $('.player').removeClass('is-expanded');
+    });
+
+    // Queue Panel Toggle
+    $(document).on('click', '.btn-queue', function (e) {
+        e.stopPropagation();
+        $('.queue-panel').addClass('active');
+        $('.queue-overlay').addClass('active');
+        renderQueue();
+    });
+
+    // Close Queue Panel
+    $(document).on('click', '.btn-close-queue, .queue-overlay', function () {
+        $('.queue-panel').removeClass('active');
+        $('.queue-overlay').removeClass('active');
+    });
+
+    // Queue Item Click - Play song from queue
+    $(document).on('click', '.queue-item', function () {
+        const songId = parseInt($(this).data('song-id'));
+        if (songId) {
+            const song = songs.find(s => s.id === songId);
+            if (song) {
+                audioManager.playSong(song, audioManager.playlist);
+                renderQueue(); // Re-render to update active state
+            }
+        }
+    });
 }

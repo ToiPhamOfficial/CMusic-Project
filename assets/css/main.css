@@ -208,7 +208,7 @@
 
 /* --- 3. Card (Khung chứa lời bài hát) --- */
 /* Tự định nghĩa lại class .card */
-.card {
+.page-detail-song__card {
     background-color: #202a44;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     overflow: hidden;
@@ -217,12 +217,12 @@
 }
 
 /* Định nghĩa lại .card-body */
-.card-body {
+.page-detail-song__card-body {
     padding: 30px;
 }
 
 /* Tiêu đề "Lời bài hát" */
-.card-title {
+.page-detail-song__card-title {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--accent-color);

@@ -44,9 +44,9 @@ export default function SongDetail() {
                 </div>
             </section>
             
-            <div class="card bg-dark text-white border-secondary">
-                <div class="card-body">
-                    <h5 class="card-title text-primary">Lời bài hát</h5>
+            <div class="card page-detail-song__card bg-dark text-white border-secondary">
+                <div class="page-detail-song__card-body">
+                    <h5 class="page-detail-song__card-title text-primary">Lời bài hát</h5>
                     <hr class="border-secondary">
                     
                     <p id="lyric-content" style="white-space: pre-line; line-height: 2.0; min-height: 100px;">
