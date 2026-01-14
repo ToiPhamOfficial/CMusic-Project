@@ -93,7 +93,7 @@ export default function Sidebar() {
                     <h3 class="nav-title">DANH SÁCH PHÁT</h3>
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a class="nav-link" data-need-login="true">
+                            <a href="" class="nav-link" id="open-playlist-modal" data-need-login="true">
                                 <span class="material-icons-round">
                                     add_circle
                                 </span>
@@ -101,7 +101,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/playlist" class="nav-link">
+                            <a href="/playlist/lofi-chill" class="nav-link">
                                 <span class="material-icons-round">
                                     play_circle
                                 </span>
@@ -109,7 +109,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/playlist" class="nav-link">
+                            <a href="/playlist/hot-phonk" class="nav-link">
                                 <span class="material-icons-round">
                                     play_circle
                                 </span>
@@ -117,7 +117,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/playlist" class="nav-link">
+                            <a href="/playlist/all" class="nav-link">
                                 <span class="material-icons-round">
                                     format_list_bulleted
                                 </span>

@@ -125,7 +125,10 @@ class Auth {
                 follower: 0,
                 followedArtists: [],
                 favorites: [],
-                playlists: []
+                albums: [],
+                playlists: [],
+                artists: [],
+                songsIds: []
             };
             
             users.push(newUser);

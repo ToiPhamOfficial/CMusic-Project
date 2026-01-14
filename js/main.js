@@ -3,6 +3,8 @@ import Sidebar, { initSidebarToggle } from './components/Sidebar.js';
 import Player, { initPlayerEvents } from './components/Player.js';
 import Header, { initHeaderEvents } from './components/Header.js';
 import LoginSignup, { initLoginSignupEvents } from './components/LoginSignup.js';
+import AddPlaylist, { initAddPlaylistEvents } from './components/AddPlaylist.js';
+import Toast from './components/Toast.js';
 
 /* Import modules */
 import { initRouter } from './router.js';
@@ -31,7 +33,10 @@ const App = {
         $('.sidebar').html(Sidebar());
         $('.header').html(Header());
         $('.player').html(Player());
-        $('#modal-root').html(LoginSignup());
+        $('#modal-root').html(`
+            ${LoginSignup()}
+            ${AddPlaylist()}
+        `);
     },
 
     initComponentEvents: function () {
@@ -39,6 +44,7 @@ const App = {
         initHeaderEvents();
         initPlayerEvents();
         initLoginSignupEvents();
+        initAddPlaylistEvents();
     },
 
     // Kích hoạt Router và các trang cụ thể
