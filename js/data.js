@@ -177,7 +177,7 @@ export const artists = [
         listeners: "134M",
         followers: 1250400,
         genre: "V-Pop",
-        songIds: [3],
+        songIds: [1, 2, 3, 4, 5, 6, 7],
         topSongId: 3,
         biography: "Sơn Tùng M-TP (tên thật Nguyễn Thanh Tùng, sinh năm 1994) là một ca sĩ, nhạc sĩ và nhà sản xuất âm nhạc hàng đầu của V-Pop. Với phong cách âm nhạc đa dạng từ Pop, R&B đến EDM, Sơn Tùng nhanh chóng chiếm được cảm tình của giới trẻ Việt Nam. Anh nổi tiếng với những bản hit như 'Lạc Trôi', 'Chạy Ngay Đi', và 'Hãy Trao Cho Anh', đồng thời sở hữu lượng fan hâm mộ đông đảo và trung thành."
     },
@@ -320,7 +320,7 @@ export const playlists = [
         songCount: 24,
         icon: "play_circle",
         creator: "SonTung",
-        songIds: [1, 3]
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8]
     },
     {
         id: 2,
@@ -340,7 +340,7 @@ export const albums = [
         year: 2023,
         songs: 12,
         image: "/data/albums/greatest-hits-bruno-mars.webp",
-        songIds: [1, 3]
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8]
     },
     {
         id: 2,
