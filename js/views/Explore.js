@@ -1,5 +1,5 @@
-import { banner, songs, artists, genres, albums, internationalAlbums, lofiAlbums} from '../data.js';
-import { ArtistCard, GenreCard, ChartItem, AlbumCard } from '../components/Card.js';
+import { banner, songs, artists, genres, albums, internationalAlbums, getPlaylistById, getPlaylistGroupById} from '../data.js';
+import { ArtistCard, GenreCard, ChartItem, AlbumCard, PlaylistCard} from '../components/Card.js';
 
 export default function Explore() {
     return `
@@ -125,14 +125,17 @@ export default function Explore() {
             </div>
         </section>
 
-        <!-- Album Lofi -->
-        <section class="section-box lofi-albums">
+        <!-- Lofi -->
+        <section class="section-box lofi-playlists">
             <div class="section-header">
-                <h2>Album Nhạc Lofi</h2>
+                <h2>Nhạc Lofi</h2>
                 <a href="/lofi" class="view-all">Tất cả</a>
             </div>
-            <div class="albums-grid">
-                ${lofiAlbums.slice(0, 6).map(album => AlbumCard(album)).join('')}
+            <div class="playlist-grid">
+                ${(() => {
+                    const playlistGroup = getPlaylistGroupById('lofi');
+                    return playlistGroup.playlistIds.slice(0, 6).map(playlistId => PlaylistCard(getPlaylistById(playlistId))).join('');
+                })()}
             </div>
         </section>
 

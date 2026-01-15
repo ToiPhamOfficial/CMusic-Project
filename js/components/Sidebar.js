@@ -101,7 +101,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/playlist/lofi-chill" class="nav-link">
+                            <a class="nav-link" data-route="/playlist-detail?id=1&type=userPlaylists">
                                 <span class="material-icons-round">
                                     play_circle
                                 </span>
@@ -109,7 +109,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/playlist/hot-phonk" class="nav-link">
+                            <a class="nav-link" data-route="/playlist-detail?id=2&type=userPlaylists">
                                 <span class="material-icons-round">
                                     play_circle
                                 </span>
@@ -117,7 +117,7 @@ export default function Sidebar() {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/playlist/all" class="nav-link">
+                            <a href="/playlists?type=userPlaylists" class="nav-link">
                                 <span class="material-icons-round">
                                     format_list_bulleted
                                 </span>

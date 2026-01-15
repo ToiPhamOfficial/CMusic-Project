@@ -2,7 +2,7 @@ import Explore from './views/Explore.js';
 import Albums from './views/Albums.js';
 import Artists from './views/Artists.js';
 import Genres from './views/Genres.js';
-import Playlist from './views/Playlist.js';
+import Playlists from './views/Playlists.js';
 import Favorites from './views/Favorites.js';
 import Profile from './views/Profile.js';
 import Recently from './views/Recently.js';
@@ -19,7 +19,7 @@ const routes = {
     '/albums': Albums,
     '/artists': Artists,
     '/genres': Genres,
-    '/playlist': Playlist,
+    '/playlists': Playlists,
     '/recently': Recently,
     '/albums-saved': AlbumsSaved,
     '/favorites': Favorites,

@@ -115,7 +115,8 @@ class Auth {
                 createdAt: new Date().toISOString(),
                 followedArtists: [],
                 favoriteSongs: [],
-                albumsSaved: []
+                albumsSaved: [],
+                myPlaylists: []
             };
             
             users.push(newUser);

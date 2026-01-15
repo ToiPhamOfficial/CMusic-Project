@@ -1,5 +1,5 @@
 // 1. Import dữ liệu từ data.js
-import { playlists, albums } from '../data.js';
+import { myPlaylists, albums } from '../data.js';
 
 // 2. Dữ liệu người dùng (Vì chưa có trong database nên tạm thời khai báo ở đây)
 const userData = {
@@ -69,11 +69,11 @@ export default function Profile() {
 
         <section class="section-box recommended-playlists">
             <div class="section-header">
-                <h2>Playlist đã tạo (${playlists.length}) </h2>
+                <h2>Playlist đã tạo (${myPlaylists.length}) </h2>
                 <a href="#" class="view-all">Tất cả</a>
             </div>
             <div class="playlist-grid">
-                ${playlists.map((playlist, index) => {
+                ${myPlaylists.map((playlist, index) => {
                     // Logic chọn màu: Lấy index chia lấy dư cho độ dài mảng màu
                     // Ví dụ: index 0 -> màu 0, index 1 -> màu 1, index 2 -> quay lại màu 0
                     const bgStyle = gradients[index % gradients.length];
