@@ -79,6 +79,9 @@ export function navigateTo(path, replace = false) {
     renderRoute(path);
 }
 
+// Expose navigateTo ra global scope để components có thể sử dụng
+window.navigateTo = navigateTo;
+
 // Render View dựa trên URL
 export function renderRoute(path = window.location.pathname) {
     const routePath = path.split('?')[0];

@@ -7,15 +7,7 @@ import {users} from '../data.js';
 
 class Auth {
     constructor() {
-        this.loadCurrentUser();
-    }
-    
-    // Load current user on init
-    loadCurrentUser() {
-        const user = this.getCurrentUser();
-        if (user) {
-            this.updateUIAfterLogin(user);
-        }
+        // Constructor intentionally empty - no auto UI updates
     }
     
     // Handle login
@@ -43,7 +35,6 @@ class Auth {
             
             if (user) {
                 this.setCurrentUser(user);
-                this.updateUIAfterLogin(user);
                 return {
                     success: true,
                     message: `Chào mừng ${user.name}!`,
@@ -130,7 +121,6 @@ class Auth {
             users.push(newUser);
             
             this.setCurrentUser(newUser);
-            this.updateUIAfterLogin(newUser);
             return {
                 success: true,
                 message: 'Đăng ký thành công!',
@@ -174,20 +164,11 @@ class Auth {
     logout() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('isLoggedIn');
-        this.updateUIAfterLogin(null);
         return {
             success: true,
             message: 'Đã đăng xuất!',
             type: 'success'
         };
-    }
-    
-    // Update UI after login/logout
-    updateUIAfterLogin(user) {
-        // Dispatch custom event for other components to listen
-        const event = new CustomEvent('userLoggedIn', { detail: { user } });
-        document.dispatchEvent(event);
-        console.log('User state changed:', user);
     }
     
     // Get default avatar
@@ -199,13 +180,13 @@ class Auth {
     }
     
     // Check if user is logged in
-    static isLoggedIn() {
+    isLoggedIn() {
         return localStorage.getItem('isLoggedIn') === 'true' && 
                localStorage.getItem('currentUser') !== null;
     }
     
-    // Get current user (static method)
-    static getCurrentUser() {
+    // Get current user
+    getCurrentUser() {
         const user = localStorage.getItem('currentUser');
         return user ? JSON.parse(user) : null;
     }

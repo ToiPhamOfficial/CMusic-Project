@@ -4,7 +4,7 @@ import Player, { initPlayerEvents } from './components/Player.js';
 import Header, { initHeaderEvents } from './components/Header.js';
 import LoginSignup, { initLoginSignupEvents } from './components/LoginSignup.js';
 import AddPlaylist, { initAddPlaylistEvents } from './components/AddPlaylist.js';
-import Toast from './components/Toast.js';
+import { initDropdownEvents } from './components/Dropdown.js';
 
 /* Import modules */
 import { initRouter } from './router.js';
@@ -45,6 +45,7 @@ const App = {
         initPlayerEvents();
         initLoginSignupEvents();
         initAddPlaylistEvents();
+        initDropdownEvents();
     },
 
     // Kích hoạt Router và các trang cụ thể
@@ -58,7 +59,11 @@ const App = {
 
 // Khởi tạo các event listeners
 function initEventListeners() {
-    
+    // Lắng nghe sự kiện đăng nhập/đăng ký thành công
+    $(document).on('user:authChanged', function() {
+        // Re-render Header để hiển thị thông tin user
+        $('.header').html(Header());
+    });
 }
 
 // Start App when DOM is ready

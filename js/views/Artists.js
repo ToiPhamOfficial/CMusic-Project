@@ -1,4 +1,5 @@
 import { artists, songs } from '../data.js';
+import Toast from '../components/Toast.js';
 
 export default function Artists() {
     return `

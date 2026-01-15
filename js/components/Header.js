@@ -1,9 +1,10 @@
-import Auth from '../services/auth.js';
+import auth from '../services/auth.js';
+import { searchSongs } from '../data.js';
 
 export default function Header() {
     // Đọc dữ liệu mỗi khi render để cập nhật trạng thái mới nhất
-    const isLoggedIn = Auth.isLoggedIn;
-    let currentUser = Auth.currentUser;
+    const isLoggedIn = auth.isLoggedIn();
+    let currentUser = auth.getCurrentUser();
     
     return `
         <button class="btn btn-menu">
@@ -294,7 +295,7 @@ function initNotificationsAndSettings() {
             $('.settings-panel').removeClass('active');
             $('.settings-overlay').removeClass('active');
             $('.header').html(Header());
-            navigateTo('/');
+            window.navigateTo('/');
         }
     });
 
@@ -302,7 +303,7 @@ function initNotificationsAndSettings() {
     $(document).on('click', '.setting-item[data-action="goto-settings"]', function () {
         $('.settings-panel').removeClass('active');
         $('.settings-overlay').removeClass('active');
-        navigateTo('/settings');
+        window.navigateTo('/settings');
     });
 
     // Toggle switches

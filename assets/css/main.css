@@ -21,6 +21,7 @@
 @import url('components/login-signup.css');
 @import url('components/toast.css');
 @import url('components/card.css');
+@import url('components/dropdown.css');
 
 /* === 3.5 PAGES === */
 @import url('pages/explore.css');

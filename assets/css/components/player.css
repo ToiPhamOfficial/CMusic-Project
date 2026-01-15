@@ -217,7 +217,7 @@
     position: relative;
 }
 
-.player-more-dropdown {
+/* .player-more-dropdown {
     position: absolute;
     bottom: calc(100% + 12px);
     right: 0;
@@ -272,7 +272,7 @@
     height: 1px;
     background: rgba(255, 255, 255, 0.1);
     margin: 4px 0;
-}
+} */
 
 /* Queue Panel Styles */
 .queue-overlay {
