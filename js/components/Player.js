@@ -1,5 +1,6 @@
 import audioManager from '../services/audioManager.js';
 import Toast from './Toast.js';
+import Dropdown, { toggleDropdown } from './Dropdown.js';
 import { songs } from '../data.js';
 
 export default function Player() {
@@ -56,25 +57,16 @@ export default function Player() {
                 </button>
                 
                 <!-- More Dropdown Menu -->
-                <div class="player-more-dropdown">
-                    <div class="dropdown-item" data-action="download">
-                        <span class="material-icons-round">download</span>
-                        <span>Tải về</span>
-                    </div>
-                    <div class="dropdown-item" data-action="add-to-playlist">
-                        <span class="material-icons-round">playlist_add</span>
-                        <span>Thêm vào playlist</span>
-                    </div>
-                    <div class="dropdown-item" data-action="share">
-                        <span class="material-icons-round">share</span>
-                        <span>Chia sẻ</span>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <div class="dropdown-item" data-action="report">
-                        <span class="material-icons-round">flag</span>
-                        <span>Báo cáo</span>
-                    </div>
-                </div>
+                ${Dropdown([
+                        [
+                            { action: 'download', icon: 'download', text: 'Tải về' },
+                            { action: 'add-to-playlist', icon: 'playlist_add', text: 'Thêm vào playlist' },
+                            { action: 'share', icon: 'share', text: 'Chia sẻ' },
+                        ],
+                        [
+                            { action: 'report', icon: 'flag', text: 'Báo cáo' }
+                        ]
+                    ])}
             </div>
         </div>
         
@@ -195,46 +187,45 @@ export function initPlayerEvents() {
     // Player More Dropdown Toggle
     $(document).on('click', '.btn-more', function (e) {
         e.stopPropagation();
-        const $dropdown = $('.player-more-dropdown');
-        $dropdown.toggleClass('active');
+        toggleDropdown($(this));
     });
 
     // Close More Dropdown when clicking outside
-    $(document).on('click', function (e) {
-        if (!$(e.target).closest('.player-more-container').length) {
-            $('.player-more-dropdown').removeClass('active');
-        }
-    });
+    // $(document).on('click', function (e) {
+    //     if (!$(e.target).closest('.player-more-container').length) {
+    //         $('.player-more-dropdown').removeClass('active');
+    //     }
+    // });
 
     // Handle More Dropdown Actions
-    $(document).on('click', '.dropdown-item', function (e) {
-        e.stopPropagation();
-        const action = $(this).data('action');
+    // $(document).on('click', '.dropdown-item', function (e) {
+    //     e.stopPropagation();
+    //     const action = $(this).data('action');
 
-        switch (action) {
-            case 'download':
-                Toast.info('Tính năng tải về đang được phát triển');
-                break;
-            case 'add-to-playlist':
-                Toast.info('Tính năng thêm vào playlist đang được phát triển');
-                break;
-            case 'share':
-                Toast.info('Tính năng chia sẻ đang được phát triển');
-                break;
-            case 'report':
-                Toast.warning('Tính năng báo cáo đang được phát triển');
-                break;
-        }
+    //     switch (action) {
+    //         case 'download':
+    //             Toast.info('Tính năng tải về đang được phát triển');
+    //             break;
+    //         case 'add-to-playlist':
+    //             Toast.info('Tính năng thêm vào playlist đang được phát triển');
+    //             break;
+    //         case 'share':
+    //             Toast.info('Tính năng chia sẻ đang được phát triển');
+    //             break;
+    //         case 'report':
+    //             Toast.warning('Tính năng báo cáo đang được phát triển');
+    //             break;
+    //     }
 
-        $('.player-more-dropdown').removeClass('active');
-    });
+    //     $('.player-more-dropdown').removeClass('active');
+    // });
 
     // colose player more dropdown when clicking outside
-    $(document).on('click', function (e) {
-        if (!$(e.target).closest('.player-more-container').length) {
-            $('.player-more-dropdown').removeClass('active');
-        }
-    });
+    // $(document).on('click', function (e) {
+    //     if (!$(e.target).closest('.player-more-container').length) {
+    //         $('.player-more-dropdown').removeClass('active');
+    //     }
+    // });
 
     // For mobile - expand player
     $(document).on('click', '.player', function (e) {
