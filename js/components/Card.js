@@ -83,7 +83,7 @@ export function HeaderSongItem(song, index = null) {
 
 export function SongItem(song, index = null) {
     return `
-        <div class="song-item" data-song-id="${song.id}">
+        <div class="song-item" data-route="/song-detail?id=${song.id} data-song-id="${song.id}">
             <div class="song-item__index">
                 ${index !== null ? `<span class="song-item__number">${index}</span>` : ''}
             </div>

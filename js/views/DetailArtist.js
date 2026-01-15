@@ -1,5 +1,6 @@
 import { getArtistById, getSongById } from '../data.js';
 import { SongItem, HeaderSongItem } from '../components/Card.js';
+import { initToggleMore } from '../utils/utils.js';
 
 export default function ArtistDetail() {
     //Tự lấy ID từ URL hiện tại (ví dụ: .../artist-detail?id=1)
@@ -13,6 +14,9 @@ export default function ArtistDetail() {
     const listSongs = artist.songIds.map(songId => {
         return getSongById(songId);
     }).filter(song => song !== undefined); // Lọc bỏ trường hợp bài hát bị xóa (undefined)
+
+    const initialDisplayCount = 5;
+    const hasMore = listSongs.length > initialDisplayCount;
 
     return `
         <section class="profile-hero">
@@ -39,14 +43,22 @@ export default function ArtistDetail() {
             ${HeaderSongItem()}
             <div class="song-item__song-list">
                 ${listSongs.length > 0 
-                    ? listSongs.map((song, index) => SongItem(song, index + 1)).join('')
+                    ? listSongs.map((song, index) => {
+                        const isHidden = hasMore && index >= initialDisplayCount;
+                        return `<div class="song-item-wrapper ${isHidden ? 'hidden' : ''}">
+                            ${SongItem(song, index + 1)}
+                        </div>`;
+                    }).join('')
                     : '<div class="song-item__empty">Chưa có bài hát nào</div>'
                 }
             </div>
             
-            <div class="see-more">
-                Xem thêm <span class="material-icons-round">arrow_drop_down</span>
-            </div>
+            ${hasMore ? `
+                <div class="see-more" data-expanded="false">
+                    <span class="see-more-text">Xem thêm</span> 
+                    <span class="material-icons-round">arrow_drop_down</span>
+                </div>
+            ` : ''}
         </section>
 
         <section class="section-box my-playlists">
@@ -66,4 +78,9 @@ export default function ArtistDetail() {
             </div>
         </section>
     `;
+}
+
+// Export hàm init events
+export function initArtistDetailEvents() {
+    initToggleMore('.song-item__song-list', '.song-item-wrapper', 5);
 }
