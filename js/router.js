@@ -11,6 +11,7 @@ import ArtistDetail from './views/DetailArtist.js';
 import PlaylistDetail from './views/DetailPlaylist.js';
 import SongDetail from './views/DetailSong.js';
 import AlbumDetail from './views/DetailAlbum.js';
+import GenreDetail from './views/DetailGenre.js';
 
 // Cấu hình Route map
 const routes = {
@@ -26,7 +27,8 @@ const routes = {
     '/artist-detail': ArtistDetail,
     '/playlist-detail': PlaylistDetail,
     '/song-detail': SongDetail,
-    '/album-detail': AlbumDetail
+    '/album-detail': AlbumDetail,
+    '/genre-detail': GenreDetail
 };
 
 // Khởi tạo Router

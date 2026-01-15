@@ -1,4 +1,5 @@
 import { getPlaylistById, getSongById } from '../data.js';
+import { SongItem, HeaderSongItem } from '../components/Card.js';
 
 export default function PlaylistDetail() {
     //Tự lấy ID từ URL hiện tại (ví dụ: .../artist-detail?id=1)
@@ -48,30 +49,13 @@ export default function PlaylistDetail() {
 
             <section class="track-list-container">
 
-                ${nothing}
-                ${header}
-                ${listSongs.map((song, index) => {
-                    // Nếu data không có thì fallback text
-                    const albumName = song.album || "Unknown Album"; 
-
-                    return `
-                    <div class="track-item" data-song-id="${song.id}">
-                        <div class="col-index">
-                            <span class="number">#${index + 1}</span>
-                            <span class="material-icons-round">play_arrow</span>
-                        </div>
-                        <div class="col-title">
-                            <img src="${song.image}" alt="${song.title}" class="track-img">
-                            <span class="song-name">${song.title}</span>
-                        </div>
-                        <div class="col-artist">${song.artist}</div>
-                        <div class="col-album">${albumName}</div>
-                        <div class="col-time">
-                            ${song.duration} <span class="material-icons-round icon-more">more_horiz</span>
-                        </div>
-                    </div>
-                    `;
-                }).join('')}
+                ${HeaderSongItem()}
+                <div class="song-item__song-list">
+                    ${listSongs.length > 0 
+                        ? listSongs.map((song, index) => SongItem(song, index + 1)).join('')
+                        : '<div class="song-item__empty">Chưa có bài hát nào</div>'
+                    }
+                </div>
 
                 <div class="see-more">
                     Xem thêm <span class="material-icons-round">arrow_drop_down</span>

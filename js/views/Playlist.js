@@ -50,26 +50,5 @@ export default function Playlist() {
                 </div>
             </div>
         </section>
-
-        <section class="section-box playlist-songs">
-            <div class="section-header">
-                <h2>Bài hát phổ biến</h2>
-            </div>
-            <div class="song-list">
-                ${songs.map(song => `
-                    <div class="song-item" data-song-id="${song.id}">
-                        <img src="${song.image}" alt="${song.title}">
-                        <div class="song-details">
-                            <p class="song-title">${song.title}</p>
-                            <p class="song-artist">${song.artist}</p>
-                        </div>
-                        <span class="song-duration">${song.duration}</span>
-                        <button class="btn-icon btn-add">
-                            <span class="material-icons-round">add</span>
-                        </button>
-                    </div>
-                `).join('')}
-            </div>
-        </section>
     `;
 }

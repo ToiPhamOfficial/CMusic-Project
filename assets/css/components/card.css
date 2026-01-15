@@ -183,6 +183,47 @@
 /* ==========================================
    SONG ITEM (List View) - BEM Structure
    ========================================== */
+
+/* header */
+.song-item__header {
+    display: grid;
+    grid-template-columns: 35px minmax(0, 2fr) minmax(0, 1fr) 80px;
+    gap: 1rem;
+    padding: var(--space-sm) var(--space-md);
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.song-item__header-col {
+    display: flex;
+    align-items: center;
+}
+
+.song-item__header-col--index {
+    justify-content: center;
+}
+
+.song-item__header-col--actions {
+    justify-content: flex-end;
+}
+/*  */
+.song-item__song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.song-item__empty {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* track  */
 .song-item {
     display: grid;
     grid-template-columns: 35px minmax(0, 2fr) minmax(0, 1fr) 80px;
@@ -529,6 +570,18 @@
     .chart-rank {
         width: 32px;
         font-size: var(--fs-body);
+    }
+
+    .song-item__header {
+        grid-template-columns: 30px minmax(0, 3fr) minmax(0, 2fr);
+    }
+
+    .song-item__header-col--artist {
+        display: none;
+    }
+
+    .song-item__header-col--actions {
+        visibility: hidden;
     }
 
     .song-item {

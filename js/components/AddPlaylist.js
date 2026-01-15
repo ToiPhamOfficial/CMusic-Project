@@ -27,12 +27,12 @@ export default function AddPlaylist() {
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-cancel" id="btn-cancel">Hủy</button>
-                <button class="btn btn-save" id="btn-save" disabled>Lưu</button>
-            </div>
+        <div class="modal-footer">
+            <button class="btn-addplaylist btn-cancel" id="btn-cancel">Hủy</button>
+            <button class="btn-addplaylist btn-save" id="btn-save" disabled>Lưu</button>
         </div>
     </div>
+</div>
     `;
 }
 

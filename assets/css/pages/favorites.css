@@ -88,7 +88,7 @@
 }
 
 /* Container Section */
-.page-favorites__header {
+/* .page-favorites__header {
     display: grid;
     grid-template-columns: 35px minmax(0, 2fr) minmax(0, 1fr) 80px;
     gap: 1rem;
@@ -124,7 +124,7 @@
     padding: 3rem 2rem;
     color: var(--text-secondary);
     font-size: 1rem;
-}
+} */
 
 
 /* Responsive for Tablet/Small Laptop */

@@ -242,62 +242,74 @@ export const genres = [
     {
         id: 1,
         name: "Electro Pop",
-        color: "#a49a85"
+        color: "#a49a85",
+        playlistIds: [1, 2]
     },
     {
         id: 2,
         name: "Alternative Indie",
-        color: "#a34c33"
+        color: "#a34c33",
+        playlistIds: []
     },
     {
         id: 3,
         name: "Hip Hop",
-        color: "#0c4045"
+        color: "#0c4045",
+        playlistIds: [1, 2]
     },
     {
         id: 4,
         name: "Dance Beat",
-        color: "#466a89"
+        color: "#466a89",
+        playlistIds: []
     },
     {
         id: 5,
         name: "Classical Period",
-        color: "#a77895"
+        color: "#a77895",
+        playlistIds: [1, 2]
     },
     {
         id: 6,
         name: "Hip Hop Rap",
-        color: "#5647a5"
+        color: "#5647a5",
+        playlistIds: [1, 2]
     },
     {
         id: 7,
         name: "V-Pop",
-        color: "#d34e24"
+        color: "#d34e24",
+        playlistIds: [1, 2]
     },
     {
         id: 8,
         name: "Lofi",
-        color: "#6b8a4f"
+        color: "#6b8a4f",
+        playlistIds: [1, 2]
     },
     {
         id: 9,
         name: "Pop",
-        color: "#d24f67"
+        color: "#d24f67",
+        playlistIds: [1, 2]
     },
     {
         id: 10,
         name: "EDM",
-        color: "#4f90d2"
+        color: "#4f90d2",
+        playlistIds: [1, 2]
     },
     {
         id: 11,
         name: "Rock",
-        color: "#888888"
+        color: "#888888",
+        playlistIds: [1, 2]
     },
     {
         id: 12,
         name: "Jazz",
-        color: "#a0522d"
+        color: "#a0522d",
+        playlistIds: [1, 2]
     }
 ];
 
@@ -504,14 +516,6 @@ export const lofiAlbums = [
     }
 ];
 
-// Recently data
-export const recentlyData = {
-    songsIds: [1, 5, 3, 8, 2],
-    playlists: [1],
-    albums: [3, 1],
-    artists: [1, 3]
-};
-
 // Helper functions để lấy dữ liệu
 export function getSongById(id) {
     return songs.find(song => song.id === id);
@@ -527,6 +531,10 @@ export function getPlaylistById(id) {
 
 export function getAlbumById(id) {
     return albums.find(album => album.id === id);
+}
+
+export function getGenreById(id) {
+    return genres.find(genre => genre.id === id);
 }
 
 export function getTopSongs(limit = 5) {

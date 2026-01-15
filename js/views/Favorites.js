@@ -1,5 +1,5 @@
 import { getSongById } from '../data.js';
-import { SongItem } from '../components/Card.js';
+import { SongItem, HeaderSongItem } from '../components/Card.js';
 
 export default function Favorites() {
     // Lấy thông tin user từ localStorage
@@ -32,22 +32,14 @@ export default function Favorites() {
         </button>
     </section>
 
-    <section class="page-favorites__container">
-
-        <div class="page-favorites__header">
-            <div class="page-favorites__header-col page-favorites__header-col--index">#</div>
-            <div class="page-favorites__header-col page-favorites__header-col--title">Bài hát</div>
-            <div class="page-favorites__header-col page-favorites__header-col--artist">Nghệ sĩ</div>
-            <div class="page-favorites__header-col page-favorites__header-col--actions">Thời gian</div>
-        </div>
-        <div class="divider"></div>
-        <div class="page-favorites__song-list">
+    <section class="section_song-item">
+        ${HeaderSongItem()}
+        <div class="song-item__song-list">
             ${favoriteSongs.length > 0 
                 ? favoriteSongs.map((song, index) => SongItem(song, index + 1)).join('')
-                : '<div class="page-favorites__empty">Chưa có bài hát yêu thích nào</div>'
+                : '<div class="song-item__empty">Chưa có bài hát yêu thích nào</div>'
             }
         </div>
-
     </section>
     `;
 }
