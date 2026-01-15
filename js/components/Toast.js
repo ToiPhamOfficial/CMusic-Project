@@ -1,4 +1,3 @@
-// Toast notification utility
 const Toast = {
     // Lazy initialization của notifications container
     getNotificationContainer() {

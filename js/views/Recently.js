@@ -127,7 +127,7 @@ export default function Recently() {
 
 // --- EVENT HANDLERS ---
 
-export function initRecentlyPage() {
+export function initRecentlyPageEvents() {
     // Dùng .off() trước khi .on() để tránh bị gán sự kiện nhiều lần khi chuyển trang qua lại
     $(document).off('click', '.tabs__tab-item').on('click', '.tabs__tab-item', function() {
         // Chỉ xử lý nếu đang ở trang Recently (có id recently-content)
