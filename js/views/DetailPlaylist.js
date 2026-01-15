@@ -3,11 +3,12 @@ import { SongItem, HeaderSongItem } from '../components/Card.js';
 import { initToggleMore } from '../utils/utils.js';
 
 export default function PlaylistDetail() {
-    //Tự lấy ID từ URL hiện tại (ví dụ: .../artist-detail?id=1)
+    //Tự lấy ID từ URL hiện tại (ví dụ: .../playlist-detail?id=1)
     const params = new URLSearchParams(window.location.search);
-    const id = parseInt(params.get('id')); // Lấy số 1 ra
+    const id = parseInt(params.get('id'));
+    const type = params.get('type');
 
-    const playlist = getPlaylistById(id);
+    const playlist = getPlaylistById(id, type);
 
     if (!playlist) return `<h1>Playlist không tồn tại</h1>`;
 

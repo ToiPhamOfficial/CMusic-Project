@@ -43,7 +43,8 @@ export const users = [
         email: "demo@example.com",
         avatar: "/assets/img/default-avatar.png",
         favoriteSongs: [1, 2, 3, 4, 5],
-        albumsSaved: [1, 3, 5]
+        albumsSaved: [1, 3, 5],
+        myPlaylists: [1, 2]
     },
 
     {
@@ -53,7 +54,8 @@ export const users = [
         email: "hoang_quan@gmail.com",
         avatar: "/data/users/avatar/hoang_quan_3343.png",
         favoriteSongs: [1, 3, 5, 7, 9],
-        albumsSaved: [2, 4, 6]
+        albumsSaved: [2, 4, 6],
+        myPlaylists: [1]
     },
     {
         id: 3,
@@ -62,7 +64,8 @@ export const users = [
         email: "van_khanh@gmail.com",
         avatar: "/data/users/avatar/van_khanh_2331.png",
         favoriteSongs: [2, 4, 6, 8, 10],
-        albumsSaved: [1, 5, 7]
+        albumsSaved: [1, 5, 7],
+        myPlaylists: [4, 5]
     }
 ];
 
@@ -313,14 +316,15 @@ export const genres = [
     }
 ];
 
-export const playlists = [
+export const myPlaylists = [
     {
         id: 1,
         name: "Lofi Chill",
         songCount: 24,
         icon: "play_circle",
         creator: "SonTung",
-        songIds: [1, 2, 3, 4, 5, 6, 7, 8]
+        songIds: [1, 3],
+        image: "/data/albums/lofi-albums/lofi-chill-beats.webp"
     },
     {
         id: 2,
@@ -328,7 +332,74 @@ export const playlists = [
         songCount: 18,
         icon: "play_circle",
         creator: "Jack",
-        songIds: [2, 3]
+        songIds: [2, 3],
+        image: "/data/albums/lofi-albums/study-lofi.webp"
+    }
+];
+
+export const playlists = [
+    {
+        id: 1,
+        name: "Lofi Chill Beats",
+        songCount: 20,
+        icon: "play_circle",
+        creator: "Various Artists",
+        songIds: [2, 5, 4, 6],
+        image: "/data/playlists/lofi-chill-beats.webp"
+    },
+    {
+        id: 2,
+        name: "Study Lofi",
+        songCount: 18,
+        icon: "play_circle",
+        creator: "Various Artists",
+        songIds: [1, 3, 7, 8],
+        image: "/data/playlists/study-lofi.webp"
+    },
+    {
+        id: 3,
+        name: "Lofi Vibes",
+        creator: "Various Artists",
+        songCount: 22,
+        icon: "play_circle",
+        songIds: [9, 10, 5, 6],
+        image: "/data/playlists/lofi-vibes.webp"
+    },
+    {
+        id: 4,
+        name: "Lofi Hip Hop",
+        creator: "Various Artists",
+        songCount: 16,
+        icon: "play_circle",
+        songIds: [5, 2, 4, 1],
+        image: "/data/playlists/lofi-hip-hop.webp"
+    },
+    {
+        id: 5,
+        name: "Chillhop Essentials",
+        creator: "Various Artists",
+        songCount: 15,
+        icon: "play_circle",
+        songIds: [2, 3, 6, 7],
+        image: "/data/playlists/chillhop-essentials.webp"
+    },
+    {
+        id: 6,
+        name: "Lofi Dreams",
+        creator: "Various Artists",
+        songCount: 19,
+        icon: "play_circle",
+        songIds: [1, 4, 8, 9],
+        image: "/data/playlists/lofi-dreams.webp"
+    }
+];
+
+export const playlistGroups = [
+    {
+        id: 'lofi',
+        name: 'Lofi',
+        playlistIds: [1, 2, 3, 4, 5, 6],
+        description: 'Bộ sưu tập các playlist Lofi Chill tuyệt vời để thư giãn và tập trung.'
     }
 ];
 
@@ -465,57 +536,6 @@ export const internationalAlbums = [
     }
 ];
 
-export const lofiAlbums = [
-    {
-        id: 1,
-        title: "Lofi Chill Beats",
-        artist: "Various Artists",
-        year: 2021,
-        songs: 20,
-        image: "/data/albums/lofi-albums/lofi-chill-beats.webp"
-    },
-    {
-        id: 2,
-        title: "Study Lofi",
-        artist: "Various Artists",
-        year: 2020,
-        songs: 18,
-        image: "/data/albums/lofi-albums/study-lofi.webp"
-    },
-    {
-        id: 3,
-        title: "Lofi Vibes",
-        artist: "Various Artists",
-        year: 2019,
-        songs: 22,
-        image: "/data/albums/lofi-albums/lofi-vibes.webp"
-    },
-    {
-        id: 4,
-        title: "Lofi Hip Hop",
-        artist: "Various Artists",
-        year: 2022,
-        songs: 16,
-        image: "/data/albums/lofi-albums/lofi-hip-hop.webp"
-    },
-    {
-        id: 5,
-        title: "Chillhop Essentials",
-        artist: "Various Artists",
-        year: 2023,
-        songs: 15,
-        image: "/data/albums/lofi-albums/chillhop-essentials.webp"
-    },
-    {
-        id: 6,
-        title: "Lofi Dreams",
-        artist: "Various Artists",
-        year: 2021,
-        songs: 19,
-        image: "/data/albums/lofi-albums/lofi-dreams.webp"
-    }
-];
-
 // Helper functions để lấy dữ liệu
 export function getSongById(id) {
     return songs.find(song => song.id === id);
@@ -525,8 +545,15 @@ export function getArtistById(id) {
     return artists.find(artist => artist.id === id);
 }
 
-export function getPlaylistById(id) {
+export function getPlaylistById(id, type = 'systemPlaylists') {
+    if( type === 'userPlaylists') {
+        return myPlaylists.find(playlist => playlist.id === id);
+    }
     return playlists.find(playlist => playlist.id === id);
+}
+
+export function getPlaylistGroupById(id) {
+    return playlistGroups.find(group => group.id === id);
 }
 
 export function getAlbumById(id) {
