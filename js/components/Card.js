@@ -65,7 +65,7 @@ export function AlbumCard(album) {
             <div class="card-info">
                 <h3 class="card-title">${album.title}</h3>
                 <p class="card-subtitle">${album.artist}</p>
-                ${album.year && album.songs ? `<p class="card-meta">${album.year} • ${album.songs} bài hát</p>` : ''}
+                ${album.year && album.songIds.length ? `<p class="card-meta">${album.year} • ${album.songIds.length} bài hát</p>` : ''}
             </div>
         </div>
     `;
@@ -145,7 +145,7 @@ export function PlaylistCard(playlist) {
             </div>
             <div class="card-info">
                 <h3 class="card-title">${playlist.name}</h3>
-                <p class="card-subtitle">${playlist.songCount} bài hát</p>
+                <p class="card-subtitle">${playlist.songIds.length} bài hát</p>
             </div>
         </div>
     `;

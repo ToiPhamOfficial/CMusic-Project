@@ -100,16 +100,74 @@ export function initAddPlaylistEvents() {
     btnSave.addEventListener('click', () => {
         if (!inputName.value) return;
 
+        // const newPlaylist = {
+        //     id: Date.now(),
+        //     name: inputName.value,
+        //     image: imgPreview.src || 'assets/images/default-playlist.png'
+        // };
+
+        // console.log('Playlist mới:', newPlaylist);
+        // alert(`Đã tạo playlist: ${newPlaylist.name}`);
+
+        // closeModal();
+        // // TODO: addPlaylist(newPlaylist)
+
+        // 1. Lấy thông tin user đang đăng nhập
+        // LƯU Ý: Key này phải khớp với key bạn dùng lúc đăng nhập (VD: 'current_user' hoặc 'user_info')
+        const STORAGE_KEY_USER = 'currentUser'; 
+        const STORAGE_KEY_USERS_DB = 'users'; // Key chứa danh sách tất cả user (giả lập database)
+
+        const currentUser = JSON.parse(localStorage.getItem(STORAGE_KEY_USER));
+
+        // Kiểm tra đăng nhập
+        if (!currentUser) {
+            alert('Vui lòng đăng nhập để tạo Playlist!');
+            return;
+        }
+
+        // 2. Tạo đối tượng Playlist mới
         const newPlaylist = {
-            id: Date.now(),
-            name: inputName.value,
-            image: imgPreview.src || 'assets/images/default-playlist.png'
+            id: Date.now() + 1, // ID duy nhất dựa trên thời gian
+            name: inputName.value.trim(),
+            icon: "play_circle",
+            // Nếu không có ảnh thì dùng ảnh mặc định
+            image: imgPreview.src && imgPreview.style.display !== 'none' 
+                   ? imgPreview.src 
+                   : './assets/img/playlist-default.png', 
+            creator: currentUser.username || currentUser.name,
+            songIds: [] // Mảng bài hát rỗng
         };
 
-        console.log('Playlist mới:', newPlaylist);
-        alert(`Đã tạo playlist: ${newPlaylist.name}`);
+        // 3. Thêm vào mảng playlists của User
+        // Nếu user chưa có mảng playlists thì tạo mới
+        if (!currentUser.playlists) {
+            currentUser.playlists = [];
+        }
+        currentUser.playlists.push(newPlaylist);
 
+        // 4. Lưu lại currentUser vào LocalStorage
+        localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(currentUser));
+
+        // 5. (Tùy chọn) Cập nhật vào danh sách tổng Users (Giả lập Database)
+        // Bước này giúp khi logout ra và login lại, dữ liệu vẫn còn đồng bộ
+        const allUsers = JSON.parse(localStorage.getItem(STORAGE_KEY_USERS_DB)) || [];
+        const userIndex = allUsers.findIndex(u => u.id === currentUser.id || u.username === currentUser.username);
+        
+        if (userIndex !== -1) {
+            allUsers[userIndex] = currentUser; // Cập nhật user trong DB
+            localStorage.setItem(STORAGE_KEY_USERS_DB, JSON.stringify(allUsers));
+        }
+
+        // 6. Thông báo thành công
+        console.log('Playlist đã tạo:', newPlaylist);
+        // alert(`Đã tạo playlist: ${newPlaylist.name}`); // Có thể bỏ alert nếu thấy phiền
+        
+        // Đóng modal
         closeModal();
-        // TODO: addPlaylist(newPlaylist)
+
+        // 7. BẮN SỰ KIỆN ĐỂ SIDEBAR CẬP NHẬT
+        // Sidebar sẽ lắng nghe sự kiện này để render lại list playlist mà không cần F5
+        const event = new Event('playlist:updated');
+        document.dispatchEvent(event);
     });
 }
