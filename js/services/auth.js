@@ -35,6 +35,7 @@ class Auth {
             
             if (user) {
                 this.setCurrentUser(user);
+                this.emit('user:authChanged');
                 return {
                     success: true,
                     message: `Chào mừng ${user.name}!`,
@@ -122,6 +123,7 @@ class Auth {
             users.push(newUser);
             
             this.setCurrentUser(newUser);
+            this.emit('user:authChanged');
             return {
                 success: true,
                 message: 'Đăng ký thành công!',
@@ -165,6 +167,7 @@ class Auth {
     logout() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('isLoggedIn');
+        this.emit('user:authChanged');
         return {
             success: true,
             message: 'Đã đăng xuất!',
@@ -190,6 +193,12 @@ class Auth {
     getCurrentUser() {
         const user = localStorage.getItem('currentUser');
         return user ? JSON.parse(user) : null;
+    }
+
+    // emit event
+     emit(eventName, data) {
+        const event = new CustomEvent(eventName, { detail: data });
+        document.dispatchEvent(event);
     }
 }
 
