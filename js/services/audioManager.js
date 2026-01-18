@@ -1,171 +1,249 @@
-// Audio Manager - Quản lý phát nhạc
+// Audio Manager - Quản lý phát nhạc (Pure Logic)
 class AudioManager {
     constructor() {
         this.audio = new Audio();
         this.currentSong = null;
-        this.playlist = [];
+        this.originalPlaylist = []; // Playlist gốc
+        this.shuffledPlaylist = []; // Playlist đã xáo trộn
         this.currentIndex = -1;
+        
+        // Context tracking để xác định bài hát thuộc album/playlist nào
+        this.currentContext = {
+            albumId: null,
+            playlistId: null,
+            type: null // 'album', 'playlist', 'song', etc.
+        };
+        
+        // Settings
         this.isPlaying = false;
-        this.isRepeat = false;
+        this.isRepeat = false; // false | 'one' | 'all' (nếu muốn mở rộng)
         this.isShuffle = false;
 
-        // Setup audio event listeners
         this.setupAudioEvents();
     }
 
+    // --- INTERNAL EVENTS ---
     setupAudioEvents() {
-        // Khi bài hát tải xong
         this.audio.addEventListener('loadedmetadata', () => {
-            this.updateDuration();
+            this.emit('audio:loaded', { duration: this.audio.duration });
         });
 
-        // Cập nhật progress khi phát
         this.audio.addEventListener('timeupdate', () => {
-            this.updateProgress();
+            // Chỉ emit để UI update, không tính toán % ở đây
+            this.emit('audio:timeupdate', { 
+                currentTime: this.audio.currentTime, 
+                duration: this.audio.duration || 0
+            });
         });
 
-        // Khi bài hát kết thúc
         this.audio.addEventListener('ended', () => {
+            this.emit('audio:ended');
             this.onSongEnded();
         });
 
-        // Khi có lỗi
         this.audio.addEventListener('error', (e) => {
             console.error('Audio error:', e);
-            this.showNotification('Không thể phát bài hát này');
+            this.emit('audio:error', { message: 'Không thể phát bài hát này' });
+        });
+        
+        // Sự kiện play/pause native
+        this.audio.addEventListener('play', () => {
+            this.isPlaying = true;
+            this.emit('audio:state-change', { isPlaying: true });
+        });
+        
+        this.audio.addEventListener('pause', () => {
+            this.isPlaying = false;
+            this.emit('audio:state-change', { isPlaying: false });
         });
     }
 
-    // Phát bài hát
-    playSong(song, playlist = []) {
+    // --- CORE METHODS ---
+
+    playSong(song, newPlaylist = null) {
         if (!song) return;
 
-        // Nếu có playlist mới, cập nhật
-        if (playlist.length > 0) {
-            this.playlist = playlist;
-            this.currentIndex = this.playlist.findIndex(s => s.id === song.id);
+        // Nếu có playlist mới, cập nhật context
+        if (newPlaylist && newPlaylist.length > 0) {
+            this.setPlaylist(newPlaylist);
+        }
+
+        // Tìm index trong playlist hiện tại (Original hoặc Shuffle)
+        const currentList = this.getCurrentPlaylist();
+        this.currentIndex = currentList.findIndex(s => s.id === song.id);
+        
+        // Fallback nếu không tìm thấy bài trong list hiện tại
+        if (this.currentIndex === -1) {
+             // Trường hợp phát bài lẻ không nằm trong playlist hiện tại -> Reset playlist về bài đó
+             this.setPlaylist([song]);
+             this.currentIndex = 0;
         }
 
         this.currentSong = song;
-
-        // Nếu bài hát có URL âm thanh
-        if (song.audioUrl) {
-            this.audio.src = song.audioUrl;
-            this.audio.load();
-            this.play();
-        } else {
-            // Sử dụng demo audio (có thể thay bằng URL thật)
-            console.warn('Bài hát chưa có file audio, sử dụng demo');
-            this.audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-            this.audio.load();
-            this.play();
-        }
-
-        this.updatePlayerUI();
+        this.loadSourceAndPlay(song);
+        
+        // Bắn event báo cho UI biết bài hát đã đổi
+        this.emit('audio:change', { song: this.currentSong });
     }
 
-    // Play
+    loadSourceAndPlay(song) {
+        // Clear src cũ để tránh memory leak nhẹ trên 1 số trình duyệt
+        this.audio.pause(); 
+        
+        const src = song.audioUrl || 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+        this.audio.src = src;
+        this.audio.load();
+        
+        this.play();
+    }
+
     play() {
         const playPromise = this.audio.play();
-
         if (playPromise !== undefined) {
-            playPromise.then(() => {
-                this.isPlaying = true;
-                this.updatePlayButton();
-            }).catch(error => {
-                console.error('Play error:', error);
+            playPromise.catch(error => {
+                console.warn('Playback prevented:', error);
                 this.isPlaying = false;
+                this.emit('audio:state-change', { isPlaying: false });
             });
         }
     }
 
-    // Pause
     pause() {
         this.audio.pause();
-        this.isPlaying = false;
-        this.updatePlayButton();
     }
 
-    // Toggle play/pause
     togglePlay() {
         if (this.isPlaying) {
             this.pause();
         } else {
+            // Resume hoặc phát bài đầu tiên
             if (this.currentSong) {
                 this.play();
-            } else if (this.playlist.length > 0) {
-                // Nếu chưa có bài hát nhưng có playlist, phát bài đầu tiên
-                this.playSong(this.playlist[0], this.playlist);
+            } else if (this.originalPlaylist.length > 0) {
+                this.playSong(this.originalPlaylist[0]);
             }
         }
     }
 
-    // Next song
     next() {
-        if (this.playlist.length === 0) return;
+        const list = this.getCurrentPlaylist();
+        if (list.length === 0) return;
 
-        if (this.isShuffle) {
-            // Random song
-            const randomIndex = Math.floor(Math.random() * this.playlist.length);
-            this.currentIndex = randomIndex;
-        } else {
-            // Next song in order
-            this.currentIndex = (this.currentIndex + 1) % this.playlist.length;
+        let nextIndex = this.currentIndex + 1;
+        
+        // Loop playlist
+        if (nextIndex >= list.length) {
+            nextIndex = 0; 
         }
 
-        this.playSong(this.playlist[this.currentIndex], this.playlist);
+        this.playSong(list[nextIndex]);
     }
 
-    // Previous song
     prev() {
-        if (this.playlist.length === 0) return;
+        const list = this.getCurrentPlaylist();
+        if (list.length === 0) return;
 
-        // Nếu đang phát > 3s, quay về đầu bài
+        // Logic Replay: Nếu nghe quá 3s thì replay lại bài hiện tại
         if (this.audio.currentTime > 3) {
             this.audio.currentTime = 0;
             return;
         }
 
-        // Previous song
-        this.currentIndex = (this.currentIndex - 1 + this.playlist.length) % this.playlist.length;
-        this.playSong(this.playlist[this.currentIndex], this.playlist);
+        let prevIndex = this.currentIndex - 1;
+        if (prevIndex < 0) {
+            prevIndex = list.length - 1;
+        }
+
+        this.playSong(list[prevIndex]);
     }
 
-    // Seek to position
     seek(percentage) {
         if (this.audio.duration) {
-            this.audio.currentTime = (percentage / 100) * this.audio.duration;
+            const time = (percentage / 100) * this.audio.duration;
+            this.audio.currentTime = time;
         }
     }
 
-    // Set volume (0-100)
     setVolume(volume) {
-        this.audio.volume = volume / 100;
+        // volume input: 0-100
+        this.audio.volume = Math.max(0, Math.min(1, volume / 100));
     }
 
-    // Set playlist
+    // --- PLAYLIST & MODES ---
+
     setPlaylist(playlist) {
-        this.playlist = playlist;
-        if (this.playlist.length > 0 && !this.currentSong) {
-            this.currentIndex = 0;
+        // Clone mảng để tránh reference ngoài ý muốn
+        this.originalPlaylist = [...playlist];
+        
+        // Nếu đang shuffle, cần tạo lại shuffled playlist nhưng cố gắng giữ bài hiện tại (nếu có)
+        if (this.isShuffle) {
+            this.generateShuffledPlaylist(this.currentSong);
         }
     }
 
-    // Toggle repeat
+    setContext(context) {
+        // Cập nhật context (albumId, playlistId, type)
+        this.currentContext = {
+            albumId: context.albumId || null,
+            playlistId: context.playlistId || null,
+            type: context.type || null
+        };
+    }
+
     toggleRepeat() {
         this.isRepeat = !this.isRepeat;
-        this.updateRepeatButton();
+        this.emit('audio:mode-change', { repeat: this.isRepeat, shuffle: this.isShuffle });
     }
 
-    // Toggle shuffle
     toggleShuffle() {
         this.isShuffle = !this.isShuffle;
-        this.updateShuffleButton();
+        
+        if (this.isShuffle) {
+            // Bật shuffle: Tạo list mới bắt đầu bằng bài hiện tại
+            this.generateShuffledPlaylist(this.currentSong);
+            // Reset index về 0 (vì bài hiện tại luôn nằm đầu list shuffle)
+            this.currentIndex = 0; 
+        } else {
+            // Tắt shuffle: Tìm lại index bài hiện tại trong list gốc
+            if (this.currentSong) {
+                this.currentIndex = this.originalPlaylist.findIndex(s => s.id === this.currentSong.id);
+            }
+        }
+        
+        this.emit('audio:mode-change', { repeat: this.isRepeat, shuffle: this.isShuffle });
     }
 
-    // Khi bài hát kết thúc
+    // Thuật toán Fisher-Yates Shuffle
+    generateShuffledPlaylist(startSong = null) {
+        let list = [...this.originalPlaylist];
+        
+        // Nếu có bài bắt đầu, tách nó ra để đưa lên đầu
+        if (startSong) {
+            list = list.filter(s => s.id !== startSong.id);
+        }
+
+        // Shuffle phần còn lại
+        for (let i = list.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [list[i], list[j]] = [list[j], list[i]];
+        }
+
+        // Gộp lại: [Bài hiện tại, ...các bài đã đảo]
+        if (startSong) {
+            this.shuffledPlaylist = [startSong, ...list];
+        } else {
+            this.shuffledPlaylist = list;
+        }
+    }
+
+    getCurrentPlaylist() {
+        return this.isShuffle ? this.shuffledPlaylist : this.originalPlaylist;
+    }
+
     onSongEnded() {
         if (this.isRepeat) {
+            // Nếu repeat 1 bài (tùy logic bạn muốn repeat 1 hay repeat list)
+            // Giả sử ở đây logic cũ của bạn là repeat bài hiện tại
             this.audio.currentTime = 0;
             this.play();
         } else {
@@ -173,89 +251,12 @@ class AudioManager {
         }
     }
 
-    // Update UI
-    updatePlayerUI() {
-        if (!this.currentSong) return;
-
-        // Update song info
-        $('.player-info h3, .player-info h3').text(this.currentSong.title);
-        $('.player-info span, .player-info p').text(this.currentSong.artist);
-
-        // Update album cover
-        $('.player-album img, .player-disc img').attr({
-            'src': this.currentSong.image,
-            'alt': this.currentSong.title
-        });
-
-        $('.player').css('display', 'flex');
-        $('.app').css('padding-bottom', '90px');
-    }
-
-    updatePlayButton() {
-        const icon = this.isPlaying ? 'pause_circle' : 'play_circle';
-        $('.player-controls .btn-play span, .player-controls .play span').text(icon);
-    
-    }
-
-    updateProgress() {
-        if (!this.audio.duration) return;
-
-        const currentTime = this.audio.currentTime;
-        const duration = this.audio.duration;
-        const percentage = (currentTime / duration) * 100;
-
-        // Update progress bar
-        $('.progress-slider, .progress-bar').val(percentage);
-
-        // Update time display
-        $('.player-progress .time:first, .player-progress .time:first').text(this.formatTime(currentTime));
-        $('.player-progress .time:last, .player-progress .time:last').text(this.formatTime(duration));
-    }
-
-    updateDuration() {
-        if (this.audio.duration) {
-            $('.player-progress .time:last, .player-progress .time:last').text(this.formatTime(this.audio.duration));
-            $('.progress-slider, .progress-bar').attr('max', 100);
-        }
-    }
-
-    updateRepeatButton() {
-        const $btn = $('.player-controls .btn-control[title="Repeat"]');
-        if (this.isRepeat) {
-            $btn.addClass('active');
-            $btn.find('span').css('color', 'var(--accent-color)');
-        } else {
-            $btn.removeClass('active');
-            $btn.find('span').css('color', '');
-        }
-    }
-
-    updateShuffleButton() {
-        const $btn = $('.player-controls .btn-control[title="Shuffle"]');
-        if (this.isShuffle) {
-            $btn.addClass('active');
-            $btn.find('span').css('color', 'var(--accent-color)');
-        } else {
-            $btn.removeClass('active');
-            $btn.find('span').css('color', '');
-        }
-    }
-
-    // Format time (seconds to mm:ss)
-    formatTime(seconds) {
-        if (isNaN(seconds)) return '0:00';
-
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
-    }
-
-    // Show notification
-    showNotification(message) {
-        console.log('Notification:', message);
-        // TODO: Implement toast notification
+    // --- HELPER: EVENT EMITTER ---
+    // Giúp tách biệt Logic và UI. UI sẽ lắng nghe các event này.
+    emit(eventName, data) {
+        const event = new CustomEvent(eventName, { detail: data });
+        document.dispatchEvent(event);
     }
 }
 
-// Export singleton instance
 export default new AudioManager();

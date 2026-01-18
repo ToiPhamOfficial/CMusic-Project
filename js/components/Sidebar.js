@@ -1,3 +1,6 @@
+import { myPlaylists } from '../data.js';
+import auth from '../services/auth.js';
+
 export default function Sidebar() {
     return `
         <!-- Logo -->
@@ -67,16 +70,16 @@ export default function Sidebar() {
                                 <span>Gần đây</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/albums-saved" class="nav-link" data-need-login="true">
+                        <li class="need-login nav-item" ${!auth.isLoggedIn() ? 'style="display: none;"' : ''}>
+                            <a href="/albums-saved" class="nav-link">
                                 <span class="material-icons-round">
                                     book
                                 </span>
                                 <span>Album</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/favorites" class="nav-link" data-need-login="true">
+                        <li class="need-login nav-item" ${!auth.isLoggedIn() ? 'style="display: none;"' : ''}>
+                            <a href="/favorites" class="nav-link">
                                 <span class="material-icons-round">
                                     favorite
                                 </span>
@@ -86,36 +89,32 @@ export default function Sidebar() {
                     </ul>
                 </div>
 
-                <div class="divider"></div>
+                <div class="need-login divider" ${!auth.isLoggedIn() ? 'style="display: none;"' : ''}></div>
 
                 <!-- Playlist -->
-                <div class="nav-group">
+                <div class="need-login nav-group" ${!auth.isLoggedIn() ? 'style="display: none;"' : ''}>
                     <h3 class="nav-title">DANH SÁCH PHÁT</h3>
                     <ul class="nav-list">
                         <li class="nav-item">
-                            <a href="" class="nav-link" id="open-playlist-modal" data-need-login="true">
+                            <a href="" class="nav-link" id="open-playlist-modal">
                                 <span class="material-icons-round">
                                     add_circle
                                 </span>
                                 <span>Tạo mới</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-route="/playlist-detail?id=1&type=userPlaylists">
-                                <span class="material-icons-round">
-                                    play_circle
-                                </span>
-                                <span>Lofi Chill</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-route="/playlist-detail?id=2&type=userPlaylists">
-                                <span class="material-icons-round">
-                                    play_circle
-                                </span>
-                                <span>Hot Phonk</span>
-                            </a>
-                        </li>
+                        ${ // tối đa 3 playlist gần đây
+                            auth.isLoggedIn() ? myPlaylists.slice(0,3).map(playlist => `
+                                <li class="nav-item">
+                                    <a class="nav-link" data-route="/playlist-detail?id=${playlist.id}&type=userPlaylists">
+                                        <span class="material-icons-round">
+                                            play_circle
+                                        </span>
+                                        <span>${playlist.name}</span>
+                                    </a>
+                                </li>
+                            `
+                            ).join('') : ''}
                         <li class="nav-item">
                             <a href="/playlists?type=userPlaylists" class="nav-link">
                                 <span class="material-icons-round">
