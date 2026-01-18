@@ -42,12 +42,12 @@
 /* --- 1. Header Profile --- */
 .profile-hero {
     position: relative;
-    background: linear-gradient(to bottom, #1e3c72, #000); /* Gradient Xanh đậm -> Đen */
+    background: linear-gradient(to bottom, #7b8fff, #000);
     padding: 30px;
     height: 300px;
     display: flex;
     align-items: center;
-    border-radius: 0 0 20px 20px;
+    border-radius: 12px;
     margin-bottom: 20px;
 }
 
@@ -88,10 +88,21 @@
     line-height: 1;
 }
 
+.container-follower {
+    display: flex;
+    gap: 10px;
+    align-items: center; 
+    justify-content: flex-start; /* Căn trái (mặc định), center (giữa), space-between (giãn đều) */
+    margin-bottom: 20px;
+}
+
+.container-follower .page-artists__follow-btn {
+    display: block !important;
+}
+
 .profile-stats {
     font-size: 0.95rem;
     color: #ccc;
-    margin-bottom: 20px;
 }
 
 .btn-play-profile {
@@ -175,6 +186,90 @@
 .qa-sub {
     font-size: 0.8rem;
     color: #b3b3b3;
+}
+
+/* 1. Màn hình Tablet & Mobile (Dưới 768px) */
+@media screen and (max-width: 768px) {
+    
+    /* --- Profile Hero --- */
+    .profile-hero {
+        height: auto; /* Bỏ chiều cao cố định để nội dung tự đẩy xuống */
+        padding: 30px 20px;
+        border-radius: 0; /* Có thể bỏ bo góc dưới nếu muốn full màn hình */
+    }
+
+    .profile-content {
+        flex-direction: column; /* Xếp dọc: Ảnh trên, Chữ dưới */
+        text-align: center; /* Canh giữa nội dung */
+        gap: 20px;
+    }
+
+    .profile-avatar img {
+        width: 140px; /* Giảm kích thước ảnh */
+        height: 140px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .profile-info {
+        align-items: center; /* Canh giữa các phần tử con (nút bấm, tag) */
+        width: 100%;
+    }
+
+    .profile-tag {
+        font-size: 0.75rem;
+    }
+
+    .profile-name {
+        font-size: 2.5rem; /* Giảm cỡ chữ tên */
+        margin-bottom: 10px;
+    }
+
+    .profile-stats {
+        font-size: 0.85rem;
+    }
+
+    /* --- Quick Access Cards --- */
+    .quick-access-grid {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột duy nhất */
+        gap: 15px;
+        padding: 0 20px; /* Giảm padding hai bên */
+    }
+
+    .qa-card {
+        height: auto; /* Đảm bảo thẻ co giãn tốt */
+    }
+}
+
+/* 2. Màn hình Mobile nhỏ (Dưới 480px) */
+@media screen and (max-width: 480px) {
+    
+    .profile-hero {
+        padding: 20px 15px;
+    }
+
+    .profile-avatar img {
+        width: 120px; /* Nhỏ hơn nữa cho đt bé */
+        height: 120px;
+    }
+
+    .profile-name {
+        font-size: 2rem; /* Cỡ chữ vừa vặn màn hình dọc */
+    }
+
+    .btn-play-profile {
+        font-size: 0.85rem;
+        padding: 8px 20px;
+    }
+
+    /* Grid Card */
+    .qa-img-box {
+        width: 70px; /* Thu nhỏ icon bên trái thẻ */
+        height: 70px;
+    }
+    
+    .qa-title {
+        font-size: 0.95rem;
+    }
 }
 
 /*==========================================
@@ -293,9 +388,9 @@ hr.border-secondary {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #2b4cde 0%, rgba(0,0,0,0) 100%);
-    opacity: 0.6;
+    background: linear-gradient(to bottom, #7b8fff, #000);
     z-index: 1;
+    border-radius: 12px;
 }
 
 /* Ảnh bìa playlist (Gradient + Heart Icon) */
@@ -658,7 +753,7 @@ hr.border-secondary {
 }
 .btn-addplaylist.btn-cancel { background: transparent; color: #fff; }
 .btn-addplaylist.btn-cancel:hover { text-decoration: underline; }
-.btn-addplaylist.btn-save { background: var(--accent-color); color: white; } /* Màu tím Nhaccuatui */
+.btn-addplaylist.btn-save { background: var(--accent-color); color: white; }
 .btn-addplaylist.btn-save:disabled { background: #4a4a4a; color: #888; cursor: not-allowed; }
 
 /*==========================================

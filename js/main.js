@@ -17,7 +17,7 @@ import audioManager from './services/audioManager.js';
 import { syncButtonsWithAudioManager } from './utils/iconManager.js';
 
 /* Import views event handlers */
-import { initRecentlyPageEvents } from './views/Recently.js';
+import { initRecentlyPageEvents, addToHistory } from './views/Recently.js';
 import { initArtistsPageEvents } from './views/Artists.js';
 
 /* Import functions from ./data.js */
@@ -143,6 +143,9 @@ function handlePlayClick(btnElement) {
             if (songToPlay) {
                 audioManager.playSong(songToPlay);
             }
+
+            // Lưu bài hát vừa chuyển vào lịch sử
+            addToHistory('songsIds', songToPlay.id);
             return;
         }
 
@@ -159,6 +162,21 @@ function handlePlayClick(btnElement) {
             // Gọi lệnh phát nhạc với danh sách mới
             console.log(`Bắt đầu phát: ${newContextData.songToPlay.name}`);
             audioManager.playSong(newContextData.songToPlay, newContextData.songsList);
+
+            // Lưu các thông tin vào lịch sử khi bắt đầu phát context mới
+            
+            // Luôn lưu bài hát đang phát
+            addToHistory('songsIds', newContextData.songToPlay.id);
+
+            // Nếu phát từ Album, lưu Album
+            if (target.albumId) {
+                addToHistory('albums', target.albumId);
+            }
+
+            // Nếu phát từ Playlist, lưu Playlist
+            if (target.playlistId) {
+                addToHistory('playlists', target.playlistId);
+            }
         }
 
     } catch (error) {

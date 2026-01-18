@@ -39,7 +39,7 @@ export default function Artists() {
                     <div class="page-artists__track-artist">
                         <img src="${artist.image}" alt="${artist.name}" class="page-artists__artist-avatar">
                         <div class="page-artists__artist-info">
-                            <div class="page-artists__artist-name">${artist.name}</div>
+                            <div class="page-artists__artist-name" data-route="/artist-detail?id=${artist.id}">${artist.name}</div>
                             <div class="page-artists__artist-followers">${artist.listeners} người theo dõi</div>
                         </div>
                         <button class="btn-follow page-artists__follow-btn" data-artist-id="${artist?.id || ''}">${getFollowText(artist?.id)}</button>
