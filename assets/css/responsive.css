@@ -16,6 +16,162 @@
     .banner {
         display: none;
     }
+
+    /* Page Explore */
+    .artists-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .artists-grid > *:nth-child(n+5) {
+        display: none;
+    }
+
+    .genres-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .genres-grid > *:nth-child(n+7) {
+        display: none;
+    }
+
+    .charts-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-wrapper > .chart-column:not(:first-child) {
+        display: none;
+    }
+
+    .albums-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .albums-grid > *:nth-child(n+5) {
+        display: none;
+    }
+
+    /* Page Artists */
+    .page-artists__hero {
+        height: 200px;
+    }
+
+    .page-artists__hero-title {
+        font-size: 2rem;
+    }
+
+    .page-artists__hero-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .page-artists__header, 
+    .page-artists__track {
+        grid-template-columns: 35px minmax(0,2fr) 80px;
+    }
+
+    .page-artists__header-col--time {
+        visibility: hidden;
+    }
+
+    .page-artists__header-col--song,
+    .page-artists__track-song, 
+    .page-artists__duration, 
+    .page-artists__icon--heart {
+        display: none !important;
+    }
+
+    .page-artists__icon--more {
+        display: block !important;
+    }
+}
+
+/* === TABLET MEDIUM - Max-width: 992px === */
+@media (max-width: 992px) {
+    /* Page Favorites */
+    .page-favorites__hero-play {
+        display: none;
+    }
+}
+
+/* === TABLET & MOBILE - Max-width: 768px === */
+@media screen and (max-width: 768px) {
+    /* Profile Hero */
+    .profile-hero {
+        height: auto;
+        padding: 30px 20px;
+        border-radius: 0;
+    }
+
+    .profile-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-avatar img {
+        width: 140px;
+        height: 140px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .profile-info {
+        align-items: center;
+        width: 100%;
+    }
+
+    .profile-tag {
+        font-size: 0.75rem;
+    }
+
+    .profile-name {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .profile-stats {
+        font-size: 0.85rem;
+    }
+
+    /* Quick Access Cards */
+    .quick-access-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .qa-card {
+        height: auto;
+    }
+
+    /* Detail Playlist */
+    .playlist-hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: auto;
+    }
+    
+    .hero-cover { 
+        margin-right: 0; 
+        margin-bottom: 20px; 
+    }
+    
+    .hero-img { 
+        margin-right: 0; 
+        margin-bottom: 20px; 
+    }
+    
+    .hero-info { 
+        height: auto; 
+        align-items: center; 
+    }
+    
+    .track-header, .track-item {
+        grid-template-columns: 40px 1fr 60px;
+    }
+    
+    .col-artist, .col-album { 
+        display: none; 
+    }
 }
 
 /* === MOBILE (Điện thoại) - Max-width: 576px === */
@@ -37,37 +193,119 @@
         /* Radius */
         --radius-lg: 0.375rem; /* 6px */
     }
-
-    /* Hide elements on mobile */
-    .chart-right {
-        display: none !important;
-    }
-
-    .banner {
-        display: none !important;
-    }
-
-    /* Content adjustments */
-    .genre-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .album-grid,
-    .artist-grid,
-    .playlist-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
+    
     .container {
         padding: var(--space-md);
+        padding-top: 0;
+    }
+
+    /* Page Explore */
+    .artists-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .artists-grid > *:nth-child(n+4) {
+        display: none;
+    }
+
+    .genres-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .genres-grid > *:nth-child(n+5) {
+        display: none;
+    }
+
+    .albums-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .albums-grid > *:nth-child(n+4) {
+        display: none;
+    }
+
+    /* Page Artists */
+    .page-artists__header, 
+    .page-artists__track {
+        grid-template-columns: 35px minmax(0,2fr) 20px;
+    }
+
+    .page-artists__header-col--time {
+        visibility: hidden;
+    }
+
+    .page-artists__btn-follow {
+        display: none !important;
+    }
+
+    /* Page Favorites */
+    .page-favorites__hero-icon {
+        width: 150px;
+        height: 150px;
+    }
+
+    .page-favorites__hero-icon .material-icons-round {
+        font-size: 60px;
+    }
+
+    .page-favorites__hero-title {
+        font-size: 2rem;
+    }
+
+    .page-favorites__header {
+        grid-template-columns: 30px minmax(0, 3fr) minmax(0, 2fr);
+    }
+
+    .page-favorites__header-col--artist {
+        display: none;
+    }
+
+    .page-favorites__header-col--actions {
+        visibility: hidden;
+    }
+
+    /* Page Recently */
+    .page-recently__songs-header {
+        grid-template-columns: 35px minmax(0, 1fr) 50px;
+    }
+
+    .page-recently__songs-header-col--artist {
+        display: none;
+    }
+
+    .page-recently__songs-header-col--time {
+        visibility: hidden;
     }
 }
 
-/* === LARGE SCREENS (Desktop) - Min-width: 1440px === */
-@media (min-width: 1440px) {
-    .album-grid,
-    .artist-grid,
-    .playlist-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+/* === MOBILE SMALL - Max-width: 480px === */
+@media screen and (max-width: 480px) {
+    /* Profile */
+    .profile-hero {
+        padding: 20px 15px;
+    }
+
+    .profile-avatar img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-name {
+        font-size: 2rem;
+    }
+
+    .btn-play-profile {
+        font-size: 0.85rem;
+        padding: 8px 20px;
+    }
+
+    /* Quick Access Grid Card */
+    .qa-img-box {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .qa-title {
+        font-size: 0.95rem;
     }
 }
