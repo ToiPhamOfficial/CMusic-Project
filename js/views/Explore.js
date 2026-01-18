@@ -1,5 +1,6 @@
 import { banner, songs, artists, genres, albums, internationalAlbums, getPlaylistById, getPlaylistGroupById} from '../data.js';
 import { ArtistCard, GenreCard, ChartItem, AlbumCard, PlaylistCard} from '../components/Card.js';
+import { isFavorited } from '../utils/utils.js';
 
 export default function Explore() {
     return `
@@ -20,7 +21,7 @@ export default function Explore() {
             </div>
             <div class="banner-actions">
                 <button class="btn btn-play-zzz btn-play-music" data-song-id="${banner[0].songId}">Phát ngay</button>
-                <button class="btn btn-fav">
+                <button class="btn btn-favorite page-explore__btn-favorite ${isFavorited(banner[0].songId) ? 'active' : ''}" data-song-id="${banner[0].songId}" title="Thêm vào yêu thích">
                     <span class="material-icons-round">
                         favorite
                     </span>
@@ -129,7 +130,7 @@ export default function Explore() {
         <section class="section-box lofi-playlists">
             <div class="section-header">
                 <h2>Nhạc Lofi</h2>
-                <a href="/lofi" class="view-all">Tất cả</a>
+                <a class="view-all" data-route="/playlists?id=lofi">Tất cả</a>
             </div>
             <div class="playlist-grid">
                 ${(() => {

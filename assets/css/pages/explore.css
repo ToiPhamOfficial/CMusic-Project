@@ -102,7 +102,7 @@
     background-color: var(--accent-hover);
 }
 
-.btn-fav {
+.page-explore__btn-favorite {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,7 +115,7 @@
     transition: all var(--transition-fast);
 }
 
-.btn-fav:hover {
+.page-explore__btn-favorite:hover {
     background-color: var(--accent-color);
 }
 
@@ -512,7 +512,7 @@
 
 .album-cover,
 .artist-avatar,
-.playlist-cover {
+/* .playlist-cover {
     width: 100%;
     aspect-ratio: 1;
     border-radius: var(--radius-md);
@@ -538,7 +538,7 @@
 .playlist-cover .material-icons-round {
     font-size: 64px;
     color: var(--text-primary);
-}
+} */
 
 .album-play-btn,
 .artist-follow-btn {

@@ -1,6 +1,5 @@
 import { getPlaylistById, getSongById } from '../data.js';
 import { SongItem, HeaderSongItem } from '../components/Card.js';
-import { initToggleMore } from '../utils/utils.js';
 
 export default function PlaylistDetail() {
     //Tự lấy ID từ URL hiện tại (ví dụ: .../playlist-detail?id=1)
@@ -31,7 +30,7 @@ export default function PlaylistDetail() {
         return getSongById(songId);
     }).filter(song => song !== undefined);
 
-    const initialDisplayCount = 5;
+    const initialDisplayCount = 15;
     const hasMore = listSongs.length > initialDisplayCount;
 
     return `
@@ -74,7 +73,7 @@ export default function PlaylistDetail() {
                 </div>
 
                 ${hasMore ? `
-                    <div class="see-more" data-expanded="false">
+                    <div class="see-more" data-expanded="false" data-element=".song-item-wrapper">
                         <span class="see-more-text">Xem thêm</span> 
                         <span class="material-icons-round">arrow_drop_down</span>
                     </div>
@@ -83,9 +82,4 @@ export default function PlaylistDetail() {
             </section>
         </div>
     `;
-}
-
-// Export hàm init events
-export function initPlaylistDetailEvents() {
-    initToggleMore('.song-item__song-list', '.song-item-wrapper', 5);
 }

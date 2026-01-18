@@ -8,14 +8,14 @@ import Favorites from './views/Favorites.js';
 import Profile from './views/Profile.js';
 import Recently from './views/Recently.js';
 import AlbumsSaved from './views/AlbumsSaved.js';
-// import ArtistDetail from './views/DetailArtist.js';
-// import PlaylistDetail from './views/DetailPlaylist.js';
+import ArtistDetail from './views/DetailArtist.js';
+import PlaylistDetail from './views/DetailPlaylist.js';
 import SongDetail from './views/DetailSong.js';
-// import AlbumDetail from './views/DetailAlbum.js';
 import GenreDetail from './views/DetailGenre.js';
-import ArtistDetail, { initArtistDetailEvents } from './views/DetailArtist.js';
-import PlaylistDetail, { initPlaylistDetailEvents } from './views/DetailPlaylist.js';
-import AlbumDetail, { initAlbumDetailEvents } from './views/DetailAlbum.js';
+import AlbumDetail from './views/DetailAlbum.js';
+
+import audioManager from './services/audioManager.js';
+import { syncButtonsWithAudioManager } from './utils/iconManager.js';
 
 // Cấu hình Route map
 const routes = {
@@ -34,15 +34,6 @@ const routes = {
     '/song-detail': SongDetail,
     '/album-detail': AlbumDetail,
     '/genre-detail': GenreDetail
-};
-
-// Map các hàm init events cho từng route
-const routeInits = {
-    '/playlist-detail': initPlaylistDetailEvents,
-    '/album-detail': initAlbumDetailEvents,
-    '/artist-detail': initArtistDetailEvents
-    // Thêm các trang khác khi cần
-    // '/genre-detail': initGenreDetailEvents,
 };
 
 // Khởi tạo Router
@@ -92,12 +83,10 @@ export function renderRoute(path = window.location.pathname) {
     // Render HTML
     $('.container').html(view());
 
-    // Tự động gọi init function nếu route có config
-    if (routeInits[routePath]) {
-        routeInits[routePath]();
-    }
-
     // Update Sidebar Active
     $('.nav-item').removeClass('active');
     $(`.nav-link[href="${routePath}"]`).closest('.nav-item').addClass('active');
+
+    // Sync nút play/pause với audioManager
+    syncButtonsWithAudioManager(audioManager);
 }

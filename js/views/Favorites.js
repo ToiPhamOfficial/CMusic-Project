@@ -43,3 +43,12 @@ export default function Favorites() {
     </section>
     `;
 }
+
+export function initFavoritesEvents() {
+    // Lắng nghe sự kiện unfavorite để re-render lại trang
+    $(document).on('user:unfavoritedSong', function(e, songId) {
+        if (window.location.pathname === '/favorites') {
+            window.navigateTo('/favorites', true);
+        }
+    });
+}

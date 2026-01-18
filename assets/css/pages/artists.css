@@ -176,7 +176,7 @@
 }
 
 /* Follow Button */
-.page-artists__follow-btn {
+.page-artists__btn-follow {
     display: none;
     background: transparent;
     border: 1px solid var(--text-primary);
@@ -191,14 +191,14 @@
     white-space: nowrap;
 }
 
-.page-artists__follow-btn:hover {
+.page-artists__btn-follow:hover {
     background: var(--text-primary);
     color: #000;
     transform: scale(1.08);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
-.page-artists__track:hover .page-artists__follow-btn {
+.page-artists__track:hover .page-artists__btn-follow {
     display: block;
 }
 
@@ -436,7 +436,7 @@
         visibility: hidden;
     }
 
-    .page-artists__follow-btn {
+    .page-artists__btn-follow {
         display: none !important;
     }
 }
