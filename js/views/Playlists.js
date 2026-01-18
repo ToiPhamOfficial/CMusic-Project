@@ -16,7 +16,7 @@ export default function Playlists() {
             <section class="section-box my-playlists">
                 <div class="section-header">
                     <h2>Playlist</h2>
-                    <button class="btn-create-playlist">
+                    <button class="btn-create-playlist" id="open-playlist-modal">
                         <span class="material-icons-round">add</span>
                         Tạo mới
                     </button>

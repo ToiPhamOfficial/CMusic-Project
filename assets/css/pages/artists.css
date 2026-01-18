@@ -157,6 +157,15 @@
     letter-spacing: -0.3px;
 }
 
+.page-artists__artist-name:hover, .page-artists__song-title:hover {
+    color: var(--accent-hover);
+    /* text-decoration: underline;  <-- Bỏ cmt nếu muốn có gạch chân */
+}
+
+.page-artists__artist-name:active, .page-artists__song-title:active {
+    opacity: 0.8; /* Làm mờ nhẹ khi click */
+}
+
 .page-artists__artist-followers {
     font-size: var(--fs-label);
     color: var(--text-secondary);

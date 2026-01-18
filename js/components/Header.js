@@ -208,7 +208,7 @@ function displaySearchResults(results) {
     let suggestionItems = '<li class="suggestion-label">Gợi ý kết quả</li>';
     results.forEach(song => {
         suggestionItems += `
-            <li class="suggestion-item">
+            <li class="suggestion-item" data-route="/song-detail?id=${song.id}">
                 <div>
                     <img src="${song.image}" alt="${song.title} - ${song.artist}">
                     <button type="button" data-song-id="${song.id}">

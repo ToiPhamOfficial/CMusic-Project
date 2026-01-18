@@ -12,7 +12,6 @@ export default function Charts() {
         <section class="section-box charts-section">
             <div class="section-header">
                 <h2>Bảng xếp hạng</h2>
-                <a href="#" class="view-all" data-route="/charts">Tất cả</a>
             </div>
             <div class="charts-wrapper">
                 <!-- Weekly Chart -->
