@@ -1,6 +1,5 @@
 import { getAlbumById, getSongById } from '../data.js';
 import { SongItem, HeaderSongItem } from '../components/Card.js';
-import { initToggleMore } from '../utils/utils.js';
 
 export default function AlbumDetail() {
     //Tự lấy ID từ URL hiện tại (ví dụ: .../artist-detail?id=1)
@@ -54,7 +53,7 @@ export default function AlbumDetail() {
                 </div>
 
                 ${hasMore ? `
-                    <div class="see-more" data-expanded="false">
+                    <div class="see-more" data-expanded="false" data-element=".song-item-wrapper">
                         <span class="see-more-text">Xem thêm</span> 
                         <span class="material-icons-round">arrow_drop_down</span>
                     </div>
@@ -63,9 +62,4 @@ export default function AlbumDetail() {
             </section>
         </div>
     `;
-}
-
-// Export hàm init events
-export function initAlbumDetailEvents() {
-    initToggleMore('.song-item__song-list', '.song-item-wrapper', 5);
 }

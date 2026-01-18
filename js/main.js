@@ -5,13 +5,16 @@ import Header, { initHeaderEvents } from './components/Header.js';
 import LoginSignup, { initLoginSignupEvents } from './components/LoginSignup.js';
 import AddPlaylist, { initAddPlaylistEvents } from './components/AddPlaylist.js';
 import { initDropdownEvents } from './components/Dropdown.js';
+import { initCardEvents } from './components/Card.js';
+import Toast from './components/Toast.js';
 
 /* Import modules */
 import { initRouter } from './router.js';
-import { songs } from './data.js';
+import { getArtistById, songs } from './data.js';
 
 /* Import services */
 import audioManager from './services/audioManager.js';
+import auth from './services/auth.js';
 
 /* Import utils */
 import { syncButtonsWithAudioManager } from './utils/iconManager.js';
@@ -19,10 +22,10 @@ import { syncButtonsWithAudioManager } from './utils/iconManager.js';
 /* Import views event handlers */
 import { initRecentlyPageEvents } from './views/Recently.js';
 import { initArtistsPageEvents } from './views/Artists.js';
+import { initFavoritesEvents } from './views/Favorites.js';
 
 /* Import functions from ./data.js */
 import { getAlbumById, getPlaylistById, getSongById, getRecommendationsByGenre} from './data.js';
-import Toast from './components/Toast.js';
 
 const App = {
     // Khởi chạy ứng dụng
@@ -53,6 +56,7 @@ const App = {
         initLoginSignupEvents();
         initAddPlaylistEvents();
         initDropdownEvents();
+        initCardEvents();
     },
 
     // Kích hoạt Router và các trang cụ thể
@@ -61,6 +65,7 @@ const App = {
         initEventListeners();
         initRecentlyPageEvents();
         initArtistsPageEvents();
+        initFavoritesEvents();
     }
 };
 
@@ -80,6 +85,15 @@ function initEventListeners() {
     //     }
     // });
 
+    // Gọi hàm xử lí sự kiện xem thêm
+    seeMoreHandler();
+
+    // Xử lí sự kiện theo dõi nghệ sĩ
+    followButtonHandler();
+    
+    // Xử lí sự kiện yêu thích bài hát
+    favoriteButtonHandler();
+
     // Lắng nghe sự kiện đăng nhập/đăng ký thành công
     $(document).on('user:authChanged', function() {
         // Re-render Header để hiển thị thông tin user
@@ -93,7 +107,7 @@ function initEventListeners() {
         e.stopPropagation(); // Ngăn chặn sự kiện nổi bọt
         handlePlayClick(this);
     });
-    
+
     // Lắng nghe sự kiện thay đổi từ audioManager để update icon
     document.addEventListener('audio:change', () => {
         syncButtonsWithAudioManager(audioManager);
@@ -167,10 +181,7 @@ function handlePlayClick(btnElement) {
     }
 }
 
-/**
- * Hàm Helper: Lấy danh sách bài hát và bài cần phát dựa trên target data.
- * Giúp tách biệt logic lấy dữ liệu khỏi logic điều khiển UI.
- */
+// Hàm Helper: Lấy danh sách bài hát và bài cần phát dựa trên target data.
 function fetchPlaybackData(target) {
     let songIds = [];
     let contextInfo = {};
@@ -225,4 +236,99 @@ function fetchPlaybackData(target) {
     };
 }
 
-window.audioManager = audioManager; // For debugging purpose only
+// Hàm xử lí sự kiện xem thêm
+function seeMoreHandler() {
+    $(document).on('click', '.see-more', function() {
+        const isExpanded = this.dataset.expanded === 'true';
+        const elementSelector = this.dataset.element || '.song-item-wrapper';
+        const allItems = document.querySelectorAll(elementSelector);
+        
+        if (isExpanded) {
+            // Thu gọn - chỉ hiển thị 15 bài đầu
+            allItems.forEach((item, index) => {
+                if (index >= 5) {
+                    item.classList.add('hidden');
+                }
+            });
+            this.dataset.expanded = 'false';
+            this.querySelector('.see-more-text').textContent = 'Xem thêm';
+            this.querySelector('.material-icons-round').style.transform = 'rotate(0deg)';
+        } else {
+            // Mở rộng - hiển thị tất cả
+            allItems.forEach(item => {
+                item.classList.remove('hidden');
+            });
+            this.dataset.expanded = 'true';
+            this.querySelector('.see-more-text').textContent = 'Thu gọn';
+            this.querySelector('.material-icons-round').style.transform = 'rotate(180deg)';
+        }
+    });
+}
+
+// Hàm xử lí sự kiện click vào nút .btn-follow
+function followButtonHandler() {
+    $(document).on('click', '.btn-follow', function (e) {
+        e.stopPropagation();
+        const $btn = $(this);
+        const artistId = $btn.data('artist-id');
+        if (!artistId) return;
+        if(!auth.isLoggedIn()) {
+            Toast.info("Vui lòng đăng nhập để theo dõi nghệ sĩ.");
+            return;
+        }
+        let user = auth.getCurrentUser();
+        // Danh sách artist đã theo dõi
+        user.followedArtists ||= [];
+        const index = user.followedArtists.indexOf(artistId);
+        if (index === -1) {
+            // FOLLOW
+            user.followedArtists.push(artistId);
+            // Lưu lại user
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            $(document).trigger('user:followedArtist', artistId);
+            Toast.success(`Bạn đã theo dõi ${getArtistById(artistId).name}`);
+        } else {
+            // UNFOLLOW
+            user.followedArtists.splice(index, 1);
+            // Lưu lại user
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            $(document).trigger('user:unfollowedArtist', artistId);
+            Toast.info(`Bạn đã hủy theo dõi ${getArtistById(artistId).name}`);
+        }
+    });
+}
+
+// Hàm xử lí sự kiện click vào nút .btn-favorite
+function favoriteButtonHandler() {
+    $(document).on('click', '.btn-favorite', function (e) {
+        e.stopPropagation();
+        const $btn = $(this);
+        const songId = $btn.data('song-id');
+        if (!songId) return;
+        if(!auth.isLoggedIn()) {
+            Toast.info("Vui lòng đăng nhập để yêu thích bài hát.");
+            return;
+        }
+        let user = auth.getCurrentUser();
+        // Danh sách bài hát đã yêu thích
+        user.favoriteSongs ||= [];
+        const index = user.favoriteSongs.indexOf(songId);
+        if (index === -1) {
+            // ADD TO FAVORITES
+            user.favoriteSongs.push(songId);
+            // Lưu lại user TRƯỚC
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            // Sau đó mới trigger event
+            $(document).trigger('user:favoritedSong', songId);
+            Toast.success(`Đã thêm vào bài hát yêu thích`);
+        } else {
+            // REMOVE FROM FAVORITES
+            user.favoriteSongs.splice(index, 1);
+            // Lưu lại user TRƯỚC
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            // Sau đó mới trigger event
+            $(document).trigger('user:unfavoritedSong', songId);
+            Toast.info(`Đã gỡ bỏ khỏi bài hát yêu thích`);
+        }
+    });
+}

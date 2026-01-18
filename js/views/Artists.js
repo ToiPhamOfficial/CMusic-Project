@@ -42,7 +42,7 @@ export default function Artists() {
                             <div class="page-artists__artist-name">${artist.name}</div>
                             <div class="page-artists__artist-followers">${artist.listeners} người theo dõi</div>
                         </div>
-                        <button class="btn-follow page-artists__follow-btn" data-artist-id="${artist?.id || ''}">${getFollowText(artist?.id)}</button>
+                        <button class="btn-follow page-artists__btn-follow" data-artist-id="${artist?.id || ''}">${getFollowText(artist?.id)}</button>
                     </div>
 
                     <div class="page-artists__track-song">
@@ -60,7 +60,9 @@ export default function Artists() {
 
                     <div class="page-artists__track-actions">
                         <span class="page-artists__duration">${song.duration}</span>
-                        <span class="material-icons-round page-artists__icon page-artists__icon--heart">favorite</span>
+                        <button class="btn page-artists__btn-favorite btn-favorite ${isFavorited(song.id) ? 'active' : ''}" title="Thêm vào yêu thích" data-song-id="${song.id}">
+                            <span class="material-icons-round page-artists__icon page-artists__icon--heart">favorite</span>
+                        </button>
                         <div class="page-artists__dropdown-wrapper">
                             <span class="material-icons-round page-artists__icon page-artists__icon--more js-dropdown-trigger">more_horiz</span>
                             <div class="page-artists__dropdown">
@@ -100,7 +102,7 @@ function getFollowText(artistId) {
 
     user.followedArtists ||= [];
     return user.followedArtists.includes(artistId)
-        ? 'Đã theo dõi'
+        ? 'Hủy theo dõi'
         : 'Theo dõi';
 }
 
@@ -169,30 +171,23 @@ function handleArtistsDropdownAction(action, songId) {
 
 // Khởi tạo các sự kiện cho trang Artists
 export function initArtistsPageEvents() {
-    // FOLLOW / UNFOLLOW (theo artistId)
-    $(document).on('click', '.btn-follow', function () {
-        const $btn = $(this);
-        const artistId = $btn.data('artist-id');
-        if (!artistId) return;
-        let user = JSON.parse(localStorage.getItem('currentUser'));
-        if (!user) {
-            alert('Vui lòng đăng nhập');
-            return;
-        }
-        // Danh sách artist đã theo dõi
-        user.followedArtists ||= [];
-        const index = user.followedArtists.indexOf(artistId);
-        if (index === -1) {
-            // FOLLOW
-            user.followedArtists.push(artistId);
-            $btn.text('Đã theo dõi');
-        } else {
-            // UNFOLLOW
-            user.followedArtists.splice(index, 1);
-            $btn.text('Theo dõi');
-        }
-        // Lưu lại user
-        localStorage.setItem('currentUser', JSON.stringify(user));
+    $(document).on('user:followedArtist', function(e, artistId) {
+        // Re-render lại nút theo dõi
+        $(`.page-artists__btn-follow[data-artist-id="${artistId}"]`).text('Hủy theo dõi');
+    });
+
+    $(document).on('user:unfollowedArtist', function(e, artistId) {
+        // Re-render lại nút theo dõi
+        $(`.page-artists__btn-follow[data-artist-id="${artistId}"]`).text('Theo dõi');
+    });
+    
+    // Lắng nghe sự kiện favorite/unfavorite
+    $(document).on('user:favoritedSong', function(e, songId) {
+        $(`.page-artists__btn-favorite[data-song-id="${songId}"]`).addClass('active');
+    });
+
+    $(document).on('user:unfavoritedSong', function(e, songId) {
+        $(`.page-artists__btn-favorite[data-song-id="${songId}"]`).removeClass('active');
     });
 
     // Xử lý click nút Xem thêm / Thu gọn

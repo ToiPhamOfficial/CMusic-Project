@@ -1,8 +1,7 @@
 import { songs } from '../data.js';
 import audioManager from '../services/audioManager.js';
-import Toast from './Toast.js';
 import Dropdown, { toggleDropdown } from './Dropdown.js';
-import { formatTime } from '../utils/utils.js';
+import { formatTime, isFavorited } from '../utils/utils.js';
 
 export default function Player() {
     return `
@@ -51,8 +50,8 @@ export default function Player() {
         </div>
         
         <div class="player__right">
-            <button class="player__btn-control" title="Favorite">
-                <span class="material-icons-round">favorite_border</span>
+            <button class="player__btn-control btn-favorite" title="Favorite">
+                <span class="material-icons-round">favorite</span>
             </button>
             <button class="player__btn-control player__btn-control--queue" title="Queue">
                 <span class="material-icons-round">queue_music</span>
@@ -64,6 +63,9 @@ export default function Player() {
                 
                 <!-- More Dropdown Menu -->
                 ${Dropdown([
+                        [
+                            { action: 'add-to-favorite', icon: 'favorite', text: 'Thêm vào yêu thích' },
+                        ],
                         [
                             { action: 'download', icon: 'download', text: 'Tải về' },
                             { action: 'add-to-playlist', icon: 'playlist_add', text: 'Thêm vào playlist' },
@@ -100,153 +102,26 @@ export default function Player() {
     `;
 }
 
-// --- Main Render Function (Optimized) ---
-function renderQueue() {
-    // Destructuring an toàn với giá trị mặc định
-    const { playlist = [], currentSong } = audioManager;
-    const $queueList = $('.player__queue-list');
-
-    // 1. Xử lý trường hợp danh sách trống
-    if (playlist.length === 0) {
-        $queueList.html(EMPTY_QUEUE_HTML);
-        return;
-    }
-
-    // 2. Cache ID bài hát hiện tại để so sánh nhanh hơn trong vòng lặp
-    const currentSongId = currentSong?.id;
-
-    // 3. Sử dụng map() thay vì forEach để nối chuỗi hiệu quả hơn
-    const queueHTML = playlist.map(song => {
-        const isActive = currentSongId === song.id ? 'active' : '';
-        // Thêm loading="lazy" để tối ưu tải ảnh
-        return `
-            <div class="player__queue-item ${isActive}" data-song-id="${song.id}">
-                <div class="player__queue-item-thumbnail">
-                    <img src="${song.image}" alt="${song.title}" loading="lazy">
-                    <div class="play-indicator">
-                        <span class="material-icons-round">equalizer</span>
-                    </div>
-                </div>
-                <div class="player__queue-item-info">
-                    <div class="player__queue-item-title">${song.title}</div>
-                    <div class="player__queue-item-artist">${song.artist}</div>
-                </div>
-                <div class="player__queue-item-actions">
-                    <button class="player__queue-item-btn" title="Thêm vào yêu thích">
-                        <span class="material-icons-round">favorite_border</span>
-                    </button>
-                    <button class="player__queue-item-btn" title="Thêm tùy chọn">
-                        <span class="material-icons-round">more_horiz</span>
-                    </button>
-                </div>
-            </div>
-        `;
-    }).join('');
-
-    $queueList.html(queueHTML);
-}
-
-export function tmp() {
-    // Play/Pause button
-    $(document).on('click', '.player__controls .btn-play, .player__controls .play, .suggestion-item div button, .btn-play', function (e) {
-        e.stopPropagation(); // Ngăn chặn sự kiện nổi bọt
-        $(this).find('span').text(function (i, text) {
-            return text === 'play_arrow' ? 'pause' : 'play_arrow';
-        });
-        audioManager.togglePlay();
+export function initPlayerEvents() {
+    // Lắng nghe sự kiện favorite/unfavorite để cập nhật icon trong player
+    $(document).on('user:favoritedSong', function(e, songId) {
+        const $btn = $('.player__right .btn-favorite');
+        if ($btn.data('song-id') === songId) {
+            $btn.addClass('active');
+        }
     });
 
-    // Previous button
-    $(document).on('click', '.player__controls .btn-control[title="Previous"]', function () {
-        audioManager.prev();
-    });
-
-    // Next button
-    $(document).on('click', '.player__controls .btn-control[title="Next"]', function () {
-        audioManager.next();
-    });
-
-    // Repeat button
-    $(document).on('click', '.player__controls .btn-control[title="Repeat"]', function () {
-        audioManager.toggleRepeat();
-    });
-
-    // Shuffle button
-    $(document).on('click', '.player__controls .btn-control[title="Shuffle"]', function () {
-        audioManager.toggleShuffle();
-    });
-
-    // Progress slider
-    $(document).on('input', '.progress-slider', function () {
-        const percentage = $(this).val();
-        audioManager.seek(percentage);
-    });
-
-    // Favorite button
-    $(document).on('click', '.player__right .btn-control[title="Favorite"]', function () {
-        $(this).find('span').text(function (i, text) {
-            return text === 'favorite' ? 'favorite_border' : 'favorite';
-        });
-        $(this).toggleClass('favorited');
-    });
-
-    // Player More Dropdown Toggle
-    $(document).on('click', '.btn-more', function (e) {
-        e.stopPropagation();
-        toggleDropdown($(this));
+    $(document).on('user:unfavoritedSong', function(e, songId) {
+        const $btn = $('.player__right .btn-favorite');
+        if ($btn.data('song-id') === songId) {
+            $btn.removeClass('active');
+        }
     });
     
-    // For mobile - expand player
-    $(document).on('click', '.player', function (e) {
-        // Không expand nếu click vào button hoặc controls
-        if ($(e.target).closest('.player__btn-control, .player__btn-collapse, .player__progress-slider, .player__queue-panel, .player__more-wrapper').length) {
-            return;
-        }
-
-        // Chỉ expand trên mobile
-        if (window.innerWidth <= 576) {
-            $(this).addClass('is-expanded');
-        }
-    });
-
-    // Collapse player button
-    $(document).on('click', '.btn-collapse-player', function (e) {
-        // e.stopPropagation();
-        $('.player').removeClass('is-expanded');
-    });
-
-    // Queue Panel Toggle
-    $(document).on('click', '.player__btn-queue', function (e) {
-        e.stopPropagation();
-        $('.player__queue-panel').addClass('active');
-        $('.player__queue-overlay').addClass('active');
-        renderQueue();
-    });
-
-    // Close Queue Panel
-    $(document).on('click', '.btn-close-queue, .player__queue-overlay', function () {
-        $('.player__queue-panel').removeClass('active');
-        $('.player__queue-overlay').removeClass('active');
-    });
-
-    // Queue Item Click - Play song from queue
-    $(document).on('click', '.player__queue-item', function () {
-        const songId = parseInt($(this).data('song-id'));
-        if (songId) {
-            const song = songs.find(s => s.id === songId);
-            if (song) {
-                audioManager.playSong(song, audioManager.playlist);
-                renderQueue(); // Re-render to update active state
-            }
-        }
-    });
-}
-
-export function initPlayerEvents() {
     // Các sự kiện xứ lý UI của Player
     $(document).on('click', '.player', function (e) {
         // Không expand nếu click vào button hoặc controls
-        if ($(e.target).closest('.player__btn-control, .player__btn-collapse, .player__progress-slider, .player__queue-panel, .player__more-wrapper').length) {
+        if ($(e.target).closest('.player__btn-control, .player__btn-collapse,.player__progress-slider, .player__queue-panel, .player__more-wrapper').length) {
             return;
         }
 
@@ -262,28 +137,59 @@ export function initPlayerEvents() {
         $('.player').removeClass('is-expanded');
     });
 
+    // Toggle Queue Panel
+    $(document).on('click', '.player__btn-control--queue', function (e) {
+        e.stopPropagation();
+        $('.player__queue-panel').addClass('active');
+        $('.player__queue-overlay').addClass('active');
+        renderQueue();
+    });
+
+    // Close Queue Panel
+    $(document).on('click', '.player__btn-close-queue, .player__queue-overlay', function () {
+        $('.player__queue-panel').removeClass('active');
+        $('.player__queue-overlay').removeClass('active');
+    });
+
+    // Queue Item Click - Play song from queue
+    $(document).on('click', '.player__queue-item', function () {
+        const songId = parseInt($(this).data('song-id'));
+        if (songId) {
+            const song = songs.find(s => s.id === songId);
+            if (song) {
+                audioManager.playSong(song, audioManager.playlist);
+                renderQueue(); // Re-render to update active state
+            }
+        }
+    });
+
     // Push sự kiện phát nhạc đến audioManager
     // Next/Previous button
-    $(document).on('click', '.player__controls .player__btn-control[title="Previous"]', function () {
+    $(document).on('click', '.player__btn-control[title="Previous"]', function () {
         audioManager.prev();
     });
 
-    $(document).on('click', '.player__controls .player__btn-control[title="Next"]', function () {
+    $(document).on('click', '.player__btn-control[title="Next"]', function () {
         audioManager.next();
     });
 
     // Repeat button
-    $(document).on('click', '.player__controls .player__btn-control[title="Repeat"]', function () {
+    $(document).on('click', '.player__btn-control[title="Repeat"]', function () {
         audioManager.toggleRepeat();
         $(this).toggleClass('active', audioManager.isRepeat);
     });
 
     // Shuffle button
-    $(document).on('click', '.player__controls .player__btn-control[title="Shuffle"]', function () {
+    $(document).on('click', '.player__btn-control[title="Shuffle"]', function () {
         audioManager.toggleShuffle();
         $(this).toggleClass('active', audioManager.isShuffle);
     });
 
+    // Player More Dropdown Toggle
+    $(document).on('click', '.player__btn-control--more', function (e) {
+        e.stopPropagation();
+        toggleDropdown($(this));
+    });
 
     // Nhận sự kiện từ audioManager để cập nhật UI
     document.addEventListener('audio:change', (e) => {
@@ -314,6 +220,11 @@ export function initPlayerEvents() {
                 .attr('data-song-id', song.id)
                 .removeAttr('data-album-id data-playlist-id data-context-type');
         }
+        
+        // Cập nhật data-song-id và trạng thái favorite của nút favorite
+        const $favoriteBtn = $('.player__right .btn-favorite');
+        $favoriteBtn.attr('data-song-id', song.id);
+        $favoriteBtn.toggleClass('active', isFavorited(song.id));
     });
 
     document.addEventListener('audio:state-change', (e) => {
@@ -400,4 +311,49 @@ function updateProgressFromEvent(e, $slider) {
     $('.player__progress-thumb').css('left', percentage + '%');
     
     audioManager.seek(percentage);
+}
+
+function renderQueue() {
+    // Destructuring an toàn với giá trị mặc định
+    const { originalPlaylist = [], currentSong } = audioManager;
+    const $queueList = $('.player__queue-list');
+
+    // Xử lý trường hợp danh sách trống
+    if (originalPlaylist.length === 0) {
+        $queueList.html('<p class="player__queue-empty">Danh sách phát trống</p>');
+        return;
+    }
+
+    const currentSongId = currentSong?.id;
+
+    const queueHTML = originalPlaylist.map(song => {
+        const isActive =  currentSongId === song.id ? 'active' : '';
+        
+        return `
+            <div class="player__queue-item ${isActive}" data-song-id="${song.id}">
+                <div class="player__queue-item-thumbnail">
+                    <img src="${song.image}" alt="${song.title}" loading="lazy">
+                    <div class="play-indicator">
+                        <span class="material-icons-round">equalizer</span>
+                    </div>
+                </div>
+                <div class="player__queue-item-info">
+                    <div class="player__queue-item-title">${song.title}</div>
+                    <div class="player__queue-item-artist">${song.artist}</div>
+                </div>
+                <div class="player__queue-item-actions">
+                    <button class="player__queue-item-btn btn-favorite ${isFavorited(song.id) ? 'active' : ''}" title="Thêm vào yêu thích" data-song-id="${song.id}">
+                        <span class="material-icons-round">favorite</span>
+                    </button>
+                    <div class="btn-more-wrapper">
+                        <button class="player__queue-item-btn btn-more" title="Thêm tùy chọn">
+                            <span class="material-icons-round">more_horiz</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    $queueList.html(queueHTML);
 }

@@ -39,6 +39,12 @@
    Profile - DetailArtist
    ========================================== */
 
+   /* General for all pages */
+.btn-favorite:hover,
+.btn-favorite.active span {
+    color: var(--accent-color) !important;
+}
+
 /* --- 1. Header Profile --- */
 .profile-hero {
     position: relative;
@@ -514,10 +520,6 @@ hr.border-secondary {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-}
-
-.see-more:hover {
-    text-decoration: underline;
 }
 
 /* Responsive Mobile */

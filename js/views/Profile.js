@@ -110,7 +110,7 @@ export default function Profile() {
                         <div class="album-info">
                             <h3 class="album-title">${album.title}</h3>
                             <p class="album-artist">${album.artist}</p>
-                            <p class="album-meta">${album.year} • ${album.songs} bài hát</p>
+                            <p class="album-meta">${album.year} • ${album.songIds.length} bài hát</p>
                         </div>
                     </div>
                 `).join('')}
