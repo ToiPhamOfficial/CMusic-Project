@@ -3,6 +3,15 @@ export function validateEmail(email) {
     return re.test(email);
 }
 
+// Helper function để format thời gian
+export function formatTime(seconds) {
+    if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+    
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
 export function initToggleMore(containerSelector = '.song-item__song-list', itemSelector = '.song-item-wrapper', initialCount = 5) {
     const seeMoreBtn = document.querySelector('.see-more');
     

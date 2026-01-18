@@ -50,10 +50,10 @@ export default function PlaylistDetail() {
                         ? listSongs.map((song, index) => {
                             const isHidden = hasMore && index >= initialDisplayCount;
                             return `<div class="song-item-wrapper ${isHidden ? 'hidden' : ''}">
-                                ${SongItem(song, index + 1)}
+                                ${SongItem(song, index + 1, id, 'playlist')}
                             </div>`;
                         }).join('')
-                        : '<div class="song-item__empty">Chưa có bài hát nào</div>'
+                        : '<p>Không có bài hát nào</p>'
                     }
                 </div>
 

@@ -154,21 +154,23 @@ export default function Header() {
                         </div>
                     </div>
 
-                    <div class="settings-section">
-                        <h4>Tài khoản</h4>
-                        <div class="setting-item clickable">
-                            <span class="setting-label">Thông tin cá nhân</span>
-                            <span class="material-icons-round">chevron_right</span>
-                        </div>
-                        <div class="setting-item clickable">
-                            <span class="setting-label">Đổi mật khẩu</span>
-                            <span class="material-icons-round">chevron_right</span>
-                        </div>
-                        <div class="setting-item clickable logout-btn">
-                            <span class="setting-label" style="color: #ff4757;">Đăng xuất</span>
-                            <span class="material-icons-round" style="color: #ff4757;">logout</span>
-                        </div>
-                    </div>
+                    ${isLoggedIn ? `
+                        <div class="settings-section">
+                            <h4>Tài khoản</h4>
+                            <div class="setting-item clickable">
+                                <span class="setting-label">Thông tin cá nhân</span>
+                                <span class="material-icons-round">chevron_right</span>
+                            </div>
+                            <div class="setting-item clickable">
+                                <span class="setting-label">Đổi mật khẩu</span>
+                                <span class="material-icons-round">chevron_right</span>
+                            </div>
+                            <div class="setting-item clickable logout-btn">
+                                <span class="setting-label" style="color: #ff4757;">Đăng xuất</span>
+                                <span class="material-icons-round" style="color: #ff4757;">logout</span>
+                            </div>
+                        </div>` : ``
+                    }
                 </div>
             </div>
             <div class="settings-overlay"></div>
@@ -294,7 +296,6 @@ function initNotificationsAndSettings() {
             auth.logout();
             $('.settings-panel').removeClass('active');
             $('.settings-overlay').removeClass('active');
-            $('.header').html(Header());
             window.navigateTo('/');
         }
     });

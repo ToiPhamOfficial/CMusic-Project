@@ -174,8 +174,6 @@ export function initLoginSignupEvents() {
             if (loginResult.success) {
                 // Đóng modal
                 $modal.removeClass('is-shown');
-                // Dispatch event để thông báo đã đăng nhập thành công
-                $(document).trigger('user:authChanged');
                 // Reset form
                 $(this)[0].reset();
             }
@@ -192,8 +190,6 @@ export function initLoginSignupEvents() {
             if (signupResult.success) {
                 // Đóng modal
                 $modal.removeClass('is-shown');
-                // Dispatch event để thông báo đã đăng ký thành công
-                $(document).trigger('user:authChanged');
                 // Reset form
                 $(this)[0].reset();
             }

@@ -7,7 +7,8 @@ export const banner = [
         title: "Mất Kết Nối",
         artist: "Dương Domic",
         views: "15Tr lượt nghe",
-        image: "/data/hit-songs-bg/hit1.png"
+        image: "/data/hit-songs-bg/hit1.png",
+        songId: 5
     },
     {
         id: 2,
@@ -15,7 +16,8 @@ export const banner = [
         title: "Die With A Smile",
         artist: "Lady Gaga, Bruno Mars",
         views: "120Tr lượt nghe",
-        image: "https://images.unsplash.com/photo-1494526585095-c41746248156"
+        image: "https://images.unsplash.com/photo-1494526585095-c41746248156",
+        songId: 2
     },
     {
         id: 3,
@@ -23,7 +25,8 @@ export const banner = [
         title: "Kamin",
         artist: "Emran, HANN",
         views: "85Tr lượt nghe",
-        image: "https://images.unsplash.com/photo-1500534623283-312aade485b7"
+        image: "https://images.unsplash.com/photo-1500534623283-312aade485b7",
+        songId: 1
     },
     {
         id: 4,
@@ -31,14 +34,15 @@ export const banner = [
         title: "Faded",
         artist: "Alan Walker",
         views: "95Tr lượt nghe",
-        image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5"
+        image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5",
+        songId: 4
     }
 ];
 
 export const users = [
     {
         id: 1,
-        name: "Demo",
+        name: "Demo User",
         password: "demo123@",
         email: "demo@example.com",
         avatar: "/assets/img/default-avatar.png",
@@ -77,7 +81,7 @@ export const songs = [
         duration: "3:05",
         image: "/data/songs/thumb/Kamin%20-%20Emin%20ft.%20JONY.png",
         plays: "150M",
-        genre: "Pop",
+        genreId: 7,
         audioUrl: "/data/songs/mp3/Kamin%20-%20Emin%20ft.%20JONY.mp3"
     },
     {
@@ -87,7 +91,7 @@ export const songs = [
         duration: "4:11",
         image: "/data/songs/thumb/Die%20With%20A%20Smile%20-%20Lady%20Gaga,%20Bruno%20Mars.png",
         plays: "320M",
-        genre: "Pop",
+        genreId: 9,
         audioUrl: "/data/songs/mp3/Die%20With%20A%20Smile%20-%20Lady%20Gaga,%20Bruno%20Mars.mp3"
     },
     {
@@ -97,7 +101,7 @@ export const songs = [
         duration: "5:26",
         image: "/data/songs/thumb/Đừng%20Làm%20Trái%20Tim%20Anh%20Đau%20-%20Sơn%20Tùng%20MTP.png",
         plays: "162M",
-        genre: "V-Pop",
+        genreId: 7,
         audioUrl: "/data/songs/mp3/Đừng%20Làm%20Trái%20Tim%20Anh%20Đau%20-%20Sơn%20Tùng%20MTP.mp3"
     },
     {
@@ -107,7 +111,7 @@ export const songs = [
         duration: "3:33",
         image: "/data/songs/thumb/Faded%20-%20Alan%20Walker.png",
         plays: "970M",
-        genre: "EDM",
+        genreId: 10,
         audioUrl: "/data/songs/mp3/Faded%20-%20Alan%20Walker.mp3"
     },
     {
@@ -117,7 +121,7 @@ export const songs = [
         duration: "3:28",
         image: "/data/songs/thumb/Mất%20Kết%20Nối%20-%20Dương%20Domic.png",
         plays: "89M",
-        genre: "V-Pop",
+        genreId: 7,
         audioUrl: "/data/songs/mp3/Mất%20Kết%20Nối%20-%20Dương%20Domic.mp3"
     },
     {
@@ -127,7 +131,7 @@ export const songs = [
         duration: "2:53",
         image: "/data/songs/thumb/Sea%20Of%20Feelings%20-%20Lowx.png",
         plays: "45M",
-        genre: "Lofi",
+        genreId: 8,
         audioUrl: "/data/songs/mp3/Sea%20Of%20Feelings%20-%20Lowx.mp3"
     },
     {
@@ -137,7 +141,7 @@ export const songs = [
         duration: "3:15",
         image: "/data/songs/thumb/Sau%20Tất%20Cả%20-%20ERIK.png",
         plays: "250M",
-        genre: "V-Pop",
+        genreId: 7,
         audioUrl: "/data/songs/mp3/Sau%20Tất%20Cả%20-%20ERIK.mp3"
     },
     {
@@ -147,7 +151,7 @@ export const songs = [
         duration: "3:45",
         image: "/data/songs/thumb/Yêu%20Đơn%20Phương%20-%20Min.png",
         plays: "300M",
-        genre: "V-Pop",
+        genreId: 7,
         audioUrl: "/data/songs/mp3/Yêu%20Đơn%20Phương%20-%20Min.mp3"
     },
     {
@@ -157,7 +161,7 @@ export const songs = [
         duration: "4:00",
         image: "/data/songs/thumb/Bài%20Này%20Chill%20Phết%20-%20Đen%20Vâu,%20Min.png",
         plays: "400M",
-        genre: "Hip Hop",
+        genreId: 8,
         audioUrl: "/data/songs/mp3/Bài%20Này%20Chill%20Phết%20-%20Đen%20Vâu,%20Min.mp3"
     },
     {
@@ -167,7 +171,7 @@ export const songs = [
         duration: "3:50",
         image: "/data/songs/thumb/Phía%20Sau%20Một%20Cô%20Gái%20-%20Soobin%20Hoàng%20Sơn.png",
         plays: "220M",
-        genre: "V-Pop",
+        genreId: 7,
         audioUrl: "/data/songs/mp3/Phía%20Sau%20Một%20Cô%20Gái%20-%20Soobin%20Hoàng%20Sơn.mp3"
     }
 ];
@@ -179,7 +183,7 @@ export const artists = [
         image: "/data/artists/son-tung-mtp.webp",
         listeners: "134M",
         followers: 1250400,
-        genre: "V-Pop",
+        genreId: 7,
         songIds: [1, 2, 3, 4, 5, 6, 7],
         topSongId: 3,
         biography: "Sơn Tùng M-TP (tên thật Nguyễn Thanh Tùng, sinh năm 1994) là một ca sĩ, nhạc sĩ và nhà sản xuất âm nhạc hàng đầu của V-Pop. Với phong cách âm nhạc đa dạng từ Pop, R&B đến EDM, Sơn Tùng nhanh chóng chiếm được cảm tình của giới trẻ Việt Nam. Anh nổi tiếng với những bản hit như 'Lạc Trôi', 'Chạy Ngay Đi', và 'Hãy Trao Cho Anh', đồng thời sở hữu lượng fan hâm mộ đông đảo và trung thành."
@@ -190,7 +194,7 @@ export const artists = [
         image: "/data/artists/soobin-hoang-son.webp",
         listeners: "80M",
         followers: 995040,
-        genre: "V-Pop",
+        genreId: 7,
         songIds: [10],
         topSongId: 10,
         biography: "Soobin Hoàng Sơn (tên thật Nguyễn Hoàng Sơn, sinh năm 1992) là một ca sĩ và nhạc sĩ nổi tiếng của V-Pop. Anh bắt đầu sự nghiệp âm nhạc từ cuộc thi The Voice Việt Nam và nhanh chóng ghi dấu ấn với giọng hát nội lực cùng phong cách trình diễn cuốn hút. Soobin nổi bật với các bản hit như 'Phía Sau Một Cô Gái', 'Đi Đu Đưa Đi', và 'Đã Lỡ Yêu Em Nhiều'."
@@ -201,7 +205,7 @@ export const artists = [
         image: "/data/artists/duong-domic.webp",
         listeners: "45M",
         followers: 835040,
-        genre: "V-Pop",
+        genreId: 7,
         songIds: [5],
         topSongId: 5,
         biography: "Dương Domic (tên thật Trần Đăng Dương, sinh năm 2000) là một nghệ sĩ Gen Z đa tài của V-Pop. Từng là thực tập sinh của công ty giải trí Hàn Quốc IF Entertainment, anh sở hữu ngoại hình điển trai, khả năng vũ đạo điêu luyện, sáng tác tốt và chơi nhạc cụ thành thạo. Tên tuổi của anh vụt sáng sau chương trình 'Anh Trai Say Hi', thu hút lượng lớn người hâm mộ trẻ."
@@ -214,7 +218,7 @@ export const artists = [
         followers: 74400,
         songIds: [9],
         topSongId: 9,
-        genre: "Hip Hop",
+        genreId: 8,
         biography: "Đen Vâu (tên thật Nguyễn Đức Cường, sinh năm 1989) là một Rapper và nhạc sĩ nổi tiếng người Việt Nam. Xuất thân từ một công nhân vệ sinh bãi biển, âm nhạc của Đen mang đậm chất đời, mộc mạc, triết lý nhưng vô cùng gần gũi và chữa lành. Anh là chủ nhân của hàng loạt bản hit 'Top 1 Trending' như 'Đưa nhau đi trốn', 'Lối nhỏ', 'Mang tiền về cho mẹ', được mệnh danh là 'Nhà thơ của Rap Việt'."
     },
     {
@@ -225,7 +229,7 @@ export const artists = [
         followers: 635040,
         songIds: [8],
         topSongId: 8,
-        genre: "V-Pop",
+        genreId: 7,
         biography: "MIN (tên thật Nguyễn Minh Hằng, sinh năm 1988) xuất thân là thành viên nhóm nhảy St.319 trước khi trở thành ca sĩ chuyên nghiệp. Cô được đánh giá là một trong những nghệ sĩ có tư duy hình ảnh và âm nhạc hiện đại nhất V-Pop. Với giọng hát ngọt ngào và phong cách thời thượng, MIN sở hữu bộ sưu tập hit đồ sộ như 'Yêu', 'Có Em Chờ', 'Em Mới Là Người Yêu Anh'."
     },
     {
@@ -236,7 +240,7 @@ export const artists = [
         followers: 540400,
         songIds: [7],
         topSongId: 7,
-        genre: "V-Pop",
+        genreId: 7,
         biography: "ERIK (tên thật Lê Trung Thành, sinh năm 1997) là một nam ca sĩ sở hữu chất giọng mũi đặc trưng đầy nội lực. Nổi lên từ bản hit quốc dân 'Sau Tất Cả', ERIK nhanh chóng khẳng định vị thế 'Hoàng tử Ballad' của V-Pop. Anh là cựu thành viên nhóm nhạc Monstar và là một mảnh ghép của gia đình 'Hoa Dâm Bụt'. Các ca khúc của ERIK luôn được đầu tư chỉn chu và dễ dàng chạm đến cảm xúc khán giả."
     }
 ];
@@ -420,7 +424,7 @@ export const albums = [
         year: 2018,
         songs: 15,
         image: "/data/albums/different-world-alan-walker.webp",
-        songIds: []
+        songIds: [4, 6]
     },
     {
         id: 3,
@@ -438,7 +442,7 @@ export const albums = [
         year: 2021,
         songs: 20,
         image: "/data/albums/lofi-beats.webp",
-        songIds: []
+        songIds: [4, 6]
     },
     {
         id: 5,
@@ -465,7 +469,7 @@ export const albums = [
         year: 2023,
         songs: 16,
         image: "/data/albums/hip-hop-anthems.webp",
-        songIds: []
+        songIds: [5, 2, 4, 1]
     }
 ];
 
@@ -476,7 +480,8 @@ export const internationalAlbums = [
         artist: "James Bay",
         year: 2018,
         songs: 12,
-        image: "/data/albums/international-albums/behind-the-light-james-bay.webp"
+        image: "/data/albums/international-albums/behind-the-light-james-bay.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     },
     {
         id: 2,
@@ -484,7 +489,8 @@ export const internationalAlbums = [
         artist: "Dua Lipa",
         year: 2020,
         songs: 11,
-        image: "/data/albums/international-albums/future-nostalgia-dua-lipa.webp"
+        image: "/data/albums/international-albums/future-nostalgia-dua-lipa.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     },
     {
         id: 3,
@@ -492,7 +498,8 @@ export const internationalAlbums = [
         artist: "Ed Sheeran",
         year: 2017,
         songs: 16,
-        image: "/data/albums/international-albums/divide-ed-sheeran.webp"
+        image: "/data/albums/international-albums/divide-ed-sheeran.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     },
     {
         id: 4,
@@ -500,7 +507,8 @@ export const internationalAlbums = [
         artist: "Taylor Swift",
         year: 2019,
         songs: 18,
-        image: "/data/albums/international-albums/lover-taylor-swift.webp"
+        image: "/data/albums/international-albums/lover-taylor-swift.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     },
     {
         id: 5,
@@ -508,7 +516,8 @@ export const internationalAlbums = [
         artist: "The Weeknd",
         year: 2016,
         songs: 18,
-        image: "/data/albums/international-albums/starboy-the-weeknd.webp"
+        image: "/data/albums/international-albums/starboy-the-weeknd.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     },
     {
         id: 6,
@@ -516,7 +525,8 @@ export const internationalAlbums = [
         artist: "Justin Bieber",
         year: 2015,
         songs: 13,
-        image: "/data/albums/international-albums/purpose-justin-bieber.webp"
+        image: "/data/albums/international-albums/purpose-justin-bieber.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
     {
         id: 7,
@@ -524,7 +534,8 @@ export const internationalAlbums = [
         artist: "Drake",
         year: 2018,
         songs: 25,
-        image: "/data/albums/international-albums/scorpion-drake.webp"
+        image: "/data/albums/international-albums/scorpion-drake.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
     },
     {
         id: 8,
@@ -532,7 +543,8 @@ export const internationalAlbums = [
         artist: "Harry Styles",
         year: 2019,
         songs: 12,
-        image: "/data/albums/international-albums/fine-line-harry-styles.webp"
+        image: "/data/albums/international-albums/fine-line-harry-styles.webp",
+        songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     }
 ];
 
@@ -545,7 +557,7 @@ export function getArtistById(id) {
     return artists.find(artist => artist.id === id);
 }
 
-export function getPlaylistById(id, type = 'systemPlaylists') {
+export function getPlaylistById(id, type = null) {
     if( type === 'userPlaylists') {
         return myPlaylists.find(playlist => playlist.id === id);
     }
@@ -578,4 +590,13 @@ export function searchSongs(query) {
         song.title.toLowerCase().includes(lowerQuery) ||
         song.artist.toLowerCase().includes(lowerQuery)
     );
+}
+
+// Hàm tạo playlist gợi ý theo thể loại
+export function getRecommendationsByGenre(genreId) {
+    // random lấy tối đa 20 bài hát cùng thể loại
+    const filteredSongs = songs.filter(song => song.genreId === genreId);
+    const shuffled = filteredSongs.sort(() => 0.5 - Math.random());
+    const recommendedSongs = shuffled.length > 0 ? shuffled.slice(0, 20) : songs.slice(0, 20);
+    return { songIds: recommendedSongs.map(s => s.id) };
 }

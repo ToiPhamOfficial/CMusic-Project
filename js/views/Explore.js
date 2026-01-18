@@ -19,7 +19,7 @@ export default function Explore() {
                 </div>
             </div>
             <div class="banner-actions">
-                <button class="btn btn-play-zzz btn-play">Phát ngay</button>
+                <button class="btn btn-play-zzz btn-play-music" data-song-id="${banner[0].songId}">Phát ngay</button>
                 <button class="btn btn-fav">
                     <span class="material-icons-round">
                         favorite
@@ -62,7 +62,7 @@ export default function Explore() {
                     <div class="chart-column">
                         <div class="chart-column-header">
                             <h3>Top 50 Bài Hát Thịnh Hành</h3>
-                            <button class="btn-play-chart btn-play">
+                            <button class="btn-play-chart btn-play-music" title="Phát toàn bộ bảng xếp hạng">
                                 <span>Phát</span>
                                 <span class="material-icons-round">play_arrow</span>
                             </button>
@@ -76,7 +76,7 @@ export default function Explore() {
                     <div class="chart-column">
                         <div class="chart-column-header">
                             <h3>Top 50 Nhạc Việt</h3>
-                            <button class="btn-play-chart btn-play">
+                            <button class="btn-play-chart btn-play-music" title="Phát toàn bộ bảng xếp hạng">
                                 <span>Phát</span>
                                 <span class="material-icons-round">play_arrow</span>
                             </button>
@@ -90,7 +90,7 @@ export default function Explore() {
                     <div class="chart-column">
                         <div class="chart-column-header">
                             <h3>Top 50 Nhạc US-UK</h3>
-                            <button class="btn-play-chart btn-play">
+                            <button class="btn-play-chart btn-play-music" title="Phát toàn bộ bảng xếp hạng">
                                 <span>Phát</span>
                                 <span class="material-icons-round">play_arrow</span>
                             </button>
