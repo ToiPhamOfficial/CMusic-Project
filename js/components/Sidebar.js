@@ -140,4 +140,17 @@ export function initSidebarToggle() {
         $('.sidebar').removeClass('is-active');
         $(this).removeClass('is-open');
     });
+
+    // THÊM ĐOẠN NÀY:
+    // Lắng nghe sự kiện khi có playlist mới được tạo
+    document.addEventListener('playlist:updated', () => {
+        console.log('Phát hiện thay đổi playlist, đang render lại Sidebar...');
+        
+        // Gọi lại hàm render Sidebar
+        // Lưu ý: Bạn cần chọn đúng class cha chứa sidebar để thay thế nội dung
+        $('.sidebar').html(Sidebar()); 
+        
+        // Nếu cần gán lại sự kiện click cho các item trong sidebar
+        // initSidebarEvents(); 
+    });
 }

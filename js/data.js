@@ -324,7 +324,6 @@ export const myPlaylists = [
     {
         id: 1,
         name: "Lofi Chill",
-        songCount: 24,
         icon: "play_circle",
         creator: "SonTung",
         songIds: [1, 3],
@@ -333,7 +332,6 @@ export const myPlaylists = [
     {
         id: 2,
         name: "Hot Phonk",
-        songCount: 18,
         icon: "play_circle",
         creator: "Jack",
         songIds: [2, 3],
@@ -345,7 +343,6 @@ export const playlists = [
     {
         id: 1,
         name: "Lofi Chill Beats",
-        songCount: 20,
         icon: "play_circle",
         creator: "Various Artists",
         songIds: [2, 5, 4, 6],
@@ -354,17 +351,15 @@ export const playlists = [
     {
         id: 2,
         name: "Study Lofi",
-        songCount: 18,
         icon: "play_circle",
         creator: "Various Artists",
-        songIds: [1, 3, 7, 8],
+        songIds: [],
         image: "/data/playlists/study-lofi.webp"
     },
     {
         id: 3,
         name: "Lofi Vibes",
         creator: "Various Artists",
-        songCount: 22,
         icon: "play_circle",
         songIds: [9, 10, 5, 6],
         image: "/data/playlists/lofi-vibes.webp"
@@ -373,7 +368,6 @@ export const playlists = [
         id: 4,
         name: "Lofi Hip Hop",
         creator: "Various Artists",
-        songCount: 16,
         icon: "play_circle",
         songIds: [5, 2, 4, 1],
         image: "/data/playlists/lofi-hip-hop.webp"
@@ -382,7 +376,6 @@ export const playlists = [
         id: 5,
         name: "Chillhop Essentials",
         creator: "Various Artists",
-        songCount: 15,
         icon: "play_circle",
         songIds: [2, 3, 6, 7],
         image: "/data/playlists/chillhop-essentials.webp"
@@ -391,7 +384,6 @@ export const playlists = [
         id: 6,
         name: "Lofi Dreams",
         creator: "Various Artists",
-        songCount: 19,
         icon: "play_circle",
         songIds: [1, 4, 8, 9],
         image: "/data/playlists/lofi-dreams.webp"
@@ -413,7 +405,6 @@ export const albums = [
         title: "Greatest Hits",
         artist: "Bruno Mars",
         year: 2023,
-        songs: 12,
         image: "/data/albums/greatest-hits-bruno-mars.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8]
     },
@@ -422,7 +413,6 @@ export const albums = [
         title: "Different World",
         artist: "Alan Walker",
         year: 2018,
-        songs: 15,
         image: "/data/albums/different-world-alan-walker.webp",
         songIds: [4, 6]
     },
@@ -431,7 +421,6 @@ export const albums = [
         title: "Sky Tour",
         artist: "Sơn Tùng MTP",
         year: 2022,
-        songs: 10,
         image: "/data/albums/sky-tour-son-tung-mtp.webp",
         songIds: [1, 3]
     },
@@ -440,7 +429,6 @@ export const albums = [
         title: "Lofi Beats",
         artist: "Various Artists",
         year: 2021,
-        songs: 20,
         image: "/data/albums/lofi-beats.webp",
         songIds: [4, 6]
     },
@@ -449,7 +437,6 @@ export const albums = [
         title: "Pop Classics",
         artist: "Various Artists",
         year: 2020,
-        songs: 18,
         image: "/data/albums/pop-classics.webp",
         songIds: [1, 3]
     },
@@ -458,7 +445,6 @@ export const albums = [
         title: "Indie Vibes",
         artist: "Various Artists",
         year: 2019,
-        songs: 22,
         image: "/data/albums/indie-vibes.webp",
         songIds: [1, 3]
     },
@@ -467,7 +453,6 @@ export const albums = [
         title: "Hip Hop Anthems",
         artist: "Various Artists",
         year: 2023,
-        songs: 16,
         image: "/data/albums/hip-hop-anthems.webp",
         songIds: [5, 2, 4, 1]
     }
@@ -479,7 +464,6 @@ export const internationalAlbums = [
         title: "Behind The Light",
         artist: "James Bay",
         year: 2018,
-        songs: 12,
         image: "/data/albums/international-albums/behind-the-light-james-bay.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     },
@@ -488,7 +472,6 @@ export const internationalAlbums = [
         title: "Future Nostalgia",
         artist: "Dua Lipa",
         year: 2020,
-        songs: 11,
         image: "/data/albums/international-albums/future-nostalgia-dua-lipa.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     },
@@ -497,7 +480,6 @@ export const internationalAlbums = [
         title: "Divide",
         artist: "Ed Sheeran",
         year: 2017,
-        songs: 16,
         image: "/data/albums/international-albums/divide-ed-sheeran.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     },
@@ -506,7 +488,6 @@ export const internationalAlbums = [
         title: "Lover",
         artist: "Taylor Swift",
         year: 2019,
-        songs: 18,
         image: "/data/albums/international-albums/lover-taylor-swift.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     },
@@ -515,7 +496,6 @@ export const internationalAlbums = [
         title: "Starboy",
         artist: "The Weeknd",
         year: 2016,
-        songs: 18,
         image: "/data/albums/international-albums/starboy-the-weeknd.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     },
@@ -524,7 +504,6 @@ export const internationalAlbums = [
         title: "Purpose",
         artist: "Justin Bieber",
         year: 2015,
-        songs: 13,
         image: "/data/albums/international-albums/purpose-justin-bieber.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     },
@@ -533,7 +512,6 @@ export const internationalAlbums = [
         title: "Scorpion",
         artist: "Drake",
         year: 2018,
-        songs: 25,
         image: "/data/albums/international-albums/scorpion-drake.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
     },
@@ -542,7 +520,6 @@ export const internationalAlbums = [
         title: "Fine Line",
         artist: "Harry Styles",
         year: 2019,
-        songs: 12,
         image: "/data/albums/international-albums/fine-line-harry-styles.webp",
         songIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     }

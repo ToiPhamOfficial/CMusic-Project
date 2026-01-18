@@ -162,7 +162,7 @@ export function PlaylistCard(playlist) {
             </div>
             <div class="card-info">
                 <h3 class="card-title">${playlist.name}</h3>
-                <p class="card-subtitle">${playlist.songCount} bài hát</p>
+                <p class="card-subtitle">${playlist.songIds.length} bài hát</p>
             </div>
         </div>
     `;

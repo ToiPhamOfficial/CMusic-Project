@@ -29,7 +29,10 @@ export default function ArtistDetail() {
                 <div class="profile-info">
                     <span class="profile-tag">Nghệ sĩ</span>
                     <h1 class="profile-name"><span class="name">${artist.name}</span></h1>
-                    <div class="profile-stats">Follower: <strong>${artist.followers}</strong></div>
+                    <div class="container-follower">
+                        <div class="profile-stats">Follower: <strong>${artist.followers}</strong></div>
+                        <button class="btn-follow page-artists__follow-btn" data-artist-id="${artist.id}">Theo dõi</button>
+                    </div>
                     
                     <button class="btn-play-profile">
                         <span class="material-icons-round">play_arrow</span> Phát tất cả

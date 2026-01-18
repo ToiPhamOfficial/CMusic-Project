@@ -56,7 +56,7 @@ export default function Explore() {
             <section class="section-box charts-section">
                 <div class="section-header">
                     <h2>Bảng xếp hạng</h2>
-                    <a href="/charts" class="view-all">Tất cả</a>
+                    <a href="#" class="view-all" data-route="/charts">Tất cả</a>
                 </div>
                 <div class="charts-wrapper">
                     <!-- Weekly Chart -->

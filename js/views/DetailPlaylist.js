@@ -7,13 +7,28 @@ export default function PlaylistDetail() {
     const id = parseInt(params.get('id'));
     const type = params.get('type');
 
-    const playlist = getPlaylistById(id, type);
+    let playlist = null;
+    // Biến xác định context để truyền vào nút Play và SongItem
+    const contextType = type === 'user_playlist' ? 'user_playlist' : 'playlist';
+
+    // --- 1. SỬA LỖI KEY STORAGE ---
+    if (type === 'user_playlist') {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.playlists) {
+            playlist = currentUser.playlists.find(p => p.id === id);
+        }
+    } 
+    
+    if (!playlist) {
+        playlist = getPlaylistById(id);
+    }
 
     if (!playlist) return `<h1>Playlist không tồn tại</h1>`;
 
-    const listSongs = playlist.songIds.map(songId => {
+    // Lưu ý: User Playlist ban đầu thường có mảng songIds rỗng []
+    const listSongs = (playlist.songIds || []).map(songId => {
         return getSongById(songId);
-    }).filter(song => song !== undefined); // Lọc bỏ trường hợp bài hát bị xóa (undefined)
+    }).filter(song => song !== undefined);
 
     const initialDisplayCount = 15;
     const hasMore = listSongs.length > initialDisplayCount;
@@ -47,12 +62,13 @@ export default function PlaylistDetail() {
                 <div class="song-item__song-list">
                     ${listSongs.length > 0 
                         ? listSongs.map((song, index) => {
-                            const isHidden = hasMore && index >= initialDisplayCount;
+                            const isHidden = hasMore && index >= initialDisplayCount;                  
+                            // SỬA LỖI CONTEXT: Truyền đúng contextType (user_playlist hoặc playlist)
                             return `<div class="song-item-wrapper ${isHidden ? 'hidden' : ''}">
-                                ${SongItem(song, index + 1, id, 'playlist')}
+                                ${SongItem(song, index + 1, id, contextType)}
                             </div>`;
                         }).join('')
-                        : '<p>Không có bài hát nào</p>'
+                        : '<div style="padding: 20px; color: #888;">Chưa có bài hát nào</div>'
                     }
                 </div>
 

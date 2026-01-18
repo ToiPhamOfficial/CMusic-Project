@@ -5,6 +5,11 @@ export default function Playlists() {
     const params = new URLSearchParams(window.location.search);
     const type = params.get('type');
     const id = params.get('id');
+    // 1. Lấy object user ra trước
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')); // Key phải khớp với lúc Login/AddPlaylist
+    
+    // 2. Lấy danh sách playlist từ user đó (nếu chưa login hoặc chưa có playlist thì trả về mảng rỗng)
+    const userPlaylists = (currentUser && currentUser.playlists) ? currentUser.playlists : [];
 
     // Hiển thị playlist của user
     if (type === 'userPlaylists') {
@@ -16,14 +21,15 @@ export default function Playlists() {
             <section class="section-box my-playlists">
                 <div class="section-header">
                     <h2>Playlist</h2>
-                    <button class="btn-create-playlist">
+                    <button class="btn-create-playlist" id="open-playlist-modal">
                         <span class="material-icons-round">add</span>
                         Tạo mới
                     </button>
                 </div>
-                ${myPlaylists.length > 0 ? `
+                
+                ${userPlaylists.length > 0 ? `
                     <div class="playlist-grid">
-                        ${myPlaylists.map(playlist => PlaylistCard(playlist)).join('')}
+                        ${userPlaylists.map(playlist => PlaylistCard(playlist)).join('')}
                     </div>
                 ` : `
                     <div class="empty-state">

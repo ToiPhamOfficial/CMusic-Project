@@ -36,8 +36,9 @@ export default function Profile() {
                 <div class="profile-info">
                     <span class="profile-tag">Hồ sơ</span>
                     <h1 class="profile-name">${currentUser ? '<span class="name">' + currentUser.name + '</span>' : ''}</h1>
-                    <div class="profile-stats">Đang theo dõi <strong>${currentUser.followedArtists?.length || 0}</strong></div>
-                    
+                    <div class="container-follower">
+                        <div class="profile-stats">Đang theo dõi <strong>${currentUser.followedArtists?.length || 0}</strong></div>
+                    </div>
                     <button class="btn-play-profile">
                         <span class="material-icons-round">play_arrow</span> Phát tất cả
                     </button>
@@ -46,7 +47,7 @@ export default function Profile() {
         </section>
 
         <div class="quick-access-grid">
-            <div class="qa-card">
+            <div class="qa-card" data-route="/favorites">
                 <div class="qa-img-box gradient-heart">
                     <span class="material-icons-round">favorite</span>
                 </div>
@@ -56,7 +57,7 @@ export default function Profile() {
                 </div>
             </div>
 
-            <div class="qa-card">
+            <div class="qa-card" data-route="/recently">
                 <div class="qa-img-box gradient-blue">
                     <span class="material-icons-round"> history </span>
                 </div>
