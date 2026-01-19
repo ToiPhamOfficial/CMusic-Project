@@ -38,7 +38,7 @@ export default function SongDetail() {
                 <div class="hero-info">
                     <span class="playlist-subtitle">Bài hát: </span>
                     <h1 class="playlist-title">${song.title}</h1>
-                    <button class="btn-play-all">
+                    <button class="btn-play-all btn-play-music" data-song-id="${song.id}">
                         <span class="material-icons-round">play_arrow</span> Phát
                     </button>
                 </div>

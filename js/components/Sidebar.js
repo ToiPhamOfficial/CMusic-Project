@@ -1,6 +1,8 @@
-import { myPlaylists } from '../data.js';
 import auth from '../services/auth.js';
 
+
+const currentUser = auth.getCurrentUser();
+const myPlaylists = (currentUser && currentUser.playlists) ? currentUser.playlists : [];
 export default function Sidebar() {
     return `
         <!-- Logo -->

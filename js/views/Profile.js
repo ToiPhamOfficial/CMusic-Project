@@ -1,12 +1,5 @@
-// 1. Import dữ liệu từ data.js
-import { myPlaylists, albums } from '../data.js';
-
-// 2. Dữ liệu người dùng (Vì chưa có trong database nên tạm thời khai báo ở đây)
-const userData = {
-    name: "Phạm Sang Tới",
-    avatar: "https://i.pravatar.cc/300?img=12",
-    following: 100
-};
+import { getAlbumById } from '../data.js';
+import { AlbumCard, PlaylistCard } from '../components/Card.js';
 
 // 3. Mảng màu nền cho Playlist
 const gradients = [
@@ -24,6 +17,14 @@ export default function Profile() {
         currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
+    const userPlaylists = (currentUser && currentUser.playlists) ? currentUser.playlists : [];
+    
+    // Lấy danh sách album đã lưu
+    const albumsSavedIds = currentUser?.albumsSaved || [];
+    const albumsSaved = albumsSavedIds
+        .map(id => getAlbumById(id))
+        .filter(album => album !== undefined);
+
     return `      
         <section class="profile-hero">
             <div class="hero-bg-overlay"></div>
@@ -39,7 +40,7 @@ export default function Profile() {
                     <div class="container-follower">
                         <div class="profile-stats">Đang theo dõi <strong>${currentUser.followedArtists?.length || 0}</strong></div>
                     </div>
-                    <button class="btn-play-profile">
+                    <button class="btn-play-profile btn-play-music" data-context-type="user_favorites">
                         <span class="material-icons-round">play_arrow</span> Phát tất cả
                     </button>
                 </div>
@@ -68,54 +69,39 @@ export default function Profile() {
             </div>
         </div>
 
-        <section class="section-box recommended-playlists">
+        <section class="section-box my-playlists">
             <div class="section-header">
-                <h2>Playlist đã tạo (${myPlaylists.length}) </h2>
-                <a href="#" class="view-all">Tất cả</a>
+                <h2>Playlist</h2>
+                <button class="btn-create-playlist" id="open-playlist-modal">
+                    <span class="material-icons-round">add</span>
+                    Tạo mới
+                </button>
             </div>
-            <div class="playlist-grid">
-                ${myPlaylists.map((playlist, index) => {
-                    // Logic chọn màu: Lấy index chia lấy dư cho độ dài mảng màu
-                    // Ví dụ: index 0 -> màu 0, index 1 -> màu 1, index 2 -> quay lại màu 0
-                    const bgStyle = gradients[index % gradients.length];
-
-                    return `
-                    <div class="playlist-card" data-playlist-id="${playlist.id}">
-                        <div class="playlist-cover" style="background: ${bgStyle};">
-                            <span class="material-icons-round">${playlist.icon}</span>
-                        </div>
-                        <div class="playlist-info">
-                            <h3 class="playlist-name">${playlist.name}</h3>
-                            <p class="playlist-count">${playlist.songCount} bài hát</p>
-                        </div>
-                    </div>
-                    `;
-                }).join('')}
-            </div>
+            
+            ${userPlaylists.length > 0 ? `
+                <div class="playlist-grid">
+                    ${userPlaylists.map(playlist => PlaylistCard(playlist, 'user_playlist')).join('')}
+                </div>
+            ` : `
+                <div class="empty-state">
+                    <span class="material-icons-round">queue_music</span>
+                    <p>Bạn chưa có playlist nào</p>
+                    <p class="empty-hint">Tạo playlist đầu tiên của bạn ngay!</p>
+                </div>
+            `}
         </section>
 
-        <section class="section-box albums">
+        <section class="section-box albums-saved">
             <div class="section-header">
-                <h2>Album yêu thích (${albums.length}) </h2>
-                <a href="#" class="view-all">Tất cả</a>
+                <h2>Album đã lưu</h2>
+                <a class="view-all" data-route="/albums-saved">Tất cả</a>
             </div>
             <div class="album-grid">
-                ${albums.map(album => `
-                    <div class="album-card" data-album-id="${album.id}">
-                        <div class="album-cover">
-                            <img src="${album.image}" alt="${album.title}">
-                            <button class="album-play-btn">
-                                <span class="material-icons-round">play_arrow</span>
-                            </button>
-                        </div>
-                        <div class="album-info">
-                            <h3 class="album-title">${album.title}</h3>
-                            <p class="album-artist">${album.artist}</p>
-                            <p class="album-meta">${album.year} • ${album.songIds.length} bài hát</p>
-                        </div>
-                    </div>
-                `).join('')}
+                ${albumsSaved.length > 0 
+                    ? albumsSaved.map((album, index) => AlbumCard(album, index + 1)).join('')
+                    : '<div class="page-albums-saved__empty">Bạn chưa lưu album nào.</div>'
+                }
             </div>
-        </section>     
+        </section>
     `;
 }

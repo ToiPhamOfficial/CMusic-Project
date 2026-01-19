@@ -48,7 +48,32 @@ export const users = [
         avatar: "/assets/img/default-avatar.png",
         favoriteSongs: [1, 2, 3, 4, 5],
         albumsSaved: [1, 3, 5],
-        myPlaylists: [1, 2]
+        playlists: [
+            {
+                "id": 1768758982922,
+                "name": "playlist 1",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            },
+            {
+                "id": 1768758993339,
+                "name": "playlist 2",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            },
+            {
+                "id": 1768759002819,
+                "name": "playlist 3",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            }
+        ]
     },
 
     {
@@ -59,7 +84,32 @@ export const users = [
         avatar: "/data/users/avatar/hoang_quan_3343.png",
         favoriteSongs: [1, 3, 5, 7, 9],
         albumsSaved: [2, 4, 6],
-        myPlaylists: [1]
+        playlists: [
+            {
+                "id": 1768758982922,
+                "name": "playlist 1",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            },
+            {
+                "id": 1768758993339,
+                "name": "playlist 2",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            },
+            {
+                "id": 1768759002819,
+                "name": "playlist 3",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            }
+        ]
     },
     {
         id: 3,
@@ -69,7 +119,32 @@ export const users = [
         avatar: "/data/users/avatar/van_khanh_2331.png",
         favoriteSongs: [2, 4, 6, 8, 10],
         albumsSaved: [1, 5, 7],
-        myPlaylists: [4, 5]
+        playlists: [
+            {
+                "id": 1768758982922,
+                "name": "playlist 1",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            },
+            {
+                "id": 1768758993339,
+                "name": "playlist 2",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            },
+            {
+                "id": 1768759002819,
+                "name": "playlist 3",
+                "icon": "play_circle",
+                "image": "./assets/img/playlist-default.png",
+                "creator": "Demo User",
+                "songIds": []
+            }
+        ]
     }
 ];
 
@@ -146,13 +221,13 @@ export const songs = [
     },
     {
         id: 8,
-        title: "Yêu Đơn Phương",
+        title: "Yêu",
         artist: "Min",
         duration: "3:45",
-        image: "/data/songs/thumb/Yêu%20Đơn%20Phương%20-%20Min.png",
+        image: "/data/songs/thumb/Yêu%20-%20Min.png",
         plays: "300M",
         genreId: 7,
-        audioUrl: "/data/songs/mp3/Yêu%20Đơn%20Phương%20-%20Min.mp3"
+        audioUrl: "/data/songs/mp3/Yêu%20-%20Min.mp3"
     },
     {
         id: 9,
@@ -317,25 +392,6 @@ export const genres = [
         name: "Jazz",
         color: "#a0522d",
         playlistIds: [1, 2]
-    }
-];
-
-export const myPlaylists = [
-    {
-        id: 1,
-        name: "Lofi Chill",
-        icon: "play_circle",
-        creator: "SonTung",
-        songIds: [1, 3],
-        image: "/data/albums/lofi-albums/lofi-chill-beats.webp"
-    },
-    {
-        id: 2,
-        name: "Hot Phonk",
-        icon: "play_circle",
-        creator: "Jack",
-        songIds: [2, 3],
-        image: "/data/albums/lofi-albums/study-lofi.webp"
     }
 ];
 
@@ -536,7 +592,7 @@ export function getArtistById(id) {
 
 export function getPlaylistById(id, type = null) {
     if( type === 'userPlaylists') {
-        return myPlaylists.find(playlist => playlist.id === id);
+        return null;
     }
     return playlists.find(playlist => playlist.id === id);
 }

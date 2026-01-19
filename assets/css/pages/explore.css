@@ -489,7 +489,7 @@
 .artist-grid,
 .playlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
     gap: var(--space-lg);
 }
 
@@ -509,36 +509,6 @@
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
 }
-
-.album-cover,
-.artist-avatar,
-/* .playlist-cover {
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    position: relative;
-    margin-bottom: var(--space-md);
-}
-
-.album-cover img,
-.artist-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.playlist-cover {
-    background: linear-gradient(135deg, var(--accent-color), #764ba2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.playlist-cover .material-icons-round {
-    font-size: 64px;
-    color: var(--text-primary);
-} */
 
 .album-play-btn,
 .artist-follow-btn {

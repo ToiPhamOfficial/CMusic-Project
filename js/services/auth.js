@@ -117,7 +117,7 @@ class Auth {
                 followedArtists: [],
                 favoriteSongs: [],
                 albumsSaved: [],
-                myPlaylists: []
+                playlists: []
             };
             
             users.push(newUser);

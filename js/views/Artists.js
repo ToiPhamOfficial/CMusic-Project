@@ -1,5 +1,6 @@
 import { artists, songs } from '../data.js';
 import Toast from '../components/Toast.js';
+import { isFavorited } from '../utils/utils.js';
 
 export default function Artists() {
     return `
@@ -48,12 +49,12 @@ export default function Artists() {
                     <div class="page-artists__track-song">
                         <div class="page-artists__song-cover-wrapper">
                             <img src="${song.image}" alt="${song.title}" class="page-artists__song-cover">
-                            <div class="page-artists__play-overlay">
+                            <div class="page-artists__play-overlay btn-play-music" data-song-id="${song.id}">
                                 <span class="material-icons-round">play_arrow</span>
                             </div>
                         </div>
                         <div class="page-artists__song-info">
-                            <div class="page-artists__song-title">${song.title}</div>
+                            <div class="page-artists__song-title" data-route="/song-detail?id=${song.id}">${song.title}</div>
                             <div class="page-artists__song-artist">${song.artist}</div>
                         </div>
                     </div>

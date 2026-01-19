@@ -16,6 +16,10 @@
     .banner {
         display: none;
     }
+
+    .playlist-grid {
+        grid-template-columns: repeat(4, minmax(0, 150px));
+    }
 }
 
 /* === MOBILE (Điện thoại) - Max-width: 576px === */
@@ -55,7 +59,7 @@
     .album-grid,
     .artist-grid,
     .playlist-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .container {

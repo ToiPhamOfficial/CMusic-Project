@@ -18,7 +18,7 @@ export default function Charts() {
                 <div class="chart-column">
                     <div class="chart-column-header">
                         <h3>Top 50 Bài Hát Thịnh Hành</h3>
-                        <button class="btn-play-chart btn-play">
+                        <button class="btn-play-chart btn-play btn-play-music" data-context-type="chart" data-chart-type="trending">
                             <span>Phát</span>
                             <span class="material-icons-round">play_arrow</span>
                         </button>
@@ -32,7 +32,7 @@ export default function Charts() {
                 <div class="chart-column">
                     <div class="chart-column-header">
                         <h3>Top 50 Nhạc Việt</h3>
-                        <button class="btn-play-chart btn-play">
+                        <button class="btn-play-chart btn-play btn-play-music" data-context-type="chart" data-chart-type="vietnam">
                             <span>Phát</span>
                             <span class="material-icons-round">play_arrow</span>
                         </button>
@@ -46,7 +46,7 @@ export default function Charts() {
                 <div class="chart-column">
                     <div class="chart-column-header">
                         <h3>Top 50 Nhạc US-UK</h3>
-                        <button class="btn-play-chart btn-play">
+                        <button class="btn-play-chart btn-play btn-play-music" data-context-type="chart" data-chart-type="usuk">
                             <span>Phát</span>
                             <span class="material-icons-round">play_arrow</span>
                         </button>

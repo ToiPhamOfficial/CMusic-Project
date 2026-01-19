@@ -32,7 +32,7 @@ export default function AlbumDetail() {
                                 Tạo bởi: <strong>${album.creator || 'Admin'}</strong>
                         </span>
                     </h1>
-                    <button class="btn-play-all">
+                    <button class="btn-play-all btn-play-music" data-album-id="${id}">
                         <span class="material-icons-round">play_arrow</span> Phát tất cả
                     </button>
                 </div>
