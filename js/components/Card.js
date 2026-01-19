@@ -30,7 +30,7 @@ export function GenreCard(genre) {
 export function ChartItem(song, rank) {
     const rankClass = rank <= 3 ? 'top-rank' : '';
     return `
-        <div class="chart-item ${rankClass}" data-song-id="${song.id}">
+        <div class="chart-item ${rankClass}" data-song-id="${song.id}" data-route="/song-detail?id=${song.id}">
             <span class="chart-rank">${rank}</span>
             <div class="chart-thumbnail">
                 <img src="${song.image}" alt="${song.title}" loading="lazy">
@@ -148,14 +148,23 @@ export function SongItem(song, index = null, contextId = null, contextType = nul
     `;
 }
 
-export function PlaylistCard(playlist) {
+export function PlaylistCard(playlist, type = 'playlist') {
     const thumbUrl = playlist.image ? playlist.image : '/assets/img/default-playlist-thumb.png';
+    
+    // Thêm type vào route nếu là user_playlist
+    const route = type === 'user_playlist' 
+        ? `/playlist-detail?id=${playlist.id}&type=user_playlist`
+        : `/playlist-detail?id=${playlist.id}`;
+    
     return `
-        <div class="card playlist-card" data-route="/playlist-detail?id=${playlist.id}">
+        <div class="card playlist-card" data-route="${route}">
             <div class="card-cover playlist-cover">
                 <img src="${thumbUrl}" alt="${playlist.name}" loading="lazy">
                 <div class="card-overlay">
-                    <button class="btn-play-music card-play-btn" data-playlist-id="${playlist.id}" title="Phát">
+                    <button class="btn-play-music card-play-btn" 
+                            data-playlist-id="${playlist.id}" 
+                            data-context-type="${type}"
+                            title="Phát">
                         <span class="material-icons-round">play_arrow</span>
                     </button>
                 </div>
