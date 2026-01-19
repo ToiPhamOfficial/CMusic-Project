@@ -1,6 +1,5 @@
 import { artists, songs } from '../data.js';
 import Toast from '../components/Toast.js';
-import { isFavorited } from '../utils/utils.js';
 
 export default function Artists() {
     return `
