@@ -1,5 +1,6 @@
 import { getArtistById, getSongById } from '../data.js';
 import { SongItem, HeaderSongItem } from '../components/Card.js';
+import { addToHistory } from './Recently.js';
 
 export default function ArtistDetail() {
     //Tự lấy ID từ URL hiện tại (ví dụ: .../artist-detail?id=1)
@@ -9,6 +10,7 @@ export default function ArtistDetail() {
     const artist = getArtistById(id);
 
     if (!artist) return `<h1>Không tìm thấy nghệ sĩ</h1>`;
+    addToHistory('artists', id);
 
     const listSongs = artist.songIds.map(songId => {
         return getSongById(songId);
@@ -34,7 +36,7 @@ export default function ArtistDetail() {
                         <button class="btn-follow page-artists__follow-btn" data-artist-id="${artist.id}">Theo dõi</button>
                     </div>
                     
-                    <button class="btn-play-profile">
+                    <button class="btn-play-profile btn-play-music" data-artist-id="${artist.id}">
                         <span class="material-icons-round">play_arrow</span> Phát tất cả
                     </button>
                 </div>

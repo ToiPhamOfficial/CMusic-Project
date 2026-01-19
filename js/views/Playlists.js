@@ -1,4 +1,4 @@
-import { myPlaylists, getPlaylistById, getPlaylistGroupById } from '../data.js';
+import { getPlaylistById, getPlaylistGroupById } from '../data.js';
 import { PlaylistCard } from '../components/Card.js';
 
 export default function Playlists() {

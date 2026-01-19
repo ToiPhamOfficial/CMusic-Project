@@ -97,7 +97,7 @@ export default function Explore() {
                             </button>
                         </div>
                         <div class="chart-list">
-                            ${songs.slice(10, 15).map((song, index) => ChartItem(song, index + 1)).join('')}
+                            ${songs.slice(3, 6).map((song, index) => ChartItem(song, index + 1)).join('')}
                         </div>
                     </div>
                 </div>
@@ -151,21 +151,20 @@ export default function Explore() {
                 <div class="footer-info">
                     <div class="footer-section">
                         <h4>Doanh nghiệp quản lý</h4>
-                        <p>Công ty Cổ phần Tập đoán VNG. GCN ĐKDN: 0303490096 do sở KH & ĐT TPHCM cấp ngày
-                            9/9/2004.</p>
-                        <p>Địa chỉ: Z06 Đường số 13, Phường Tân Thuận, TPHCM, Việt Nam.</p>
+                        <p>Công ty Cổ phần Công nghệ & Giải trí CMusic. GCN ĐKDN: 0102345678 do Sở KH & ĐT TP. Hà Nội cấp lần đầu ngày 01/01/2024.</p>
+                        <p>Địa chỉ: Tầng 5, Tòa nhà Innovation, Số 88 Đường Giai Điệu, Quận Cầu Giấy, Hà Nội, Việt Nam.</p>
                     </div>
                     <div class="footer-section">
                         <h4>Người chịu trách nhiệm nội dung</h4>
-                        <p>Ông Lê Hồng Minh</p>
+                        <p>Ông Phạm Tiến Sang</p>
                     </div>
                 </div>
                 <div class="footer-contact">
                     <div class="footer-section">
                         <h4>Thông tin dịch vụ</h4>
-                        <p>GPMXH: 157/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 24/4/2019.</p>
-                        <p>CSKH/Liên hệ qua Zalo: 0934118443</p>
-                        <p>Email: zingmp3@vng.com.vn.</p>
+                        <p>GPMXH: 68/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 15/06/2024.</p>
+                        <p>CSKH/Hợp tác nội dung: 0909 123 456</p>
+                        <p>Email: support@cmusic.vn</p>
                     </div>
                 </div>
             </div>

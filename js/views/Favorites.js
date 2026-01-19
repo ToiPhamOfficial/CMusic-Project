@@ -27,7 +27,7 @@ export default function Favorites() {
                 <span class="page-favorites__hero-separator">•</span>
             </div>
         </div>
-        <button class="page-favorites__hero-play">
+        <button class="page-favorites__hero-play btn-play-music" data-context-type="favorites">
             <span class="material-icons-round">play_arrow</span>
         </button>
     </section>

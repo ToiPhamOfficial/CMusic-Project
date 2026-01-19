@@ -54,7 +54,7 @@ export default function PlaylistDetail() {
                                 Tạo bởi: <strong>${playlist.creator || 'Admin'}</strong>
                         </span>
                     </h1>
-                    <button class="btn-play-all">
+                    <button class="btn-play-all btn-play-music" data-playlist-id="${id}" data-context-type="${type}">
                         <span class="material-icons-round">play_arrow</span> Phát tất cả
                     </button>
                 </div>
