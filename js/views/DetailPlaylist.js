@@ -33,13 +33,17 @@ export default function PlaylistDetail() {
     const initialDisplayCount = 15;
     const hasMore = listSongs.length > initialDisplayCount;
 
+    const coverHTML = playlist.image 
+        ? `<img src="${playlist.image}" alt="${playlist.name}" style="width: 100%; height: 100%; object-fit: cover;">`
+        : `<span class="material-icons-round" style="font-size: 64px;">music_note</span>`;
+
     return `
         <div class="playlist-detail">
             
             <section class="playlist-hero">
                 <div class="hero-bg-glow"></div> 
                 <div class="hero-cover">
-                    <span class="material-icons-round">favorite</span>
+                    ${coverHTML}
                 </div>
                 
                 <div class="hero-info">

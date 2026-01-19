@@ -29,7 +29,7 @@ export default function Playlists() {
                 
                 ${userPlaylists.length > 0 ? `
                     <div class="playlist-grid">
-                        ${userPlaylists.map(playlist => PlaylistCard(playlist)).join('')}
+                        ${userPlaylists.map(playlist => PlaylistCard(playlist, 'user_playlist')).join('')}
                     </div>
                 ` : `
                     <div class="empty-state">
