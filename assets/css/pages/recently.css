@@ -1,0 +1,56 @@
+/* Recently Page Styles */
+.page-recently__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* Songs Section */
+.page-recently__songs {
+    gap: 0;
+}
+
+/* Song List Header */
+.page-recently__songs-header {
+    display: grid;
+    grid-template-columns: 35px minmax(0, 2fr) minmax(0, 1fr) 80px;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+.page-recently__songs-header-col {
+    font-size: var(--fs-label);
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.page-recently__songs-header-col--index {
+    text-align: center;
+}
+
+.page-recently__songs-header-col--time {
+    text-align: right;
+}
+
+/* Song List Container */
+.song-list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 576px) {
+    .page-recently__songs-header {
+        grid-template-columns: 35px minmax(0, 1fr) 50px;
+    }
+
+    .page-recently__songs-header-col--artist {
+        display: none;
+    }
+
+    .page-recently__songs-header-col--time {
+        visibility: hidden;
+    }
+}
